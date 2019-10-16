@@ -1,12 +1,15 @@
 import utils from './utils';
-import uiLines from './uiLines';
+import lines from './uiLines';
+import progressBar from './uiProgressBar';
 //
 let _App = {
   init: function(){
     this.context = document.querySelector("#main").getContext("2d");
     this.context.imageSmoothingEnabled = true;
     this.updateSize();
-    uiLines.init(_App.w, _App.h);
+    lines.init();
+    progressBar.init(_App.w, _App.h);
+
     this.loop();
   },
 
@@ -20,11 +23,12 @@ let _App = {
   },
   loop: function(){
     var ctx = _App.context;
+    
     // ctx.clearRect(0,0,_App.w, _App.h);
-    ctx.fillStyle = "#1d210d";
+    ctx.fillStyle = utils.getColors().darkGreen;
     ctx.fillRect(0,0,_App.w, _App.h);
 
-    uiLines.update(ctx, _App.w, _App.h);
+    _App.update();
     
     ctx.beginPath();
     ctx.fillStyle = ctx.strokeStyle="#fff";
@@ -32,11 +36,15 @@ let _App = {
     ctx.arc(_App.w/2,_App.h/2,120,0,2*Math.PI);
     ctx.stroke();
     
-    ctx.font = "30px Avenir";
-    ctx.fillText("This is the end",20,90);
-    ctx.fillText("My only friend, the end.",20,130);
+    // ctx.font = "30px Avenir";
+    // ctx.fillText("This is the end",20,90);
+    // ctx.fillText("My only friend, the end.",20,130);
 
     window.requestAnimationFrame(_App.loop);
+  },
+  update: function(){
+    lines.update();
+    progressBar.update();
   }
 
 }

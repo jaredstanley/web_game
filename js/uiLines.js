@@ -11,6 +11,8 @@ let fillStyle = "#ff0";
 let strokeStyle = fillStyle;
 let x=0;
 let y=0;
+let w = 0;
+let h = 0;
 
 let gradient = {};
 let barObject = { 
@@ -32,9 +34,11 @@ let barObject = {
     }    
 };
 //
-exports.init = function(w, h){
+exports.init = function(){
+    w = _App.w;
+    h = _App.h;
     let i=0;
-    console.log("init called");
+    // console.log("init called");
     
     count = Math.floor(w/(lineWidth+margin));
     for (const itm in barObject) {
@@ -43,10 +47,11 @@ exports.init = function(w, h){
         i++;
         initLineSet(w,h, barObject[itm], i);            
     }
-    console.log("completed object: ",barObject);
+    // console.log("completed object: ",barObject);
 }
 //
-exports.update = function(ctx, w, h){
+exports.update = function(){
+    let ctx = _App.context;
     count = Math.floor(w/(lineWidth+margin));
     // console.log(count);
     for (const key in barObject) {   
