@@ -1,8 +1,9 @@
 import utils from './utils';
+import uiLines from './uiLines';
+//
 let _App = {
   init: function(){
     this.context = document.querySelector("#main").getContext("2d");
-    this.ang=0;
     this.updateSize();
     this.loop();
   },
@@ -21,23 +22,8 @@ let _App = {
     ctx.fillStyle = "#1d210d";
     ctx.fillRect(0,0,_App.w, _App.h);
 
-    ctx.fillStyle = ctx.strokeStyle="#fff";
-    ctx.lineWidth=2.5;
-    let count = 50;
-
-    _App.ang-=0.055;
-    for (var i = 0; i < count; i++) {
-      
-      
-      var y = Math.cos(_App.ang+i)*10+40;
-      var x = (_App.w/count) * i + 2;
+    uiLines.update(ctx, _App.w, _App.h);
     
-      ctx.beginPath();
-      ctx.moveTo(x,0);
-      ctx.lineTo(x,y);
-      ctx.stroke();
-
-    }//
     ctx.beginPath();
     ctx.fillStyle = ctx.strokeStyle="#fff";
     ctx.lineWidth=10;
