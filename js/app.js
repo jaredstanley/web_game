@@ -4,7 +4,9 @@ import uiLines from './uiLines';
 let _App = {
   init: function(){
     this.context = document.querySelector("#main").getContext("2d");
+    this.context.imageSmoothingEnabled = true;
     this.updateSize();
+    uiLines.init(_App.w, _App.h);
     this.loop();
   },
 
@@ -18,7 +20,7 @@ let _App = {
   },
   loop: function(){
     var ctx = _App.context;
-    ctx.clearRect(0,0,_App.w, _App.h);
+    // ctx.clearRect(0,0,_App.w, _App.h);
     ctx.fillStyle = "#1d210d";
     ctx.fillRect(0,0,_App.w, _App.h);
 
