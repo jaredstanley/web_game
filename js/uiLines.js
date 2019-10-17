@@ -64,7 +64,7 @@ exports.update = function(){
             // console.log("this is next: ", b);
             
             b.ang-=b.speed;
-            y = Math.sin(b.ang+(b.i/4))*b.height+minHeight;
+            y = Math.cos(b.ang+(b.i/4))*b.height+minHeight;
             x = b.x;
             ctx.beginPath();
             ctx.moveTo(x,h);
@@ -100,7 +100,7 @@ function initLineSet(w,h, obj, grad){
             bar.x+= lineWidth/2;
             bar.height+=minHeight;
         }
-        if(Math.random()>=0.6){
+        if(Math.random()>=0.66){
             obj.bars[i] = bar;
         }
         

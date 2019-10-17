@@ -2,7 +2,9 @@ let _seed = 0;
 let count = 0;
 let colors = {
   darkGreen: "#1d210d",
-  brightGreen: "#00ff18"
+  brightGreen: "#00ff18", 
+  upcoming: "#174d0f",
+  visited: "#0ba615"
 };
 let blendModeArr = ["source-over", "source-in", "source-out", "source-atop", "destination-over", "destination-in", "destination-out", "destination-atop", "lighter", "copy", "xor", "multiply", "screen", "overlay", "darken", "color-dodge", "color-burn", "hard-light", "soft-light", "difference", "exclusion", "hue", "saturation", "color", "luminosity"];
 exports.getColors = function(){
