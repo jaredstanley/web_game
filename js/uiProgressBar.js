@@ -12,7 +12,7 @@ let itmHeight = 0;
 let topMargin = 30;
 let itemsArr = [];
 let xpos = 0;
-let currentSection = 4;
+let currentSection = 7;
 //
 exports.init = function(){
     context = _App.context;

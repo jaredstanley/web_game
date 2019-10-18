@@ -1,7 +1,6 @@
 import utils from './utils';
 import lines from './uiLines';
 import progressBar from './uiProgressBar';
-import lottie_web from 'lottie-web';
 import animation from './lottieAnim';
 
 let _App = {
@@ -9,10 +8,15 @@ let _App = {
     this.context = document.querySelector("#main").getContext("2d");
     this.context.imageSmoothingEnabled = true;
     this.updateSize();
+    //
     lines.init();
-    progressBar.init(_App.w, _App.h);
-    this.createAnimation();
+    progressBar.init();
+    animation.init();
+    //
     this.loop();
+    // console.log(animation);
+    
+    animation.begin();
   },
   loop: function(){
     var ctx = _App.context;
@@ -44,21 +48,9 @@ let _App = {
     lines.init();
     console.log("updateSize called");
     
-  },
-  createAnimation: function(){
-    var params = {
-      container: document.getElementById('logoAnim'),
-      renderer: 'svg',
-      loop: true,
-      autoplay: true,
-      animationData: lottie_web.animationData
-    };
-    animation.init();
-    var anim = lottie_web.loadAnimation(animation.params);
   }
-
 }
-
+//
 window.onload=function(){
   window._App = _App;
   window.addEventListener("resize", _App.updateSize);
