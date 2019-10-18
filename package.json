@@ -19,5 +19,8 @@
     "bable-loader": "0.0.1-security",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.11.1"
+  },
+  "dependencies": {
+    "lottie-web": "^5.5.9"
   }
 }

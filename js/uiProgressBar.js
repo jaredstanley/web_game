@@ -1,10 +1,12 @@
 import utils from './utils';
-let lineWidth = 14;
 let x=0;
 let y=0;
-let margin = 6;
+let heightPercentage = 75; //0-100
+let margin = 6; 
 let navItemWidth = 10;
-let navItems = 10;
+let fontSizeOrig = 12;
+let fontSizeSm = 8;
+let navItems = 10; 
 let context = {};
 let itmHeight = 0;
 let topMargin = 30;
@@ -14,13 +16,14 @@ let currentSection = 4;
 //
 exports.init = function(){
     context = _App.context;
-    let i=0;
-    itmHeight = ((_App.h*0.75)/navItems)-margin;
+    
     // console.log("progressBar.init() called", this);
     buildNav();
 }
 //
 exports.update = function(){
+    // console.log(itmHeight);
+    
     xpos = Math.min(_App.w*0.1, 30);
     // context.save();
     // context.globalAlpha=0.2;    
@@ -30,11 +33,16 @@ exports.update = function(){
         context.fillRect(xpos, itm.y, navItemWidth, itm.height); 
     }
     // context.restore();
-    addTextLabels();
+    let s = fontSizeOrig;
+    if(itmHeight<35){s=fontSizeSm}
+    addTextLabels(s);
 }
 
 function buildNav(){
+    itemsArr = [];
     let defaultColor = "";
+    itmHeight = ((_App.h*(heightPercentage*0.01))/navItems)-margin;
+    itmHeight = Math.max(itmHeight, 20);
     let c = utils.getColors();
     for (let i = 0; i < navItems; i++) {
         let sec = navItems-currentSection;
@@ -51,9 +59,9 @@ function buildNav(){
         itemsArr.push(itm);   
     }   
 }
-function addTextLabels(){
+function addTextLabels(s){
     context.fillStyle = utils.getColors().brightGreen;
-    context.font = "300 12px Roboto";
+    context.font = "300 "+s+"px Roboto";
     for (let i = 1; i <= itemsArr.length; i++) {
         let itm = itemsArr[i-1];
         let twoDigit = "";
