@@ -1,2 +1,3 @@
 # web_game
-stepped game
+
+sequential game-like experience idk yet tbh
