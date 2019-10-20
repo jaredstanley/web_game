@@ -1,7 +1,7 @@
 import utils from './utils';
 import lines from './uiLines';
 import progressBar from './uiProgressBar';
-import animation from './lottieAnim';
+import animation from './nameAnim';
 
 let _App = {
   init: function(){
