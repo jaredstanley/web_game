@@ -2,9 +2,11 @@ import utils from './utils';
 import lines from './uiLines';
 import progressBar from './uiProgressBar';
 import animation from './nameAnim';
+import sectionManager from './sectionManager';
 
 let _App = {
   init: function(){
+    this.curSection = 0;
     this.context = document.querySelector("#main").getContext("2d");
     this.context.imageSmoothingEnabled = true;
     this.updateSize();
@@ -12,10 +14,13 @@ let _App = {
     lines.init();
     progressBar.init();
     animation.init();
+    sectionManager.init();
+    //
+    
+    
     //
     this.loop();
     // console.log(animation);
-    
     animation.begin();
   },
   loop: function(){
@@ -26,19 +31,14 @@ let _App = {
     ctx.fillRect(0,0,_App.w, _App.h);
 
     _App.update();
-    
-    // ctx.beginPath();
-    // ctx.fillStyle = ctx.strokeStyle="#fff";
-    // ctx.lineWidth=10;
-    // ctx.arc(_App.w/2,_App.h/2,120,0,2*Math.PI);
-    // ctx.stroke();
-
     window.requestAnimationFrame(_App.loop);
   },
+  //
   update: function(){
     lines.update();
     progressBar.update();
   },
+  //
   updateSize: function(){
     _App.context.canvas.width = document.documentElement.clientWidth;
     _App.context.canvas.height = document.documentElement.clientHeight;

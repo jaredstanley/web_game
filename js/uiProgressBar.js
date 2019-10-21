@@ -12,13 +12,20 @@ let itmHeight = 0;
 let topMargin = 30;
 let itemsArr = [];
 let xpos = 0;
-let currentSection = 7;
+let currentSection = 0;
 //
 exports.init = function(){
     context = _App.context;
     
     // console.log("progressBar.init() called", this);
     buildNav();
+}
+//
+exports.nextSection = function(){
+    // console.log('current section is now ', currentSection);
+    currentSection++;
+    buildNav();
+    // console.log('current section is now ', currentSection);
 }
 //
 exports.update = function(){
@@ -29,6 +36,10 @@ exports.update = function(){
     // context.globalAlpha=0.2;    
     for (let i = 0; i < itemsArr.length; i++) {
         let itm = itemsArr[i];
+        context.fillStyle = itm.color;
+        context.fillRect(xpos, itm.y, navItemWidth, itm.height); 
+    }
+    for (let itm in itemsArr) {
         context.fillStyle = itm.color;
         context.fillRect(xpos, itm.y, navItemWidth, itm.height); 
     }
