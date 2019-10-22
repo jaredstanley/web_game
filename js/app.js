@@ -30,7 +30,7 @@ let _App = {
     
     // ctx.clearRect(0,0,_App.w, _App.h);
     ctx.fillStyle = utils.getColors().darkGreen;
-    //ctx.fillRect(0,0,_App.w, _App.h);
+    // ctx.fillRect(0,0,_App.w, _App.h);
 
     _App.update();
     window.requestAnimationFrame(_App.loop);
@@ -49,7 +49,7 @@ let _App = {
     _App.h = _App.context.canvas.height;
     progressBar.init();
     lines.init();
-    console.log("updateSize called");
+    // console.log("updateSize called");
     
   }
 }

@@ -1,7 +1,9 @@
 
 class Section {
     constructor(color){
-        this.color = 'rgb('+Math.floor(Math.random()*255)+',111,11)'
+        this.color = 'rgb('+Math.floor(Math.random()*255)+',111,11)';
+        this.timer = "";
+        this.n = ""
         // console.log('Section Class constructor');
         
     }
@@ -10,15 +12,11 @@ class Section {
         
     }
 
-    build(){
-            
-        console.log("building app ", this.color);
-        this.update();
 
-    }
-    
     kill(){
+        // console.log("killing ", this.n);
         
+        cancelAnimationFrame(this.timer);
     }
 }
 

@@ -7,15 +7,23 @@ class TapSection extends Section {
         super();
     }
     init(){
-        this.color = 'rgb('+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+',11)';
-        console.log("TapSection Initted");
+        this.n = "tapper";
+        this.color = 'rgb(111,0,111)';
+        // console.log("TapSection Initted");
         
     }
+    
     update(){
-        let ctx = _App.context;
-        ctx.fillStyle=this.color;
-        ctx.fillRect(0,0,300,300);
-        ctx.fill();
+        return false;
+        // console.log("updating!! ", this.n);
+        
+        // let ctx = _App.context;
+        // ctx.fillStyle=this.color;
+        // ctx.fillRect(0,0,300,300);
+        // ctx.fill();
+        // this.timer = requestAnimationFrame(this.update.bind(this));
+        
     }
+   
 }
 export default TapSection

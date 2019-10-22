@@ -6,9 +6,15 @@ let colors = {
   upcoming: "#174d0f",
   visited: "#0ba615"
 };
+let grad1 = {
+  b: "#009475", a:"#acc800"
+}
 let blendModeArr = ["source-over", "source-in", "source-out", "source-atop", "destination-over", "destination-in", "destination-out", "destination-atop", "lighter", "copy", "xor", "multiply", "screen", "overlay", "darken", "color-dodge", "color-burn", "hard-light", "soft-light", "difference", "exclusion", "hue", "saturation", "color", "luminosity"];
 exports.getColors = function(){
   return colors;
+}
+exports.getGrad = function(){
+  return grad1;
 }
 
 exports.debug= function(arr, clr, ctx){

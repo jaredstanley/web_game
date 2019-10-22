@@ -7,7 +7,8 @@ let tapSection = new sectionTap();
 let shakeSection = new sectionShake();
 
 let curPos = 0;
-let curSection = {x:0};
+let nextPos = 1;
+let curSection = {name:"none"};
 let sectionList = [
     {   pos:0,
         name:"tap",
@@ -30,21 +31,25 @@ let div = "";
 //
 exports.init = function(){
     div = document.getElementById('instructions');
-    div.addEventListener('click', nextSection, false);
+    // div.addEventListener('click', nextSection, false);
     div.addEventListener('touchstart', nextSection, false);
     shakeSection.init();
     tapSection.init();
     
 
 }
-exports.loadSection = function(){   
-    console.log("loading section ",curPos);
-    
-    nextSection();
+exports.loadFirstSection = function(){   
+    // console.log("loading first section ");
+    progressBar.nextSection();
+    engageLoading();
 }
 
 function nextSection(){
-    // console.log("next Section called ", curPos);
+    // console.log("next Section called, shouldnt change yet ", curPos);
+    curSection.kill();
+    // return;
+    curPos++;
+    
     if(animation.getIsPlaying()==true){
         console.log("mgr.nope");
         return;
@@ -62,18 +67,25 @@ function engageLoading(){
     }
     let sec = sectionList.find(itm => itm.pos == curPos);
 
-    console.log(sec.name);
+    // console.log('section to load is: ',sec.name);
     curSection = sec.section;
-    curSection.build(); 
+    curSection.update(); 
+    nextPos++;
 
     // console.log("sectionManager loading secrtion ", sectionList[curPos]);
    
     
-    curPos++;
+    
 }
 exports.update=function(){
-
-
+    // console.log('sectionManager Update()');
+    // console.log(curSection);
+    // if(curSection.name=="none"){
+    //     return;
+    // }
+    // curSection.update();
+    
+    
 }
 
 function shrinkLogo(){

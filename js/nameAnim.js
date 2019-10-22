@@ -28,7 +28,7 @@ function setup(){
     // console.log("animation is complete");
     isPlaying=false;
     if(firstTime){
-      sectionManager.loadSection();
+      sectionManager.loadFirstSection();
       firstTime = false;
     }
   })
