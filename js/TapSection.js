@@ -1,14 +1,14 @@
 import Section from './Section';
 //
-class ShakeSection extends Section {
+class TapSection extends Section {
     constructor(){
-        // console.log("shakeSection Constructor ");
+        // console.log("TapSection Constructor ");
         
         super();
     }
     init(){
         this.color = 'rgb('+Math.floor(Math.random()*255)+','+Math.floor(Math.random()*255)+',11)';
-        console.log("ShakeSection Initted");
+        console.log("TapSection Initted");
         
     }
     update(){
@@ -18,4 +18,4 @@ class ShakeSection extends Section {
         ctx.fill();
     }
 }
-export default ShakeSection
+export default TapSection

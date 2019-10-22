@@ -19,7 +19,9 @@ let _App = {
     
     
     //
+    _App.context.fillRect(0,0,_App.w, _App.h);
     this.loop();
+    
     // console.log(animation);
     animation.begin();
   },
@@ -28,7 +30,7 @@ let _App = {
     
     // ctx.clearRect(0,0,_App.w, _App.h);
     ctx.fillStyle = utils.getColors().darkGreen;
-    ctx.fillRect(0,0,_App.w, _App.h);
+    //ctx.fillRect(0,0,_App.w, _App.h);
 
     _App.update();
     window.requestAnimationFrame(_App.loop);
@@ -37,6 +39,7 @@ let _App = {
   update: function(){
     lines.update();
     progressBar.update();
+    sectionManager.update();
   },
   //
   updateSize: function(){
