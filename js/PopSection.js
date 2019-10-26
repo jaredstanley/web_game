@@ -31,6 +31,7 @@ class PopSection extends Section {
         for (const key in this.bubblesObj) {   
                     
             const bubb = this.bubblesObj[key];
+            bubb.updatePosition();
             // console.log("a fmaily is this: ",barFamily);
            ctx.fillStyle=bubb.color;
            ctx.beginPath();
@@ -47,9 +48,10 @@ class PopSection extends Section {
     initBubbles(){
         let count = this.colorArr.length;
         for (let i = 0; i < this.bubbleCount; i++) {
-            
+            let x = Math.random()*_App.w;
+            let y = Math.random()*_App.h;
             let color = this.colorArr[i%count].hex;
-            const element = new Bubble(i, color);
+            const element = new Bubble(i, x, y, color);
             this.bubblesObj[i] = element;
             
         }
