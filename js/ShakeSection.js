@@ -17,7 +17,7 @@ class ShakeSection extends Section {
         
     }
     update(){
-        // console.log("updating!! ", this.n);
+        console.log("updating!! ", this.n);
        let gradient = this.ctx.createLinearGradient(0, 100, 0, 900);
         gradient.addColorStop("0", utils.getGrad().a);
         gradient.addColorStop("1", utils.getGrad().b);

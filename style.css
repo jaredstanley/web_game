@@ -84,6 +84,7 @@
     }
 
     @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+        /* teenys */
         #logoAnim{
             width:75%;
             height:75%;
@@ -95,7 +96,8 @@
     
         }
     }
-    @media only screen  and (min-width : 480px) {
+    @media only screen  and (min-width : 480px) and (max-width: 1439px) {
+        /* most everything */
         #logoAnim{
             width:60%;
             height:60%;
@@ -109,6 +111,7 @@
     }
 
     @media only screen and (min-width : 1440px) {
+        /* massive screens */
         #logoAnim{
             top: 0;
             width:45%;

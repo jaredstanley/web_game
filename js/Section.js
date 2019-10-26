@@ -14,7 +14,7 @@ class Section {
 
 
     kill(){
-        // console.log("killing ", this.n);
+        console.log("killing ", this.n);
         
         cancelAnimationFrame(this.timer);
     }

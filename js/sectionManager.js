@@ -2,7 +2,10 @@ import animation from './nameAnim';
 import progressBar from './uiProgressBar';
 import sectionShake from './ShakeSection';
 import sectionTap from './TapSection';
+import sectionPop from './PopSection';
+import permissionsMgr from './PermissionsMgr';
 
+let popSection = new sectionPop();
 let tapSection = new sectionTap();
 let shakeSection = new sectionShake();
 
@@ -15,8 +18,8 @@ let sectionList = [
         section:tapSection
     },
     {   pos:1,
-        name:"shake",
-        section:shakeSection
+        name:"pop",
+        section:popSection
     },
     {   pos:2,
         name:"rotate",
@@ -25,27 +28,32 @@ let sectionList = [
     {   pos:3,
         name:"shout",
         section:shakeSection
+    },
+    {   pos:4,
+        name:"shake",
+        section:shakeSection
     }
 ]
 let div = "";
 //
 exports.init = function(){
     div = document.getElementById('instructions');
-    // div.addEventListener('click', nextSection, false);
-    div.addEventListener('touchstart', nextSection, false);
+    div.addEventListener('click', nextSection, false);
+    // div.addEventListener('touchstart', nextSection, false);
     shakeSection.init();
     tapSection.init();
+    popSection.init();
     
 
 }
 exports.loadFirstSection = function(){   
-    // console.log("loading first section ");
+    console.log("loading first section ");
     progressBar.nextSection();
     engageLoading();
 }
 
 function nextSection(){
-    // console.log("next Section called, shouldnt change yet ", curPos);
+    console.log("next Section called, shouldnt change yet ", curPos);
     curSection.kill();
     // return;
     curPos++;
@@ -63,11 +71,12 @@ function engageLoading(){
         div.classList.toggle('show');
     }
     if(curPos==1){
+        // permissionsMgr.askOrientation();
         shrinkLogo();
     }
     let sec = sectionList.find(itm => itm.pos == curPos);
 
-    // console.log('section to load is: ',sec.name);
+    console.log('section to load is: ',sec.name);
     curSection = sec.section;
     curSection.update(); 
     nextPos++;
