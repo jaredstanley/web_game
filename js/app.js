@@ -7,7 +7,6 @@ import sectionManager from './sectionManager';
 
 let _App = {
   init: function(){
-    this.curSection = 0;
     this.context = document.querySelector("#main").getContext("2d");
     this.context.imageSmoothingEnabled = true;
     this.updateSize();
@@ -38,9 +37,10 @@ let _App = {
   },
   //
   update: function(){
-    sectionManager.update();
+    
     lines.update();
     progressBar.update();
+    sectionManager.update();
     
   },
   //

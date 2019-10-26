@@ -11,6 +11,9 @@ class Section {
         // console.log("Section SuperClass Initted");
         
     }
+    start(){
+        
+    }
 
 
     kill(){

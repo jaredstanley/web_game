@@ -12,6 +12,9 @@ class TapSection extends Section {
         console.log("TapSection Initted");
         
     }
+    start(){
+        this.update();
+    }
     
     update(){
         return false;

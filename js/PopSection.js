@@ -8,6 +8,7 @@ class PopSection extends Section {
         super();
     }
     init(){
+        this.canvas = _App.context.canvas;
         this.bubblesObj = {};
         this.bubbleCount = 15;
         this.n = "popper";
@@ -20,8 +21,14 @@ class PopSection extends Section {
             }
         ],
         this.initBubbles();
-        // console.log("PopSection Initted");
+        console.log("PopSection Initted");
         
+    }
+    start(){
+        console.log(this.n, ' started');
+        this.binder = this.clickHandler.bind(this);
+       _App.context.canvas.addEventListener('click', this.binder, true);
+        this.update();
     }
     
     update(){
@@ -43,6 +50,28 @@ class PopSection extends Section {
         }
         this.timer = requestAnimationFrame(this.update.bind(this));
     }
+    clickHandler(e){
+        console.log("clickHandler called", e);
+        let _mouse = {
+            x:e.clientX,
+            y:e.clientY
+        }
+        
+        for (const key in this.bubblesObj) {   
+                    
+            let bubb = this.bubblesObj[key];
+            if (this.checkIfClicked(_mouse, bubb)){
+                console.log('clicked', bubb.pos);
+                delete this.bubblesObj[key];
+                bubb = "";
+                
+                
+                break;
+            }
+        //    console.log(bubb.x);
+    
+        }
+    }
     //
 
     initBubbles(){
@@ -56,6 +85,18 @@ class PopSection extends Section {
             
         }
         // console.log("bibb;esObj ", this.bubblesObj);
+        
+    }
+
+    checkIfClicked(mouse, circle){
+            return Math.sqrt((mouse.x-circle.x) ** 2 + (mouse.y - circle.y) ** 2) < circle.radius;
+    }
+    kill(){
+        cancelAnimationFrame(this.timer);
+        delete this.bubblesObj;
+        
+        _App.context.canvas.removeEventListener('click', this.binder, true);
+       console.log('removing popSection');
         
     }
    

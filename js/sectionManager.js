@@ -78,7 +78,7 @@ function engageLoading(){
 
     console.log('section to load is: ',sec.name);
     curSection = sec.section;
-    curSection.update(); 
+    curSection.start(); 
     nextPos++;
 
     // console.log("sectionManager loading secrtion ", sectionList[curPos]);
