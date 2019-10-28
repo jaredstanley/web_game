@@ -1,13 +1,18 @@
 import animation from './nameAnim';
 import progressBar from './uiProgressBar';
-import sectionShake from './ShakeSection';
-import sectionTap from './TapSection';
-import sectionPop from './PopSection';
+//
+import sectionShake from './sections/ShakeSection';
+import sectionTap from './sections/TapSection';
+import sectionPop from './sections/PopSection';
+import sectionDelayedTap from './sections/DelayedTapSection';
+//
 import permissionsMgr from './PermissionsMgr';
 
 let popSection = new sectionPop();
 let tapSection = new sectionTap();
 let shakeSection = new sectionShake();
+let delayedTapSection = new sectionDelayedTap();
+
 
 let curPos = 0;
 let nextPos = 1;
@@ -22,8 +27,8 @@ let sectionList = [
         section:popSection
     },
     {   pos:2,
-        name:"rotate",
-        section:tapSection
+        name:"delayedTap",
+        section:delayedTapSection
     },
     {   pos:3,
         name:"shout",
@@ -43,6 +48,7 @@ exports.init = function(){
     shakeSection.init();
     tapSection.init();
     popSection.init();
+    delayedTapSection.init();
     
 
 }

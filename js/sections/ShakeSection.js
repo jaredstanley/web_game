@@ -1,6 +1,6 @@
 import Section from './Section';
-import utils from './utils';
-import accel from './accelerometer';
+import utils from '../utils';
+import accel from '../accelerometer';
 //
 class ShakeSection extends Section {
     constructor(){

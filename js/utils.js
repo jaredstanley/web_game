@@ -4,7 +4,8 @@ let colors = {
   darkGreen: "#1d210d",
   brightGreen: "#00ff18", 
   upcoming: "#174d0f",
-  visited: "#0ba615"
+  visited: "#0ba615",
+  light: "#dedede"
 };
 let grad1 = {
   b: "#009475", a:"#acc800"
