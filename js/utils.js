@@ -1,3 +1,11 @@
+let status = {
+  type:"mobile",
+  event:{
+    mobile: 'touchstart',
+    desktop: 'click'
+  }
+
+}
 let _seed = 0;
 let count = 0;
 let colors = {
@@ -17,7 +25,9 @@ exports.getColors = function(){
 exports.getGrad = function(){
   return grad1;
 }
-
+exports.getStatus=function(){
+  return status;
+}
 exports.debug= function(arr, clr, ctx){
     clr = "white";
     ctx.save();

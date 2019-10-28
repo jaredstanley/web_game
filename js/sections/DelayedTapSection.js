@@ -11,10 +11,22 @@ class DelayedTapSection extends Section {
         this.startBtn = {x:200, y:200, radius:33};
         this.n = "delayedTap";
         this.color = 'rgb(111,0,111)';
+        this.game = {
+            isActive:false,
+            targetTime:5000,
+            curTime:0,
+            elapsedTime:0,
+            pctComplete:0,
+            timer:{}
+        }
+        this.startTime ="";
+        this.ctx = _App.context;
         console.log("DelayedTapSection Initted");
         this.timerbar = {
-            width:200,
-            height:20
+            width:350,
+            height:10,
+            x:0,
+            y:0
         }
         
     }
@@ -26,7 +38,14 @@ class DelayedTapSection extends Section {
         this.startBtn.y=_App.h/1.4;
 
         this.binder = this.clickHandler.bind(this);
-       _App.context.canvas.addEventListener('click', this.binder, true);
+        let status = utils.getStatus().type;
+        let eventType = "";
+        if(status=="mobile"){
+            eventType = utils.getStatus().event.mobile;
+        }else{
+            eventType = utils.getStatus().event.desktop;
+        }
+       _App.context.canvas.addEventListener(eventType, this.binder, true);
        
        console.log(this.n, ' started');
          
@@ -38,8 +57,13 @@ class DelayedTapSection extends Section {
         
         // return false;
         
-        console.log("updating!! ", this.n);
+        // console.log("updating!! ", this.n);
         this.updateUI();
+        // this.updateGame();
+        // if(this.game.isActive){
+        //    this.updateGame();
+        // }
+        this.drawGame();
         this.timer = requestAnimationFrame(this.update.bind(this));
         
     }
@@ -54,21 +78,79 @@ class DelayedTapSection extends Section {
         ctx.beginPath();
         ctx.fillStyle = utils.getColors().light;
         
-        
-        ctx.rect(_App.w/2-this.timerbar.width/2, _App.h/2+this.timerbar.h/2, this.timerbar.width, this.timerbar.height)
+        this.timerbar.x = (_App.w/2)-(this.timerbar.width/2);
+        this.timerbar.y = (_App.h/2)-(this.timerbar.height);
+        ctx.rect(this.timerbar.x,
+            this.timerbar.y,this.timerbar.width,this.timerbar.height);
         ctx.fill();
-        console.log(ctx.fillStyle, _App.w/2-this.timerbar.width/2);
+        // console.log(ctx.fillStyle, _App.w/2-this.timerbar.width/2);
+        
+    }
+    updateGame(){
+        // console.log("STATUS: updateGame()", this);
+        let d = new Date();
+        this.game.elapsedTime = d-this.startTime;
+        // console.log(elapsed);
+        
+
+        this.game.pctComplete = (this.game.elapsedTime/this.game.targetTime);
+        // console.log(this.game.pctComplete);
+        
+        if(this.game.pctComplete>=1){
+           this.endGame();
+        }
+    }
+    drawGame(){
+        let gradient = this.ctx.createLinearGradient(this.timerbar.x, this.timerbar.y, this.timerbar.width, this.timerbar.height);
+            gradient.addColorStop("0", utils.getGrad().a);
+            gradient.addColorStop("1", utils.getGrad().b);
+            this.ctx.fillStyle = gradient;
+            this.ctx.fillRect(this.timerbar.x, this.timerbar.y, this.timerbar.width*this.game.pctComplete, this.timerbar.height)
+        //
+        this.drawTextLabels();
+
+
+    }
+    startGame(){
+        console.log("STATUS: startGame()");
+        
+            if(!this.game.isActive){
+                this.game.curTime=0;
+                this.game.isActive=true;
+                this.startTime = new Date();
+                this.gameBinder = this.updateGame.bind(this);
+                this.game.timer = setInterval(this.gameBinder, 10)
+        
+            }
+    }
+    endGame(){
+        // console.log("STATUS: endGame()", this.game.elapsedTime);
+        
+        this.game.isActive=false;
+        this.game.elapsedTime = this.game.targetTime;
+        clearInterval(this.game.timer)
+        console.log('you waited too long');
         
     }
     clickHandler(e){
-        // console.log("clickHandler called", e);
-        let _mouse = {
-            x:e.clientX,
-            y:e.clientY
-        }
-        if(this.checkIfClicked(_mouse, this.startBtn)){
-            console.log('clicked');
+        console.log("DelayedTap Section clickHandler called", e);
+        let tgt = "";
+        if (utils.getStatus(). type=="mobile"){
+            // console.log('checking mobiel click', e.targetTouches[0]);
             
+            tgt = e.targetTouches[0]
+        }else{
+            tgt = e;
+        }
+        let _mouse = {
+            x:tgt.clientX,
+            y:tgt.clientY
+        }
+        console.log("STATUS: clicked() ", _mouse.x, _mouse.y);
+        if(this.checkIfClicked(_mouse, this.startBtn)){
+            console.log("STATUS: clicked on button");
+            
+            this.startGame();
         }
         
     }
@@ -78,10 +160,20 @@ class DelayedTapSection extends Section {
     kill(){
         cancelAnimationFrame(this.timer);
         
-        _App.context.canvas.removeEventListener('click', this.binder, true);
+        _App.context.canvas.removeEventListener('touchstart', this.binder, true);
        console.log('removing delayedTapSection');
         
     }
+    drawTextLabels(){
+        // console.log("drawTextTLabels()");
+        
+        // this.ctx.fillStyle = utils.getColors().brightGreen;
+        this.ctx.fillStyle = utils.getColors().light;
+        this.ctx.font = "300 20px Roboto"; 
+        let str = this.game.elapsedTime/1000+ " seconds elapsed";
+        this.ctx.fillText(str,this.timerbar.x, this.timerbar.y-20);
+        
+        }
+    }
    
-}
 export default DelayedTapSection

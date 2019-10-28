@@ -1,5 +1,6 @@
 import Section from './Section';
 import Bubble from './Bubble';
+import utils from '../utils'
 //
 class PopSection extends Section {
     constructor(){
@@ -27,7 +28,16 @@ class PopSection extends Section {
     start(){
         console.log(this.n, ' started');
         this.binder = this.clickHandler.bind(this);
-       _App.context.canvas.addEventListener('click', this.binder, true);
+        let status = utils.getStatus().type;
+        let eventType = "";
+        if(status=="mobile"){
+            eventType = utils.getStatus().event.mobile;
+        }else{
+            eventType = utils.getStatus().event.desktop;
+        }
+       _App.context.canvas.addEventListener(eventType, this.binder, true);
+       
+    //    _App.context.canvas.addEventListener('click', this.binder, true);
         this.update();
     }
     

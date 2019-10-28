@@ -1,5 +1,6 @@
 import animation from './nameAnim';
 import progressBar from './uiProgressBar';
+import utils from './utils';
 //
 import sectionShake from './sections/ShakeSection';
 import sectionTap from './sections/TapSection';
@@ -43,7 +44,14 @@ let div = "";
 //
 exports.init = function(){
     div = document.getElementById('instructions');
-    div.addEventListener('click', nextSection, false);
+        let status = utils.getStatus().type;
+        let eventType = "";
+        if(status=="mobile"){
+            eventType = utils.getStatus().event.mobile;
+        }else{
+            eventType = utils.getStatus().event.desktop;
+        }
+       div.addEventListener(eventType, nextSection, false);
     // div.addEventListener('touchstart', nextSection, false);
     shakeSection.init();
     tapSection.init();
