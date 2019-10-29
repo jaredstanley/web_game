@@ -28,6 +28,9 @@ exports.getGrad = function(){
 exports.getStatus=function(){
   return status;
 }
+exports.setStatus=function(s){
+  status.type = s;
+}
 exports.debug= function(arr, clr, ctx){
     clr = "white";
     ctx.save();

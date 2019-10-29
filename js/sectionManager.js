@@ -65,7 +65,9 @@ exports.loadFirstSection = function(){
     progressBar.nextSection();
     engageLoading();
 }
-
+exports.proceed = function(){
+    nextSection();
+}
 function nextSection(){
     console.log("next Section called, shouldnt change yet ", curPos);
     curSection.kill();

@@ -9,7 +9,7 @@ class TapSection extends Section {
     init(){
         this.n = "tapper";
         this.color = 'rgb(111,0,111)';
-        console.log("TapSection Initted");
+        // console.log("TapSection Initted");
         
     }
     start(){
@@ -19,13 +19,6 @@ class TapSection extends Section {
     update(){
         return false;
         console.log("updating!! ", this.n);
-        
-        // let ctx = _App.context;
-        // ctx.fillStyle=this.color;
-        // ctx.fillRect(0,0,300,300);
-        // ctx.fill();
-        // this.timer = requestAnimationFrame(this.update.bind(this));
-        
     }
    
 }

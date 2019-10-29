@@ -20,7 +20,7 @@ exports.getData=function(){
     return moveData;
 }
 exports.init=function(){	
-	console.log("accelerometer is ready");
+	// console.log("accelerometer is ready");
 	
 	// if (window.DeviceMotionEvent != undefined) {
 		window.addEventListener("devicemotion", handleMotion, true); 

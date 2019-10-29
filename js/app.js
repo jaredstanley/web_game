@@ -7,6 +7,15 @@ import sectionManager from './sectionManager';
 
 let _App = {
   init: function(){
+    // console.log(window.clientInformation.userAgent);
+    this.agent = window.clientInformation.userAgent.toString().search('Chrome');
+    if (this.agent>0){
+      utils.setStatus('desktop');
+    }else{
+      utils.setStatus('mobile');
+    }
+    
+
     this.context = document.querySelector("#main").getContext("2d");
     this.context.imageSmoothingEnabled = true;
     this.updateSize();

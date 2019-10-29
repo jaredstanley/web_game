@@ -1,6 +1,7 @@
 import Section from './Section';
 import Bubble from './Bubble';
 import utils from '../utils'
+import sectionManager from '../sectionManager';
 //
 class PopSection extends Section {
     constructor(){
@@ -11,8 +12,9 @@ class PopSection extends Section {
     init(){
         this.canvas = _App.context.canvas;
         this.bubblesObj = {};
-        this.bubbleCount = 15;
+        this.bubbleCount = 3;
         this.n = "popper";
+        this.eventType="none whatsover";
         this.colorArr = [
             {   hex:'#009474'
             },
@@ -22,31 +24,32 @@ class PopSection extends Section {
             }
         ],
         this.initBubbles();
-        console.log("PopSection Initted");
+        // console.log("PopSection Initted");
         
     }
     start(){
         console.log(this.n, ' started');
-        this.binder = this.clickHandler.bind(this);
         let status = utils.getStatus().type;
-        let eventType = "";
+        
         if(status=="mobile"){
-            eventType = utils.getStatus().event.mobile;
+            this.eventType = utils.getStatus().event.mobile;
         }else{
-            eventType = utils.getStatus().event.desktop;
+            this.eventType = utils.getStatus().event.desktop;
         }
-       _App.context.canvas.addEventListener(eventType, this.binder, true);
+        //
+        this.binder = this.clickHandler.bind(this);
+       _App.context.canvas.addEventListener(this.eventType, this.binder, true);
        
     //    _App.context.canvas.addEventListener('click', this.binder, true);
         this.update();
     }
     
     update(){
-        // console.log('update() ', this.n);
-        
+        console.log('update() ', this.n);
+        let count = 0;
         let ctx = _App.context;
         for (const key in this.bubblesObj) {   
-                    
+            count++;        
             const bubb = this.bubblesObj[key];
             bubb.updatePosition();
             // console.log("a fmaily is this: ",barFamily);
@@ -58,28 +61,42 @@ class PopSection extends Section {
            
 
         }
+        // console.log(count);
+        
+        if(count<=0){
+            this.endGame();
+            return;
+        }
+
+        // console.log(count," << bubbles left");
+        
         this.timer = requestAnimationFrame(this.update.bind(this));
+        // console.log(this.timer);
+        
     }
     clickHandler(e){
-        console.log("clickHandler called", e);
+        console.log("clickHandler called from popSection");
+        let tgt = "";
+        if (utils.getStatus().type=="mobile"){
+            // console.log('checking mobiel click', e.targetTouches[0]);
+            tgt = e.targetTouches[0]
+        }else{
+            tgt = e;
+        }
         let _mouse = {
-            x:e.clientX,
-            y:e.clientY
+            x:tgt.clientX,
+            y:tgt.clientY
         }
         
         for (const key in this.bubblesObj) {   
                     
             let bubb = this.bubblesObj[key];
             if (this.checkIfClicked(_mouse, bubb)){
-                console.log('clicked', bubb.pos);
+                // console.log('clicked', bubb.pos);
                 delete this.bubblesObj[key];
                 bubb = "";
-                
-                
                 break;
             }
-        //    console.log(bubb.x);
-    
         }
     }
     //
@@ -97,15 +114,20 @@ class PopSection extends Section {
         // console.log("bibb;esObj ", this.bubblesObj);
         
     }
-
+    endGame(){
+        sectionManager.proceed();
+    }
     checkIfClicked(mouse, circle){
             return Math.sqrt((mouse.x-circle.x) ** 2 + (mouse.y - circle.y) ** 2) < circle.radius;
     }
     kill(){
+        console.log("kill kill kill")
         cancelAnimationFrame(this.timer);
+        this.timer = null;
         delete this.bubblesObj;
         
-        _App.context.canvas.removeEventListener('click', this.binder, true);
+        _App.context.canvas.removeEventListener(this.eventType, this.binder, true);
+        // _App.context.canvas.removeEventListener('click', this.binder, true);
        console.log('removing popSection');
         
     }
