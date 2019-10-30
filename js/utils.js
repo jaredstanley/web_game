@@ -10,10 +10,12 @@ let _seed = 0;
 let count = 0;
 let colors = {
   darkGreen: "#1d210d",
-  brightGreen: "#00ff18", 
+  brightGreen: "#00ff18",
+  lessBright: "#39b54a", 
   upcoming: "#174d0f",
   visited: "#0ba615",
-  light: "#dedede"
+  light: "#dedede",
+  white:"#FFFFFF"
 };
 let grad1 = {
   b: "#009475", a:"#acc800"

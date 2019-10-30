@@ -6,6 +6,7 @@ import sectionShake from './sections/ShakeSection';
 import sectionTap from './sections/TapSection';
 import sectionPop from './sections/PopSection';
 import sectionDelayedTap from './sections/DelayedTapSection';
+import sectionKeyboard from './sections/KeyboardSection';
 //
 import permissionsMgr from './PermissionsMgr';
 
@@ -13,6 +14,7 @@ let popSection = new sectionPop();
 let tapSection = new sectionTap();
 let shakeSection = new sectionShake();
 let delayedTapSection = new sectionDelayedTap();
+let keyboardSection = new sectionKeyboard();
 
 
 let curPos = 0;
@@ -24,16 +26,16 @@ let sectionList = [
         section:tapSection
     },
     {   pos:1,
-        name:"pop",
-        section:popSection
+        name:"keyboard",
+        section:keyboardSection
     },
     {   pos:2,
         name:"delayedTap",
         section:delayedTapSection
     },
     {   pos:3,
-        name:"shout",
-        section:shakeSection
+        name:"pop",
+        section:popSection
     },
     {   pos:4,
         name:"shake",
@@ -57,6 +59,7 @@ exports.init = function(){
     tapSection.init();
     popSection.init();
     delayedTapSection.init();
+    keyboardSection.init();
     
 
 }

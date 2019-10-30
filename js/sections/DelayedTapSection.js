@@ -1,5 +1,6 @@
 import Section from './Section';
 import utils from '../utils';
+import sectionManager from '../sectionManager';
 //
 class DelayedTapSection extends Section {
     constructor(){
@@ -8,12 +9,13 @@ class DelayedTapSection extends Section {
         super();
     }
     init(){
+        this.interval = 10;
         this.startBtn = {x:200, y:200, radius:33};
         this.n = "delayedTap";
         this.color = 'rgb(111,0,111)';
         this.game = {
             isActive:false,
-            targetTime:5000,
+            targetTime:3000,
             curTime:0,
             elapsedTime:0,
             pctComplete:0,
@@ -33,21 +35,21 @@ class DelayedTapSection extends Section {
         
     }
     start(){
-        let div = document.querySelector('#instructions');
-        div.classList.toggle('show');
+        // let div = document.querySelector('#instructions');
+        // div.classList.toggle('show');
        
         this.startBtn.x=_App.w/2;
         this.startBtn.y=_App.h/1.4;
 
         this.binder = this.clickHandler.bind(this);
         let status = utils.getStatus().type;
-        let eventType = "";
+        this.eventType = "";
         if(status=="mobile"){
-            eventType = utils.getStatus().event.mobile;
+            this.eventType = utils.getStatus().event.mobile;
         }else{
-            eventType = utils.getStatus().event.desktop;
+            this.eventType = utils.getStatus().event.desktop;
         }
-       _App.context.canvas.addEventListener(eventType, this.binder, true);
+       _App.context.canvas.addEventListener(this.eventType, this.binder, true);
        
        console.log(this.n, ' started');
          
@@ -100,7 +102,7 @@ class DelayedTapSection extends Section {
         // console.log(this.game.pctComplete);
         
         if(this.game.pctComplete>=1){
-           this.endGame();
+           this.endGame(false);
         }
     }
     drawGame(){
@@ -125,7 +127,7 @@ class DelayedTapSection extends Section {
                 this.game.isActive=true;
                 this.startTime = new Date();
                 this.gameBinder = this.updateGame.bind(this);
-                this.game.timer = setInterval(this.gameBinder, 64)
+                this.game.timer = setInterval(this.gameBinder, this.interval)
         
             }
     }
@@ -141,6 +143,8 @@ class DelayedTapSection extends Section {
             this.game.elapsedTime = this.game.targetTime;
             console.log('you waited too long');
         }
+        
+        sectionManager.proceed();
         
         
     }
@@ -180,7 +184,7 @@ class DelayedTapSection extends Section {
     kill(){
         cancelAnimationFrame(this.timer);
         
-        _App.context.canvas.removeEventListener('touchstart', this.binder, true);
+        _App.context.canvas.addEventListener(this.eventType, this.binder, true);
        console.log('removing delayedTapSection');
         
     }
@@ -197,7 +201,7 @@ class DelayedTapSection extends Section {
 
 
 
-        this.ctx.fillStyle = utils.getColors().brightGreen;
+        this.ctx.fillStyle = utils.getColors().lessBright;
         // this.ctx.fillStyle = utils.getColors().light;
         this.ctx.font = "300 40px Roboto"; 
         //  str = this.game.elapsedTime/1000+ " seconds elapsed";

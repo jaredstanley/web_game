@@ -12,7 +12,7 @@ class PopSection extends Section {
     init(){
         this.canvas = _App.context.canvas;
         this.bubblesObj = {};
-        this.bubbleCount = 3;
+        this.bubbleCount = 1;
         this.n = "popper";
         this.eventType="none whatsover";
         this.colorArr = [
@@ -29,6 +29,9 @@ class PopSection extends Section {
     }
     start(){
         console.log(this.n, ' started');
+        let div = document.querySelector('#instructions');
+        div.classList.toggle('show');
+       
         let status = utils.getStatus().type;
         
         if(status=="mobile"){
@@ -121,14 +124,14 @@ class PopSection extends Section {
             return Math.sqrt((mouse.x-circle.x) ** 2 + (mouse.y - circle.y) ** 2) < circle.radius;
     }
     kill(){
-        console.log("kill kill kill")
+        // console.log("kill kill kill")
         cancelAnimationFrame(this.timer);
         this.timer = null;
         delete this.bubblesObj;
         
         _App.context.canvas.removeEventListener(this.eventType, this.binder, true);
         // _App.context.canvas.removeEventListener('click', this.binder, true);
-       console.log('removing popSection');
+       console.log('killing popSection');
         
     }
    
