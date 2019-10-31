@@ -35,7 +35,8 @@ let sectionList = [
     },
     {   pos:3,
         name:"pop",
-        section:popSection
+        section:popSection        
+        
     },
     {   pos:4,
         name:"shake",

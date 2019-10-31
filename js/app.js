@@ -18,6 +18,7 @@ let _App = {
 
     this.context = document.querySelector("#main").getContext("2d");
     this.context.imageSmoothingEnabled = true;
+    this.context.textBaseline = "top";
     this.updateSize();
     //
     lines.init();

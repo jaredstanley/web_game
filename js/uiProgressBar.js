@@ -32,6 +32,9 @@ exports.update = function(){
     // console.log(itmHeight);
     
     xpos = Math.min(_App.w*0.1, 30);
+    if(_App.w<480){
+        xpos=5;
+    }
     // context.save();
     // context.globalAlpha=0.2;    
     for (let i = 0; i < itemsArr.length; i++) {
@@ -73,6 +76,7 @@ function buildNav(){
 function addTextLabels(s){
     context.fillStyle = utils.getColors().brightGreen;
     context.font = "300 "+s+"px Roboto";
+    context.textAlign = "left";
     for (let i = 1; i <= itemsArr.length; i++) {
         let itm = itemsArr[i-1];
         let twoDigit = "";

@@ -26,7 +26,7 @@
         transform: translate3d(0,0,0);
         text-align: center;
         opacity: 1;
-        top: 10%;
+        top: 0%;
         transition-property: width, height, top;
         transition-duration: 0.64s;
     }
@@ -83,7 +83,7 @@
         position: absolute;
     }
 
-    @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    @media only screen and (max-width : 479px) {
         /* teenys */
         #logoAnim{
             width:75%;
@@ -92,7 +92,7 @@
         #logoAnim.sm{
             top: 0;
             width: 40%;
-            height: 40%;
+            height: 15%;
     
         }
     }
@@ -104,7 +104,7 @@
         }
         #logoAnim.sm{
             top: 0;
-            width: 45%;
+            width: 40%;
             height: 15%;
     
         }
@@ -118,6 +118,7 @@
             height:60%;
         }
         #logoAnim.sm{
+            top: 0;
             width: 45%;
             height: 25%;
     
