@@ -70,9 +70,9 @@ class KeyboardSection extends Section {
         
     }
     start(){
-        let div = document.querySelector('#instructions');
-        div.classList.toggle('show');
-        //
+        // let div = document.querySelector('#instructions');
+        // div.classList.toggle('show');
+        // //
         this.binder = this.clickHandler.bind(this);
         let status = utils.getStatus().type;
         let eventType = "";
@@ -204,9 +204,13 @@ class KeyboardSection extends Section {
         if(itm.note===this.song.notes[this.song.curPos]){
             console.log("correct note at position ", this.song.curPos);
             this.song.curPos++;
+            if(this.song.curPos>this.song.notes.length){
+                this.song.curPos = 0;
+                return;
+            }
             if(this.song.curPos==this.song.notes.length){
                 console.log('you won!');
-                this.song.curPos = 0;
+                
                 
             }
         }else{

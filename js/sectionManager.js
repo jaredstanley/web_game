@@ -26,16 +26,16 @@ let sectionList = [
         section:tapSection
     },
     {   pos:1,
-        name:"keyboard",
-        section:keyboardSection
+        name:"pop",
+        section:popSection 
     },
     {   pos:2,
         name:"delayedTap",
         section:delayedTapSection
     },
     {   pos:3,
-        name:"pop",
-        section:popSection        
+        name:"keyboard",
+        section:keyboardSection        
         
     },
     {   pos:4,

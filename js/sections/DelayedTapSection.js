@@ -138,13 +138,18 @@ class DelayedTapSection extends Section {
         clearInterval(this.game.timer)
         if(clicked){
             this.game.result = this.game.elapsedTime/1000;
+            if((this.game.targetTime/1000)-this.game.result < 0.5){
+                console.log("close enough");
+                
+                sectionManager.proceed();
+            }
         
         }else{
             this.game.elapsedTime = this.game.targetTime;
             console.log('you waited too long');
         }
         
-        sectionManager.proceed();
+        
         
         
     }
