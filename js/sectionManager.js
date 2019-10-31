@@ -56,11 +56,11 @@ exports.init = function(){
         }
        div.addEventListener(eventType, nextSection, false);
     // div.addEventListener('touchstart', nextSection, false);
-    shakeSection.init();
     tapSection.init();
     popSection.init();
     delayedTapSection.init();
     keyboardSection.init();
+    shakeSection.init();
     
 
 }

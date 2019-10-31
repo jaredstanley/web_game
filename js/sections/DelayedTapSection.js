@@ -189,7 +189,7 @@ class DelayedTapSection extends Section {
     kill(){
         cancelAnimationFrame(this.timer);
         
-        _App.context.canvas.addEventListener(this.eventType, this.binder, true);
+        _App.context.canvas.removeEventListener(this.eventType, this.binder, true);
        console.log('removing delayedTapSection');
         
     }

@@ -1,6 +1,6 @@
 import Section from './Section';
 import Bubble from './Bubble';
-import utils from '../utils'
+import utils from '../utils';
 import sectionManager from '../sectionManager';
 //
 class PopSection extends Section {

@@ -13,20 +13,31 @@ class ShakeSection extends Section {
         this.color = 'rgb(0,0,155)';
         this.n = "shaker"
         accel.init();
-        // console.log("ShakeSection Initted");
+        console.log("ShakeSection Initted");
+        
+    }
+    start(){
+        console.log('start in ',this.n);
+        
+        this.update();
         
     }
     update(){
-        console.log("updating!! ", this.n);
-       let gradient = this.ctx.createLinearGradient(0, 100, 0, 900);
+        // console.log("updating!! ", this.n);
+       let gradient = this.ctx.createLinearGradient(_App.w/2-100, _App.h/2-100, _App.w/2+100, _App.h/2+100);
         gradient.addColorStop("0", utils.getGrad().a);
         gradient.addColorStop("1", utils.getGrad().b);
        
-        this.ctx.fillStyle=gradient
+        this.ctx.fillStyle=gradient;
         // this.ctx.fillRect(0,0,50,50);
         // this.ctx.fill();
-        this.ctx.font = "30px Arial";
-        this.ctx.fillText(accel.getData().x, 100, 300);
+
+        let x = _App.w/2;
+        let y = _App.h/2;
+        this.ctx.textBaseline = "middle";
+        this.ctx.textAlign = "center";
+        this.ctx.font = "700 80px Roboto"; 
+        this.ctx.fillText(this.n.toUpperCase()+" section", x, y);
         
 
 

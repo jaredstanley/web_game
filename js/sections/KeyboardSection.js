@@ -1,5 +1,6 @@
 import Section from './Section';
 import utils from '../utils';
+import sectionManager from '../sectionManager';
 //
 class KeyboardSection extends Section {
     constructor(){
@@ -9,6 +10,7 @@ class KeyboardSection extends Section {
     }
     init(){
         this.ctx = _App.context;
+        this.eventType = "";
         this.n = "keyboard";
         this.color = 'rgb(111,0,111)';
         this.game = {
@@ -75,13 +77,13 @@ class KeyboardSection extends Section {
         // //
         this.binder = this.clickHandler.bind(this);
         let status = utils.getStatus().type;
-        let eventType = "";
+        
         if(status=="mobile"){
-            eventType = utils.getStatus().event.mobile;
+            this.eventType = utils.getStatus().event.mobile;
         }else{
-            eventType = utils.getStatus().event.desktop;
+            this.eventType = utils.getStatus().event.desktop;
         }
-       _App.context.canvas.addEventListener(eventType, this.binder, true);
+       _App.context.canvas.addEventListener(this.eventType, this.binder, true);
        //
         this.piano.width = Math.min(this.piano.maxWidth, _App.w*0.75);
         this.piano.height = Math.min(this.piano.maxHeight, _App.h*0.75);
@@ -210,7 +212,7 @@ class KeyboardSection extends Section {
             }
             if(this.song.curPos==this.song.notes.length){
                 console.log('you won!');
-                
+                sectionManager.proceed();
                 
             }
         }else{
@@ -232,7 +234,7 @@ class KeyboardSection extends Section {
 
     kill(){
         cancelAnimationFrame(this.timer);    
-        _App.context.canvas.addEventListener(eventType, this.binder, true);
+        _App.context.canvas.removeEventListener(this.eventType, this.binder, true);
        console.log('removing KeyboardSection');
         
     }
