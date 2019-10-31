@@ -19,7 +19,7 @@
     "babel-preset-env": "^1.6.1",
     "bable-loader": "0.0.1-security",
     "webpack": "^3.12.0",
-    "webpack-dev-server": "^2.11.5"
+    "webpack-dev-server": "^3.1.11"
   },
   "dependencies": {
     "lottie-web": "^5.5.9",
