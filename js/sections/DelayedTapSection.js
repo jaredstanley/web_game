@@ -10,7 +10,7 @@ class DelayedTapSection extends Section {
     }
     init(){
         this.interval = 10;
-        this.startBtn = {x:200, y:200, radius:33};
+        // this.startBtn = {x:200, y:200, radius:33};
         this.n = "delayedTap";
         this.color = 'rgb(111,0,111)';
         this.game = {
@@ -27,10 +27,13 @@ class DelayedTapSection extends Section {
         this.ctx = _App.context;
         // console.log("DelayedTapSection Initted");
         this.timerbar = {
-            width:350,
+            width:_App.w*0.75,
+            maxWidth:375,
             height:10,
             x:0,
-            y:0
+            y:0,
+            tap1DisplayValue:"",
+            tap2DisplayValue:""
         }
         
     }
@@ -38,8 +41,9 @@ class DelayedTapSection extends Section {
         // let div = document.querySelector('#instructions');
         // div.classList.toggle('show');
        
-        this.startBtn.x=_App.w/2;
-        this.startBtn.y=_App.h/1.4;
+        // this.startBtn.x=_App.w/2;
+        // this.startBtn.y=_App.h/1.4;
+        this.timerbar.width = Math.min(_App.w*0.75, this.timerbar.maxWidth);
 
         this.binder = this.clickHandler.bind(this);
         let status = utils.getStatus().type;
@@ -72,12 +76,12 @@ class DelayedTapSection extends Section {
         
     }
     updateUI(){
-        let s = this.startBtn;
+        // let s = this.startBtn;
         let ctx = _App.context;
-        ctx.beginPath();
-        ctx.fillStyle=this.color;
-        ctx.arc(s.x, s.y, s.radius, 0, Math.PI*2);
-        ctx.fill();
+        // ctx.beginPath();
+        // ctx.fillStyle=this.color;
+        // ctx.arc(s.x, s.y, s.radius, 0, Math.PI*2);
+        // ctx.fill();
 
         ctx.beginPath();
         ctx.fillStyle = utils.getColors().light;
@@ -172,11 +176,11 @@ class DelayedTapSection extends Section {
                 y:tgt.clientY
             }
             console.log("STATUS: clicked() ", _mouse.x, _mouse.y);
-            if(this.checkIfClicked(_mouse, this.startBtn)){
-                console.log("STATUS: clicked on button");
+            // if(this.checkIfClicked(_mouse, this.startBtn)){
+                // console.log("STATUS: clicked on button");
                 
                 this.startGame();
-            }  
+            // }  
 
 
         }
@@ -194,24 +198,39 @@ class DelayedTapSection extends Section {
         
     }
     drawTextLabels(){
+        if(this.game.isActive){
+            this.timerbar.tap1DisplayValue="0 sec";
+            this.timerbar.tap2DisplayValue=this.game.elapsedTime/1000+" sec";
+        }
         // console.log("drawTextTLabels()");
         //timer layers
         this.ctx.fillStyle = utils.getColors().light;
         this.ctx.font = "300 20px Roboto"; 
-        let str = "1st tap:   0 sec";
-        this.ctx.fillText(str,this.timerbar.x, this.timerbar.y-40);
-        str = "2nd tap:   "+this.game.result+" sec";
-        this.ctx.fillText(str,this.timerbar.x, this.timerbar.y-20);
-
+        let str = "1st tap:";
+        this.ctx.save();
+        this.ctx.textAlign="right";
+        this.ctx.fillText(str,_App.w/2-10, this.timerbar.y-40);
+        str = "2nd tap:";
+        this.ctx.fillText(str,_App.w/2-10, this.timerbar.y-20);
+        this.ctx.restore();
+        
+        this.ctx.save();
+        this.ctx.textAlign="left";
+        this.ctx.fillText(this.timerbar.tap1DisplayValue,_App.w/2+10, this.timerbar.y-40);
+        this.ctx.fillText(this.timerbar.tap2DisplayValue,_App.w/2+10, this.timerbar.y-20);
+        this.ctx.restore();
 
 
 
         this.ctx.fillStyle = utils.getColors().lessBright;
         // this.ctx.fillStyle = utils.getColors().light;
-        this.ctx.font = "300 40px Roboto"; 
+        this.ctx.font = "700 40px Roboto"; 
         //  str = this.game.elapsedTime/1000+ " seconds elapsed";
+        // this.ctx.save();
+        // this.ctx.textAlign = "center";
          str = this.game.elapsedTime/1000;
-        this.ctx.fillText(str,this.timerbar.x, this.timerbar.y+60);
+        this.ctx.fillText(str,_App.w/2-50, this.timerbar.y+60);
+        // this.ctx.restore();
         
         }
     }

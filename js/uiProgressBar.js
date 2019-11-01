@@ -6,7 +6,7 @@ let margin = 6;
 let navItemWidth = 10;
 let fontSizeOrig = 12;
 let fontSizeSm = 8;
-let navItems = 10; 
+let sections = 5; 
 let context = {};
 let itmHeight = 0;
 let topMargin = 30;
@@ -55,11 +55,11 @@ exports.update = function(){
 function buildNav(){
     itemsArr = [];
     let defaultColor = "";
-    itmHeight = ((_App.h*(heightPercentage*0.01))/navItems)-margin;
+    itmHeight = ((_App.h*(heightPercentage*0.01))/sections)-margin;
     itmHeight = Math.max(itmHeight, 20);
     let c = utils.getColors();
-    for (let i = 0; i < navItems; i++) {
-        let sec = navItems-currentSection;
+    for (let i = 0; i < sections; i++) {
+        let sec = sections-currentSection;
         
         if(i<sec)defaultColor=c.upcoming
         else if(i>sec)defaultColor=c.visited

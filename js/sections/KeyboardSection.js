@@ -169,7 +169,7 @@ class KeyboardSection extends Section {
     createKeys(){
         let i=0;
         let p = this.piano;
-        p.ivories.forEach(itm => {
+        p.ivories.reverse().forEach(itm => {
             itm.i=i;
             itm.gradObj="";
 
