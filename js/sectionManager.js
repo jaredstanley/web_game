@@ -17,44 +17,44 @@ let delayedTapSection = new sectionDelayedTap();
 let keyboardSection = new sectionKeyboard();
 
 
+
 let curPos = 0;
 let nextPos = 1;
 let curSection = {name:"none"};
 let sectionList = [
     {   pos:0,
         name:"tap",
-        section:tapSection
+        section:tapSection,
+        instructions:"tap to proceed"
     },
     {   pos:1,
         name:"pop",
-        section:popSection 
+        section:popSection,
+        instructions:"pop the bubbles to proceed"
     },
     {   pos:2,
         name:"delayedTap",
-        section:delayedTapSection
+        section:delayedTapSection,
+        instructions:"tap 3 seconds apart to proceed"
     },
     {   pos:3,
         name:"keyboard",
-        section:keyboardSection        
+        section:keyboardSection,
+        instructions:"play the song to proceed"
         
     },
     {   pos:4,
         name:"shake",
-        section:shakeSection
+        section:shakeSection,
+        instructions:"coming soon"
     }
 ]
 let div = "";
 //
 exports.init = function(){
     div = document.getElementById('instructions');
-        let status = utils.getStatus().type;
-        let eventType = "";
-        if(status=="mobile"){
-            eventType = utils.getStatus().event.mobile;
-        }else{
-            eventType = utils.getStatus().event.desktop;
-        }
-       div.addEventListener(eventType, nextSection, false);
+        
+       div.addEventListener(_App.eventType, nextSection, false);
     // div.addEventListener('touchstart', nextSection, false);
     tapSection.init();
     popSection.init();
@@ -72,7 +72,15 @@ exports.loadFirstSection = function(){
 exports.proceed = function(){
     nextSection();
 }
+exports.setInstructions=function(){
+    let sec = sectionList.find(itm => itm.pos == curPos);
+    // console.log(sec,"sdsds");
+    
+    document.querySelector(".instructiontext").innerHTML=sec.instructions;
+        
+}
 function nextSection(){
+    div.removeEventListener(_App.eventType, nextSection, false);
     console.log("next Section called, shouldnt change yet ", curPos);
     curSection.kill();
     // return;

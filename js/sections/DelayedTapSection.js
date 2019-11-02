@@ -31,6 +31,9 @@ class DelayedTapSection extends Section {
             tap1DisplayValue:"–",
             tap2DisplayValue:"–"
         }
+        // this.msg = "tap "+this.game.targetTime/1000+" seconds apart to proceed";
+        this.msg = "tap 3 seconds apart to proceed";
+        
         
     }
     start(){
@@ -39,6 +42,7 @@ class DelayedTapSection extends Section {
         this.timerbar.width = Math.min(_App.w*0.75, this.timerbar.maxWidth);
         this.binder = this.clickHandler.bind(this);
         _App.context.canvas.addEventListener(_App.eventType, this.binder, true);
+        sectionManager.setInstructions();
         this.update();
     }
     

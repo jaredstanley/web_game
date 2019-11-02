@@ -72,6 +72,8 @@
         font-weight: 200;
         font-style: italic;
         color: #bada55;
+        text-align: center;
+        width: 300px;
         letter-spacing: 0.15em;
        
     }

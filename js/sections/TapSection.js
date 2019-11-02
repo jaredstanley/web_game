@@ -1,4 +1,5 @@
 import Section from './Section';
+import sectionManager from '../sectionManager';
 //
 class TapSection extends Section {
     constructor(){
@@ -13,6 +14,7 @@ class TapSection extends Section {
         
     }
     start(){
+        sectionManager.setInstructions();
         this.update();
     }
     

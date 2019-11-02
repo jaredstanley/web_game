@@ -8,9 +8,10 @@ class PopSection extends Section {
         super();
     }
     init(){
+        this.msg = "pop the bubbles to proceed";
         this.canvas = _App.context.canvas;
         this.bubblesObj = {};
-        this.bubbleCount = 6;
+        this.bubbleCount = 1;
         this.n = "popper";
         this.eventType="none whatsover";
         this.bubbleColorsArr = [
@@ -26,7 +27,11 @@ class PopSection extends Section {
     start(){
         console.log(this.n, ' started');
         let div = document.querySelector('#instructions');
-        div.classList.toggle('show');
+        // let txt = document.querySelector(".instructiontext").innerHTML=this.msg;
+        sectionManager.setInstructions();
+        // console.log(txt);
+        
+        // div.classList.toggle('show');
        
         this.binder = this.clickHandler.bind(this);
        _App.context.canvas.addEventListener(_App.eventType, this.binder, true);
@@ -34,7 +39,7 @@ class PopSection extends Section {
     }
     
     update(){
-        console.log('update() ', this.n);
+        // console.log('update() ', this.n);
         let count = 0;
         let ctx = _App.context;
         for (const key in this.bubblesObj) {   

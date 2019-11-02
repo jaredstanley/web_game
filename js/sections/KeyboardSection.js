@@ -9,6 +9,7 @@ class KeyboardSection extends Section {
         super();
     }
     init(){
+        this.msg = "play 'Happy Birthday' to proceed";
         this.ctx = _App.context;
         this.n = "keyboard";
         this.color = 'rgb(111,0,111)';
@@ -20,7 +21,7 @@ class KeyboardSection extends Section {
         // console.log("KeyboardSection Initted");
         this.piano = {
             maxWidth:350,
-            maxHeight:425,
+            maxHeight:325,
             maxKeyHeight:40,
             width:0,
             height:0,
@@ -73,6 +74,8 @@ class KeyboardSection extends Section {
     start(){
         // let div = document.querySelector('#instructions');
         // div.classList.toggle('show');
+        // let txt = document.querySelector(".instructiontext").innerHTML=this.msg;
+        sectionManager.setInstructions();
         // //
         this.binder = this.clickHandler.bind(this);
         
@@ -80,7 +83,7 @@ class KeyboardSection extends Section {
        _App.context.canvas.addEventListener(_App.eventType, this.binder, true);
        //
         this.piano.width = Math.min(this.piano.maxWidth, _App.w*0.75);
-        this.piano.height = Math.min(this.piano.maxHeight, _App.h*0.75);
+        this.piano.height = Math.min(this.piano.maxHeight, _App.h*0.55);
         
         console.log(this.n, ' started', this.piano);
         this.createKeys();  
@@ -90,7 +93,7 @@ class KeyboardSection extends Section {
     update(){
         
         this.piano.width = Math.min(this.piano.maxWidth, _App.w*0.75);
-        this.piano.height = Math.min(this.piano.maxHeight, _App.h*0.75);
+        this.piano.height = Math.min(this.piano.maxHeight, _App.h*0.55);
         this.piano.keyHeight = Math.min(this.piano.maxKeyHeight, this.piano.height*0.1);
         let keyHeightTotal = (this.piano.keyHeight*this.piano.totalKeys);
         let leftOvers = this.piano.height-keyHeightTotal;
@@ -109,7 +112,7 @@ class KeyboardSection extends Section {
         this.ctx.fillStyle = utils.getColors().light;
         //background
         p.x = (_App.w/2)-(p.width/2);
-        p.y = (_App.h/2)-(p.height/2);
+        p.y = (_App.h/2)-(p.height/2)-40;
         this.ctx.rect(p.x,p.y,p.width,p.height);
         this.ctx.fill();
         //piano keys

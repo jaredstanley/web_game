@@ -1,6 +1,7 @@
 import Section from './Section';
 import utils from '../utils';
 import accel from '../accelerometer';
+import sectionManager from '../sectionManager';
 //
 class ShakeSection extends Section {
     constructor(){
@@ -18,7 +19,7 @@ class ShakeSection extends Section {
     }
     start(){
         console.log('start in ',this.n);
-        
+        sectionManager.setInstructions();
         this.update();
         
     }
