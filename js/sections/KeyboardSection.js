@@ -10,7 +10,6 @@ class KeyboardSection extends Section {
     }
     init(){
         this.ctx = _App.context;
-        this.eventType = "";
         this.n = "keyboard";
         this.color = 'rgb(111,0,111)';
         this.game = {
@@ -76,14 +75,9 @@ class KeyboardSection extends Section {
         // div.classList.toggle('show');
         // //
         this.binder = this.clickHandler.bind(this);
-        let status = utils.getStatus().type;
         
-        if(status=="mobile"){
-            this.eventType = utils.getStatus().event.mobile;
-        }else{
-            this.eventType = utils.getStatus().event.desktop;
-        }
-       _App.context.canvas.addEventListener(this.eventType, this.binder, true);
+       
+       _App.context.canvas.addEventListener(_App.eventType, this.binder, true);
        //
         this.piano.width = Math.min(this.piano.maxWidth, _App.w*0.75);
         this.piano.height = Math.min(this.piano.maxHeight, _App.h*0.75);
@@ -234,7 +228,7 @@ class KeyboardSection extends Section {
 
     kill(){
         cancelAnimationFrame(this.timer);    
-        _App.context.canvas.removeEventListener(this.eventType, this.binder, true);
+        _App.context.canvas.removeEventListener(_App.eventType, this.binder, true);
        console.log('removing KeyboardSection');
         
     }

@@ -5,17 +5,15 @@ import sectionManager from '../sectionManager';
 //
 class PopSection extends Section {
     constructor(){
-        // console.log("PopSection Constructor ");
-        
         super();
     }
     init(){
         this.canvas = _App.context.canvas;
         this.bubblesObj = {};
-        this.bubbleCount = 1;
+        this.bubbleCount = 6;
         this.n = "popper";
         this.eventType="none whatsover";
-        this.colorArr = [
+        this.bubbleColorsArr = [
             {   hex:'#009474'
             },
             {   hex:'#FFF'
@@ -24,26 +22,14 @@ class PopSection extends Section {
             }
         ],
         this.initBubbles();
-        // console.log("PopSection Initted");
-        
     }
     start(){
         console.log(this.n, ' started');
         let div = document.querySelector('#instructions');
         div.classList.toggle('show');
        
-        let status = utils.getStatus().type;
-        
-        if(status=="mobile"){
-            this.eventType = utils.getStatus().event.mobile;
-        }else{
-            this.eventType = utils.getStatus().event.desktop;
-        }
-        //
         this.binder = this.clickHandler.bind(this);
-       _App.context.canvas.addEventListener(this.eventType, this.binder, true);
-       
-    //    _App.context.canvas.addEventListener('click', this.binder, true);
+       _App.context.canvas.addEventListener(_App.eventType, this.binder, true);
         this.update();
     }
     
@@ -78,6 +64,7 @@ class PopSection extends Section {
         
     }
     clickHandler(e){
+        e.preventDefault();
         console.log("clickHandler called from popSection");
         let tgt = "";
         if (utils.getStatus().type=="mobile"){
@@ -105,11 +92,11 @@ class PopSection extends Section {
     //
 
     initBubbles(){
-        let count = this.colorArr.length;
+        let count = this.bubbleColorsArr.length;
         for (let i = 0; i < this.bubbleCount; i++) {
             let x = Math.random()*_App.w;
             let y = Math.random()*_App.h;
-            let color = this.colorArr[i%count].hex;
+            let color = this.bubbleColorsArr[i%count].hex;
             const element = new Bubble(i, x, y, color);
             this.bubblesObj[i] = element;
             
@@ -129,7 +116,7 @@ class PopSection extends Section {
         this.timer = null;
         delete this.bubblesObj;
         
-        _App.context.canvas.removeEventListener(this.eventType, this.binder, true);
+        _App.context.canvas.removeEventListener(_App.eventType, this.binder, true);
         // _App.context.canvas.removeEventListener('click', this.binder, true);
        console.log('killing popSection');
         

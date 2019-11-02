@@ -14,11 +14,18 @@ let _App = {
     }else{
       utils.setStatus('mobile');
     }
-    
+    this.status = utils.getStatus().type;
+        if(this.status=="mobile"){
+            this.eventType = utils.getStatus().event.mobile;
+        }else{
+            this.eventType = utils.getStatus().event.desktop;
+    }
 
     this.context = document.querySelector("#main").getContext("2d");
     this.context.imageSmoothingEnabled = true;
     this.context.textBaseline = "top";
+    
+     
     this.updateSize();
     //
     lines.init();
@@ -44,6 +51,11 @@ let _App = {
 
     _App.update();
     window.requestAnimationFrame(_App.loop);
+  },
+  blocker: function(e){
+    console.log("blocking");
+    
+    // e.preventDefault();
   },
   //
   update: function(){

@@ -3,7 +3,9 @@ class Bubble {
     constructor(pos, x, y, color){
         this.pos = pos;
         this.color = color;
-        this.radius = 25;
+        this.radius = _App.w/10;
+        this.radius = Math.min(this.radius, 40);
+        
         this.direction = Math.random()*Math.PI*2;
         this.speed = Math.random()*2+1;
         this.n = "bubble"+pos;

@@ -20,6 +20,7 @@
         position: relative;
     }
     #logoAnim{
+        cursor: pointer;
         display:block;
         position: absolute;
         overflow: hidden;
@@ -33,7 +34,7 @@
 
     
     #instructions{
-
+        cursor: pointer;
         width: 240px;
         height: 100px;
         /* background-color: crimson; */
@@ -48,7 +49,7 @@
         flex-direction: column;
         visibility: hidden;
         opacity: 0;
-        transition: all 1s;
+        transition: all 0.64s;
        
     }
     #instructions.show{
@@ -119,7 +120,7 @@
         }
         #logoAnim.sm{
             top: 0;
-            width: 45%;
+            width: 20%;
             height: 25%;
     
         }

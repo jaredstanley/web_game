@@ -36,7 +36,7 @@ class ShakeSection extends Section {
         let y = _App.h/2;
         this.ctx.textBaseline = "middle";
         this.ctx.textAlign = "center";
-        this.ctx.font = "700 80px Roboto"; 
+        this.ctx.font = "700 40px Roboto"; 
         this.ctx.fillText(this.n.toUpperCase()+" section", x, y);
         
 

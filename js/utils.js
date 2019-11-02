@@ -2,7 +2,7 @@ let status = {
   type:"mobile",
   event:{
     mobile: 'touchstart',
-    desktop: 'click'
+    desktop: 'mousedown'
   }
 
 }
