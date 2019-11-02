@@ -11,7 +11,7 @@ class PopSection extends Section {
         this.msg = "pop the bubbles to proceed";
         this.canvas = _App.context.canvas;
         this.bubblesObj = {};
-        this.bubbleCount = 1;
+        this.bubbleCount = 5;
         this.n = "popper";
         this.eventType="none whatsover";
         this.bubbleColorsArr = [

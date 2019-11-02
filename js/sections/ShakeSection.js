@@ -14,7 +14,7 @@ class ShakeSection extends Section {
         this.color = 'rgb(0,0,155)';
         this.n = "shaker"
         accel.init();
-        console.log("ShakeSection Initted");
+        // console.log("ShakeSection Initted");
         
     }
     start(){
@@ -35,11 +35,12 @@ class ShakeSection extends Section {
 
         let x = _App.w/2;
         let y = _App.h/2;
+        this.ctx.save();
         this.ctx.textBaseline = "middle";
         this.ctx.textAlign = "center";
         this.ctx.font = "700 40px Roboto"; 
         this.ctx.fillText(this.n.toUpperCase()+" section", x, y);
-        
+        this.ctx.restore();
 
 
 

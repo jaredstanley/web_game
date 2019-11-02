@@ -7,6 +7,7 @@
     html{
         height: 100%;
         width: 100%;
+        user-select: none;
     }
     body{
         color:white;
@@ -20,7 +21,6 @@
         position: relative;
     }
     #logoAnim{
-        cursor: pointer;
         display:block;
         position: absolute;
         overflow: hidden;
@@ -31,16 +31,20 @@
         transition-property: width, height, top;
         transition-duration: 0.64s;
     }
-
+    .cursor{
+        cursor: pointer;   
+    }
+    .ignored{
+        pointer-events: none;
+    }
     
     #instructions{
-        cursor: pointer;
         width: 240px;
         height: 100px;
         /* background-color: crimson; */
         /* opacity: 0.2; */
         position: absolute;
-        bottom: 15%;
+        bottom: 5%;
         display: flex;
         justify-items: center;
         justify-content: center;

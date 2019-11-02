@@ -54,13 +54,11 @@ let div = "";
 exports.init = function(){
     div = document.getElementById('instructions');
         
-       div.addEventListener(_App.eventType, nextSection, false);
-    // div.addEventListener('touchstart', nextSection, false);
-    tapSection.init();
-    popSection.init();
-    delayedTapSection.init();
-    keyboardSection.init();
-    shakeSection.init();
+    div.addEventListener(_App.eventType, nextSection, false);
+    for (let i = 0; i < sectionList.length; i++) {
+        let element = sectionList[i].section;
+        element.init();
+      }
     
 
 }
@@ -80,8 +78,10 @@ exports.setInstructions=function(){
         
 }
 function nextSection(){
+    console.log("next Section called, time to remove this pos: ", curPos);
     div.removeEventListener(_App.eventType, nextSection, false);
-    console.log("next Section called, shouldnt change yet ", curPos);
+    div.classList.remove("cursor");
+    div.classList.add("ignored");
     curSection.kill();
     // return;
     curPos++;
@@ -100,7 +100,7 @@ function engageLoading(){
     }
     if(curPos==1){
         // permissionsMgr.askOrientation();
-        shrinkLogo();
+        animation.shrinkLogo();
     }
     let sec = sectionList.find(itm => itm.pos == curPos);
 
@@ -125,8 +125,4 @@ exports.update=function(){
     
 }
 
-function shrinkLogo(){
-    let logo = document.querySelector('#logoAnim');
-    // console.log(document, logo);
-    logo.classList.toggle('sm');
-}
+

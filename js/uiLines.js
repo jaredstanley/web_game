@@ -7,6 +7,7 @@ let margin = 0;
 let minHeight = 22;
 let numItems = 0;
 let fillStyle = "#ff0";
+let edge = "top";
 let x=0;
 let y=0;
 let w = 0;
@@ -60,15 +61,26 @@ exports.update = function(){
             
             b.ang-=b.speed;
             y = Math.cos(b.ang+(b.i/4))*b.height+minHeight;        
-            x = (w/numItems+margin) * b.i+b.offset;
+                        
+            x = (w/numItems+margin) * b.i+b.xoffset;
             // console.log(">> ",x);
             
             ctx.beginPath();
-            ctx.moveTo(x,h);
+            if(edge=="bottom"){
+                ctx.moveTo(x,h);
+                ctx.lineTo(x,h-y);  
+                gradient = ctx.createLinearGradient(x, h-y, x, h);
+              
+            }else{
+                ctx.moveTo(x,0);
+                ctx.lineTo(x,y);
+                gradient = ctx.createLinearGradient(x, y, x, 0);
+                
+            }
             
-            ctx.lineTo(x,h-y);
             
-            gradient = ctx.createLinearGradient(x, h-y, x, h);
+            
+            
             gradient.addColorStop("0", barFamily.colors.a);
             gradient.addColorStop("1", barFamily.colors.b);
             ctx.strokeStyle = gradient;
@@ -85,18 +97,18 @@ function newOne() {
 function initLineSet(w,h, obj, grad){    
     
     for (let i = 0; i < numItems; i++) {
-        let offset = 0;
+        let xoffset = 0;
         let bar = {
             x: 0,
             height: Math.random()*waveLength+amplitude+minHeight,
             ang:Math.random()*5,
             i: i,
             speed: Math.random()*speed+0.01,
-            offset: offset
+            xoffset: xoffset
 
         }
         if(Math.random()>0.25){
-            bar.offset = lineWidth/3;
+            bar.xoffset = lineWidth/3;
             
         }
         if(Math.random()>=0.66){

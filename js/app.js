@@ -28,6 +28,7 @@ let _App = {
      
     this.updateSize();
     //
+    
     lines.init();
     progressBar.init();
     animation.init();
