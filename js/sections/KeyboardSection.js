@@ -1,6 +1,7 @@
 import Section from './Section';
 import utils from '../utils';
 import sectionManager from '../sectionManager';
+import eventTypeManager from '../eventTypeManager';
 //
 class KeyboardSection extends Section {
     constructor(){
@@ -80,7 +81,7 @@ class KeyboardSection extends Section {
         this.binder = this.clickHandler.bind(this);
         
        
-       _App.context.canvas.addEventListener(_App.eventType, this.binder, true);
+        eventTypeManager.addEvent(_App.context.canvas, this.binder);
        //
         this.piano.width = Math.min(this.piano.maxWidth, _App.w*0.75);
         this.piano.height = Math.min(this.piano.maxHeight, _App.h*0.55);
@@ -176,6 +177,7 @@ class KeyboardSection extends Section {
     }
 
     clickHandler(e){
+        e.preventDefault();
         // console.log("keyboardSection clickHandler called", e);
         let tgt = "";
         if (utils.getStatus().type=="mobile"){
@@ -231,7 +233,7 @@ class KeyboardSection extends Section {
 
     kill(){
         cancelAnimationFrame(this.timer);    
-        _App.context.canvas.removeEventListener(_App.eventType, this.binder, true);
+        eventTypeManager.removeEvent(_App.context.canvas, this.binder);
        console.log('removing KeyboardSection');
         
     }

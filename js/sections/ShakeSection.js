@@ -38,7 +38,7 @@ class ShakeSection extends Section {
         this.ctx.save();
         this.ctx.textBaseline = "middle";
         this.ctx.textAlign = "center";
-        this.ctx.font = "700 40px Roboto"; 
+        this.ctx.font = "700 20px Roboto"; 
         this.ctx.fillText(this.n.toUpperCase()+" section", x, y);
         this.ctx.restore();
 

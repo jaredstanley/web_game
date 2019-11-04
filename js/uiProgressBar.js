@@ -7,8 +7,9 @@ let navItemWidth = 10;
 let fontSizeOrig = 12;
 let fontSizeSm = 8;
 let sections = 5; 
-let context = {};
+let context = "";
 let itmHeight = 0;
+let itmMaxHeight = 20;
 let topMargin = 60;
 let itemsArr = [];
 let xpos = 0;
@@ -16,8 +17,6 @@ let currentSection = 0;
 //
 exports.init = function(){
     context = _App.context;
-    
-    // console.log("progressBar.init() called", this);
     buildNav();
 }
 //
@@ -56,7 +55,7 @@ function buildNav(){
     itemsArr = [];
     let defaultColor = "";
     itmHeight = ((_App.h*(heightPercentage*0.01))/sections)-margin;
-    itmHeight = Math.max(itmHeight, 20);
+    itmHeight = Math.max(itmHeight, itmMaxHeight);
     let c = utils.getColors();
     for (let i = 0; i < sections; i++) {
         let sec = sections-currentSection;
@@ -64,12 +63,15 @@ function buildNav(){
         if(i<sec)defaultColor=c.upcoming
         else if(i>sec)defaultColor=c.visited
         else defaultColor=c.brightGreen;
+        
         let itm = {
             color: defaultColor,
             i: i+1,
             y: (itmHeight+margin)*i+topMargin, 
             height: itmHeight-margin
         }
+        // console.log(itm.i, itm.y);
+        
         itemsArr.push(itm);   
     }   
 }

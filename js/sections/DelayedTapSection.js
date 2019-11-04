@@ -1,6 +1,7 @@
 import Section from './Section';
 import utils from '../utils';
 import sectionManager from '../sectionManager';
+import eventTypeManager from '../eventTypeManager';
 //
 class DelayedTapSection extends Section {
     constructor(){
@@ -41,7 +42,7 @@ class DelayedTapSection extends Section {
         // div.classList.toggle('show');
         this.timerbar.width = Math.min(_App.w*0.75, this.timerbar.maxWidth);
         this.binder = this.clickHandler.bind(this);
-        _App.context.canvas.addEventListener(_App.eventType, this.binder, true);
+        eventTypeManager.addEvent(_App.context.canvas, this.binder);
         sectionManager.setInstructions();
         this.update();
     }
@@ -145,7 +146,7 @@ class DelayedTapSection extends Section {
 
     kill(){
         cancelAnimationFrame(this.timer);    
-        _App.context.canvas.removeEventListener(_App.eventType, this.binder, true);
+        eventTypeManager.removeEvent(_App.context.canvas, this.binder);
        console.log('removing delayedTapSection');
     }
 

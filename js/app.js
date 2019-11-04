@@ -3,23 +3,12 @@ import lines from './uiLines';
 import progressBar from './uiProgressBar';
 import animation from './nameAnim';
 import sectionManager from './sectionManager';
+import eventTypeManager from './eventTypeManager';
 
 
 let _App = {
   init: function(){
-    // console.log(window.clientInformation.userAgent);
-    this.agent = window.clientInformation.userAgent.toString().search('Chrome');
-    if (this.agent>0){
-      utils.setStatus('desktop');
-    }else{
-      utils.setStatus('mobile');
-    }
-    this.status = utils.getStatus().type;
-        if(this.status=="mobile"){
-            this.eventType = utils.getStatus().event.mobile;
-        }else{
-            this.eventType = utils.getStatus().event.desktop;
-    }
+    this.eventType = eventTypeManager.init();
 
     this.context = document.querySelector("#main").getContext("2d");
     this.context.imageSmoothingEnabled = true;
@@ -28,16 +17,9 @@ let _App = {
      
     this.updateSize();
     //
-    
-    lines.init();
-    progressBar.init();
     animation.init();
     sectionManager.init();
     //
-    
-    
-    //
-    _App.context.fillRect(0,0,_App.w, _App.h);
     this.loop();
     
     // console.log(animation);

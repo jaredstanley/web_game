@@ -1,12 +1,10 @@
-let ang = 0;
 let amplitude = 11;
-let speed = 0.045;
+let speed = 0.065;
 let waveLength = 30;
 let lineWidth = 14;
 let margin = 0;
-let minHeight = 22;
+let minHeight = 2;
 let numItems = 0;
-let fillStyle = "#ff0";
 let edge = "top";
 let x=0;
 let y=0;
@@ -78,9 +76,6 @@ exports.update = function(){
                 
             }
             
-            
-            
-            
             gradient.addColorStop("0", barFamily.colors.a);
             gradient.addColorStop("1", barFamily.colors.b);
             ctx.strokeStyle = gradient;
@@ -111,7 +106,7 @@ function initLineSet(w,h, obj, grad){
             bar.xoffset = lineWidth/3;
             
         }
-        if(Math.random()>=0.66){
+        if(Math.random()>=0.16){
             obj.bars[i] = bar;
         }
         

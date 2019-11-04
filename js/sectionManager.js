@@ -52,9 +52,6 @@ let sectionList = [
 let div = "";
 //
 exports.init = function(){
-    div = document.getElementById('instructions');
-        
-    div.addEventListener(_App.eventType, nextSection, false);
     for (let i = 0; i < sectionList.length; i++) {
         let element = sectionList[i].section;
         element.init();
@@ -79,29 +76,20 @@ exports.setInstructions=function(){
 }
 function nextSection(){
     console.log("next Section called, time to remove this pos: ", curPos);
-    div.removeEventListener(_App.eventType, nextSection, false);
-    div.classList.remove("cursor");
-    div.classList.add("ignored");
-    curSection.kill();
-    // return;
-    curPos++;
     
     if(animation.getIsPlaying()==true){
         console.log("mgr.nope");
         return;
     }
+    
+    curSection.kill();
+    curPos++;
     progressBar.nextSection();
     engageLoading();    
 }
 
 function engageLoading(){
-    if(curPos==0){
-        div.classList.toggle('show');
-    }
-    if(curPos==1){
-        // permissionsMgr.askOrientation();
-        animation.shrinkLogo();
-    }
+    
     let sec = sectionList.find(itm => itm.pos == curPos);
 
     console.log('section to load is: ',sec.name);

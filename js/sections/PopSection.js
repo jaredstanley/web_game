@@ -2,6 +2,8 @@ import Section from './Section';
 import Bubble from './Bubble';
 import utils from '../utils';
 import sectionManager from '../sectionManager';
+import eventTypeManager from '../eventTypeManager';
+import animation from '../nameAnim';
 //
 class PopSection extends Section {
     constructor(){
@@ -13,7 +15,6 @@ class PopSection extends Section {
         this.bubblesObj = {};
         this.bubbleCount = 5;
         this.n = "popper";
-        this.eventType="none whatsover";
         this.bubbleColorsArr = [
             {   hex:'#009474'
             },
@@ -26,15 +27,10 @@ class PopSection extends Section {
     }
     start(){
         console.log(this.n, ' started');
-        let div = document.querySelector('#instructions');
-        // let txt = document.querySelector(".instructiontext").innerHTML=this.msg;
+        animation.shrinkLogo();
         sectionManager.setInstructions();
-        // console.log(txt);
-        
-        // div.classList.toggle('show');
-       
         this.binder = this.clickHandler.bind(this);
-       _App.context.canvas.addEventListener(_App.eventType, this.binder, true);
+        eventTypeManager.addEvent(_App.context.canvas, this.binder);
         this.update();
     }
     
@@ -121,7 +117,7 @@ class PopSection extends Section {
         this.timer = null;
         delete this.bubblesObj;
         
-        _App.context.canvas.removeEventListener(_App.eventType, this.binder, true);
+        eventTypeManager.removeEvent(_App.context.canvas, this.binder);
         // _App.context.canvas.removeEventListener('click', this.binder, true);
        console.log('killing popSection');
         
