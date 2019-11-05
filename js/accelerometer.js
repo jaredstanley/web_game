@@ -20,7 +20,7 @@ exports.getData=function(){
     return moveData;
 }
 exports.init=function(){	
-	// console.log("accelerometer is ready");
+	console.log("accelerometer is ready");
 	
 	// if (window.DeviceMotionEvent != undefined) {
 		window.addEventListener("devicemotion", handleMotion, true); 
@@ -36,9 +36,13 @@ exports.init=function(){
 
 }
 function handleMotion(e){
+    console.log("hjkgfkhgf");
+    
     moveData.x = e.accelerationIncludingGravity.x;
     moveData.y = e.accelerationIncludingGravity.y;
     moveData.z = e.accelerationIncludingGravity.z;
+    
+    console.log("miotn", moveData);
 
 }
 

@@ -21,7 +21,8 @@ let _App = {
     sectionManager.init();
     //
     this.loop();
-    
+    this.binder = this.blocker.bind(this);
+    eventTypeManager.addEvent(_App.context.canvas, this.binder);
     // console.log(animation);
     animation.begin();
   },
@@ -38,7 +39,7 @@ let _App = {
   blocker: function(e){
     console.log("blocking");
     
-    // e.preventDefault();
+    e.preventDefault();
   },
   //
   update: function(){

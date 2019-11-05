@@ -20,7 +20,7 @@ exports.askOrientation = function(){
             })
             .catch(console.error);
     } else {
-        console.log("hey this is requestPermission not needed");
+        console.log("hey this is requestPermission not available");
         
     // handle regular non iOS 13+ devices
     }

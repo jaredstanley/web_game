@@ -24,7 +24,8 @@ class TapSection extends Section {
         this.update();
     }
     
-    finished(){
+    finished(e){
+        e.preventDefault();
         console.log("finished");
         
         sectionManager.proceed();
