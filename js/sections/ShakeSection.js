@@ -2,6 +2,8 @@ import Section from './Section';
 import utils from '../utils';
 import accel from '../accelerometer';
 import sectionManager from '../sectionManager';
+import eventTypeManager from '../eventTypeManager';
+import permissionsMgr from '../PermissionsMgr';
 //
 class ShakeSection extends Section {
     constructor(){
@@ -15,14 +17,25 @@ class ShakeSection extends Section {
         this.n = "shaker"
         accel.init();
         // console.log("ShakeSection Initted");
+       
+       
         
     }
     start(){
         console.log('start in ',this.n);
+        this.binder = this.clickHandler.bind(this);
+        eventTypeManager.addEvent(_App.context.canvas, this.binder);
         sectionManager.setInstructions();
         this.update();
         
     }
+
+    clickHandler(e){
+        e.preventDefault();
+        permissionsMgr.askOrientation();
+          
+    }
+
     update(){
         // console.log("updating!! ", this.n);
        let gradient = this.ctx.createLinearGradient(_App.w/2-100, _App.h/2-100, _App.w/2+100, _App.h/2+100);
