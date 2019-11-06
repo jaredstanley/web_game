@@ -4,6 +4,7 @@ import progressBar from './uiProgressBar';
 import animation from './nameAnim';
 import sectionManager from './sectionManager';
 import eventTypeManager from './eventTypeManager';
+import instructions from './instructions';
 
 
 let _App = {
@@ -19,13 +20,15 @@ let _App = {
     //
     animation.init();
     sectionManager.init();
+    instructions.init();
     //
     this.loop();
-    this.binder = this.blocker.bind(this);
-    eventTypeManager.addEvent(_App.context.canvas, this.binder);
+    // this.binder = this.blocker.bind(this);
+    //eventTypeManager.addEvent(_App.context.canvas, this.binder);
     // console.log(animation);
     animation.begin();
   },
+
   loop: function(){
     var ctx = _App.context;
     
@@ -44,9 +47,10 @@ let _App = {
   //
   update: function(){
     
+    sectionManager.update();
     lines.update();
     progressBar.update();
-    sectionManager.update();
+    
     
   },
   //

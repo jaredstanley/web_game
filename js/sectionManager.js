@@ -1,6 +1,7 @@
 import animation from './nameAnim';
 import progressBar from './uiProgressBar';
 import utils from './utils';
+import instructions from './instructions';
 //
 import sectionShake from './sections/ShakeSection';
 import sectionTap from './sections/TapSection';
@@ -19,9 +20,9 @@ let keyboardSection = new sectionKeyboard();
 
 
 let curPos = 0;
-let nextPos = 1;
 let curSection = {name:"none"};
 let sectionList = [
+    
     {   pos:0,
         name:"tap",
         section:tapSection,
@@ -30,7 +31,8 @@ let sectionList = [
     {   pos:1,
         name:"pop",
         section:popSection,
-        instructions:"pop the bubbles to proceed"
+        instructions:"pop to proceed"
+        
     },
     {   pos:2,
         name:"delayedTap",
@@ -49,7 +51,7 @@ let sectionList = [
         instructions:"coming soon"
     }
 ]
-let div = "";
+
 //
 exports.init = function(){
     for (let i = 0; i < sectionList.length; i++) {
@@ -71,7 +73,8 @@ exports.setInstructions=function(){
     let sec = sectionList.find(itm => itm.pos == curPos);
     // console.log(sec,"sdsds");
     
-    document.querySelector(".instructiontext").innerHTML=sec.instructions;
+    
+    instructions.show(sec.instructions);
         
 }
 function nextSection(){
@@ -81,7 +84,9 @@ function nextSection(){
         console.log("mgr.nope");
         return;
     }
-    
+    if(curPos==0){
+        animation.shrinkLogo();  
+    }
     curSection.kill();
     curPos++;
     progressBar.nextSection();
@@ -95,7 +100,7 @@ function engageLoading(){
     console.log('section to load is: ',sec.name);
     curSection = sec.section;
     curSection.start(); 
-    nextPos++;
+    
 
     // console.log("sectionManager loading secrtion ", sectionList[curPos]);
    

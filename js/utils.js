@@ -15,7 +15,8 @@ let colors = {
   upcoming: "#174d0f",
   visited: "#0ba615",
   light: "#dedede",
-  white:"#FFFFFF"
+  white:"#FFFFFF", 
+  dead: "rgba(0,0,0,0.2)"
 };
 let grad1 = {
   b: "#009475", a:"#acc800"

@@ -73,10 +73,7 @@ class KeyboardSection extends Section {
         
     }
     start(){
-        // let div = document.querySelector('#instructions');
-        // div.classList.toggle('show');
-        // let txt = document.querySelector(".instructiontext").innerHTML=this.msg;
-        sectionManager.setInstructions();
+        
         // //
         this.binder = this.clickHandler.bind(this);
         
@@ -88,6 +85,7 @@ class KeyboardSection extends Section {
         
         console.log(this.n, ' started', this.piano);
         this.createKeys();  
+        sectionManager.setInstructions();
         this.update();
     }
     

@@ -12,15 +12,14 @@ class TapSection extends Section {
         this.n = "tapper";
         this.color = 'rgb(111,0,111)';
         this.binder = this.finished.bind(this);
-        this.div = document.getElementById('instructions'); 
         // console.log("TapSection Initted");
         
     }
     start(){
-        sectionManager.setInstructions();
         
-        eventTypeManager.addEvent(this.div, this.binder); 
-        this.div.classList.add('show');
+        eventTypeManager.addEvent(_App.context.canvas, this.binder); 
+        
+        sectionManager.setInstructions();
         this.update();
     }
     
@@ -33,9 +32,8 @@ class TapSection extends Section {
     kill(){
         console.log("kill ", this.n);
         
-        eventTypeManager.removeEvent(this.div, this.binder);
-        this.div.classList.remove("cursor");
-        this.div.classList.add("ignored");
+        eventTypeManager.removeEvent(_App.context.canvas, this.binder);
+        
     }
 
     update(){

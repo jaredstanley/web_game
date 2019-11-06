@@ -38,8 +38,6 @@ class DelayedTapSection extends Section {
         
     }
     start(){
-        // let div = document.querySelector('#instructions');
-        // div.classList.toggle('show');
         this.timerbar.width = Math.min(_App.w*0.75, this.timerbar.maxWidth);
         this.binder = this.clickHandler.bind(this);
         eventTypeManager.addEvent(_App.context.canvas, this.binder);

@@ -3,17 +3,16 @@ import Bubble from './Bubble';
 import utils from '../utils';
 import sectionManager from '../sectionManager';
 import eventTypeManager from '../eventTypeManager';
-import animation from '../nameAnim';
+
 //
 class PopSection extends Section {
     constructor(){
         super();
     }
     init(){
-        this.msg = "pop the bubbles to proceed";
         this.canvas = _App.context.canvas;
         this.bubblesObj = {};
-        this.bubbleCount = 2;
+        this.bubbleCount = 12;
         this.n = "popper";
         this.bubbleColorsArr = [
             {   hex:'#009474'
@@ -22,20 +21,24 @@ class PopSection extends Section {
             },
             {   hex:'#acc800'
             }
-        ],
+        ];
+        this.deadBubblesArr = [];
         this.initBubbles();
+        
+
     }
     start(){
         console.log(this.n, ' started');
-        animation.shrinkLogo();
-        sectionManager.setInstructions();
+        
         this.binder = this.clickHandler.bind(this);
         eventTypeManager.addEvent(_App.context.canvas, this.binder);
+        sectionManager.setInstructions();
         this.update();
     }
     
     update(){
         // console.log('update() ', this.n);
+        this.drawDeadBubbles();
         let count = 0;
         let ctx = _App.context;
         for (const key in this.bubblesObj) {   
@@ -51,7 +54,6 @@ class PopSection extends Section {
            
 
         }
-        // console.log(count);
         
         if(count<=0){
             this.endGame();
@@ -61,9 +63,21 @@ class PopSection extends Section {
         // console.log(count," << bubbles left");
         
         this.timer = requestAnimationFrame(this.update.bind(this));
-        // console.log(this.timer);
-        
+        // console.log(this.timer);        
     }
+    //
+    drawDeadBubbles(){
+        let ctx = _App.context;
+
+        ctx.fillStyle = utils.getColors().dead;
+        this.deadBubblesArr.forEach((bubb, i) => {
+            // console.log(bubb);
+            ctx.beginPath();    
+            ctx.arc(bubb.x, bubb.y, bubb.radius,0,Math.PI*2);
+            ctx.fill();
+        });
+    }
+    //
     clickHandler(e){
         e.preventDefault();
         console.log("clickHandler called from popSection");
@@ -84,11 +98,14 @@ class PopSection extends Section {
             let bubb = this.bubblesObj[key];
             if (this.checkIfClicked(_mouse, bubb)){
                 // console.log('clicked', bubb.pos);
+                this.deadBubblesArr.push(Object.create(bubb));
                 delete this.bubblesObj[key];
                 bubb = "";
                 break;
             }
         }
+        // console.log(this.deadBubblesArr);
+        
     }
     //
 
