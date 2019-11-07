@@ -8,8 +8,8 @@ class DelayedTapSection extends Section {
         super();
     }
     init(){
-        this.interval = 10;
         this.n = "delayedTap";
+        this.interval = 1;
         this.startTime ="";
         this.ctx = _App.context;
         //
@@ -29,8 +29,14 @@ class DelayedTapSection extends Section {
             x:0,
             y:0,
             pctBarWidth:0,
-            tap1DisplayValue:"–",
-            tap2DisplayValue:"–"
+            tap1DisplayValue:"0",
+            tap2DisplayValue:"0.0",
+            message:{
+                cur:"",
+                win:"you did it!",
+                toolate:"you took too long",
+                tooearly:"nope, too early",
+            }
         }
         // this.msg = "tap "+this.game.targetTime/1000+" seconds apart to proceed";
         this.msg = "tap 3 seconds apart to proceed";
@@ -87,6 +93,7 @@ class DelayedTapSection extends Section {
     startGame(){
         console.log("STATUS: startGame()");
             if(!this.game.isActive){
+                this.timerbar.message.cur="";
                 this.game.curTime = 0;
                 this.game.result = 0;
                 this.game.isActive=true;
@@ -103,14 +110,17 @@ class DelayedTapSection extends Section {
         if(clicked){
             this.game.result = this.game.elapsedTime/1000;
             if((this.game.targetTime/1000)-this.game.result < 0.5){
-                console.log("close enough");
-                
+                // console.log("close enough");
+                this.timerbar.message.cur = this.timerbar.message.win;
                 sectionManager.proceed();
+            }else{
+                this.timerbar.message.cur = this.timerbar.message.tooearly;
             }
         }else{
             this.game.elapsedTime = this.game.targetTime;
-            this.timerbar.tap2DisplayValue = this.game.elapsedTime/1000+" sec"
-            console.log('you waited too long');
+            this.timerbar.tap2DisplayValue = this.game.elapsedTime/1000+" sec";
+            this.timerbar.message.cur = this.timerbar.message.toolate;
+            // console.log('you waited too long');
         }
     }
 
@@ -179,12 +189,22 @@ class DelayedTapSection extends Section {
         this.ctx.font = "700 40px Roboto"; 
         //  str = this.game.elapsedTime/1000+ " seconds elapsed";
         // this.ctx.save();
-        // this.ctx.textAlign = "center";
-         str = this.game.elapsedTime/1000;
-        this.ctx.fillText(str,_App.w/2-50, this.timerbar.y+60);
+        this.ctx.textAlign = "center";
+         str = this.timerbar.tap2DisplayValue;
+         str=str.substr(0,3);
+         this.ctx.fillText(str,_App.w/2, this.timerbar.y+60);
         // this.ctx.restore();
+
+        this.ctx.font = "italic 200 14px Roboto"; 
+        str = this.timerbar.message.cur;
+        this.ctx.fillText(str,_App.w/2, this.timerbar.y-80);
+        
+
+        
+
         
         }
+
     }
    
 export default DelayedTapSection
