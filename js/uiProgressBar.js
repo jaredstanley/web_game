@@ -1,5 +1,5 @@
 import utils from './utils';
-import tweenFunctions from './tweenFunctions';
+import highlightBar from './uiHighlightBar';
 let x=0;
 let y=0;
 let heightPercentage = 75; //0-100
@@ -15,13 +15,7 @@ let topMargin = 60;
 let itemsArr = [];
 let xpos = 0;
 let currentSection = 0;
-let hl = {
-    needsUpdate:false,
-    iteration:0,
-    totalIterations:100,
-    x:0,y:0,w:0,h:0,
-    curH:0
-}
+
 //
 exports.init = function(){
     context = _App.context;
@@ -63,9 +57,7 @@ function buildNav(){
         itemsArr.push(itm); 
         
     }   
-    hl.needsUpdate=true;
-    hl.h=0;
-    hl.curH=0;
+    highlightBar.reset();
 }
 //
 exports.update = function(){
@@ -85,43 +77,12 @@ exports.update = function(){
     addTextLabels(s);
 
     let curSec;
+    curSec = sections-currentSection;
     if(currentSection==0){
         return;
     }
-    if(hl.needsUpdate){
-        updateHighlightBar();
-    }
-    curSec = sections-currentSection;
-    // console.log(currentSection, curSec);
-    // console.log(`val2 is ${curSec}`);
-    context.fillStyle=utils.getColors().brightGreen;
-    let _y = itemsArr[curSec].y+itemsArr[curSec].height-hl.curH;
-    context.fillRect(xpos,_y, 10, hl.curH);
+    highlightBar.checkIfNeedsUpdate(itemsArr[curSec], xpos, margin);   
 }
-
-
-function updateHighlightBar(){
-    hl.iteration++;  
-    if (hl.iteration < hl.totalIterations) {
-        // console.log(hl.iteration, hl.curH);
-        
-        hl.h = tweenFunctions.easeInOutSine(hl.iteration, hl.curH, itemsArr[0].height, hl.totalIterations);
-        // hl.y = tweenFunctions.easeInOutQuart(hl.iteration, hl.curSpot.y, hl.tgt.y-hl.curSpot.y, hl.totalIterations);
-        hl.curH = hl.h;
-
-    }else{
-        hl.iteration=0;
-        hl.needsUpdate=false;
-        // console.log(itemsArr);
-        
-    }
-
-    
-}
-
-
-
-
 
 function addTextLabels(s){
     context.fillStyle = utils.getColors().brightGreen;
