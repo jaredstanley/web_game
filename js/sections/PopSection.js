@@ -12,7 +12,7 @@ class PopSection extends Section {
     init(){
         this.canvas = _App.context.canvas;
         this.bubblesObj = {};
-        this.bubbleCount = 12;
+        this.bubbleCount = 3;
         this.n = "popper";
         this.bubbleColorsArr = [
             {   hex:'#009474'

@@ -15,7 +15,7 @@ let topMargin = 60;
 let itemsArr = [];
 let xpos = 0;
 let currentSection = 0;
-let highlight = {
+let hl = {
     needsUpdate:false,
     iteration:0,
     totalIterations:100,
@@ -35,33 +35,6 @@ exports.nextSection = function(){
     // console.log('current section is now ', currentSection);
 }
 //
-exports.update = function(){
-    // console.log(itmHeight);
-    
-    xpos = Math.min(_App.w*0.1, 30);
-    if(_App.w<480){
-        xpos=5;
-    }
-    // context.save();
-    // context.globalAlpha=0.2;    
-    itemsArr.forEach(itm =>{
-        context.fillStyle = itm.color;
-        context.fillRect(xpos, itm.y, navItemWidth, itm.height); 
-    })
-
-    // context.restore();
-    let s = fontSizeOrig;
-    if(itmHeight<35){s=fontSizeSm}
-    addTextLabels(s);
-
-    if(highlight.needsUpdate){
-        updateHighlight();
-    }
-    context.fillStyle="#deadaf";
-    let curSec = sections-(currentSection+1);
-    context.fillRect(100,itemsArr[curSec].y-highlight.h, 10, highlight.h);
-}
-
 function buildNav(){
     
     itemsArr = [];
@@ -76,7 +49,7 @@ function buildNav(){
         
         if(i<sec){defaultColor=c.upcoming;}
         else if(i>sec){defaultColor=c.visited}
-        else {defaultColor=c.brightGreen;
+        else {defaultColor=c.upcoming;
         }
         
         let itm = {
@@ -90,25 +63,57 @@ function buildNav(){
         itemsArr.push(itm); 
         
     }   
-    highlight.needsUpdate=true;
-    highlight.h=0;
-    highlight.curH=0;
+    hl.needsUpdate=true;
+    hl.h=0;
+    hl.curH=0;
+}
+//
+exports.update = function(){
+    // console.log(itmHeight);
+    
+    xpos = Math.min(_App.w*0.1, 30);
+    if(_App.w<480){
+        xpos=5;
+    }
+   itemsArr.forEach(itm =>{
+        context.fillStyle = itm.color;
+        context.fillRect(xpos, itm.y, navItemWidth, itm.height); 
+    })
+
+    let s = fontSizeOrig;
+    if(itmHeight<35){s=fontSizeSm}
+    addTextLabels(s);
+
+    let curSec;
+    if(currentSection==0){
+        return;
+    }
+    if(hl.needsUpdate){
+        updateHighlightBar();
+    }
+    curSec = sections-currentSection;
+    // console.log(currentSection, curSec);
+    // console.log(`val2 is ${curSec}`);
+    context.fillStyle=utils.getColors().brightGreen;
+    let _y = itemsArr[curSec].y+itemsArr[curSec].height-hl.curH;
+    context.fillRect(xpos,_y, 10, hl.curH);
 }
 
-function updateHighlight(){
-    let hl = highlight;
-    console.log("updateHighlight");
-    // console.log(sections, c);
-   
+
+function updateHighlightBar(){
     hl.iteration++;  
     if (hl.iteration < hl.totalIterations) {
-        hl.h = tweenFunctions.easeInOutQuart(hl.iteration, hl.curH, itmHeight, hl.totalIterations);
+        // console.log(hl.iteration, hl.curH);
+        
+        hl.h = tweenFunctions.easeInOutSine(hl.iteration, hl.curH, itemsArr[0].height, hl.totalIterations);
         // hl.y = tweenFunctions.easeInOutQuart(hl.iteration, hl.curSpot.y, hl.tgt.y-hl.curSpot.y, hl.totalIterations);
         hl.curH = hl.h;
 
     }else{
         hl.iteration=0;
         hl.needsUpdate=false;
+        // console.log(itemsArr);
+        
     }
 
     
