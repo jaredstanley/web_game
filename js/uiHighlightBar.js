@@ -58,7 +58,7 @@ function shrinkTheBar(itm){
 
 exports.checkIfNeedsUpdate=function(itm, _x, _m){
     if(needsUpdate){
-        console.log("udpaet");
+        // console.log("udpaet");
         
         margin=_m;
         xpos = _x;

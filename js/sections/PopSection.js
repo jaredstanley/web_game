@@ -12,7 +12,7 @@ class PopSection extends Section {
     init(){
         this.canvas = _App.context.canvas;
         this.bubblesObj = {};
-        this.bubbleCount = 3;
+        this.bubbleCount = 8;
         this.n = "popper";
         this.bubbleColorsArr = [
             {   hex:'#009474'
@@ -22,8 +22,12 @@ class PopSection extends Section {
             {   hex:'#acc800'
             }
         ];
+        this.bubblesAllGone = false;
+        this.alph=1;
         this.deadBubblesArr = [];
+        
         this.initBubbles();
+
         
 
     }
@@ -37,6 +41,13 @@ class PopSection extends Section {
     }
     
     update(){
+        if(this.bubblesAllGone){
+            console.log("biubbs gone");
+            
+            
+            this.fadeOut();
+            return;
+        }
         // console.log('update() ', this.n);
         this.drawDeadBubbles();
         let count = 0;
@@ -56,9 +67,12 @@ class PopSection extends Section {
         }
         
         if(count<=0){
-            this.endGame();
-            return;
+            this.bubblesAllGone = true;
+            // this.endGame();
+            // return;
         }
+        console.log("going");
+        
 
         // console.log(count," << bubbles left");
         
@@ -121,6 +135,19 @@ class PopSection extends Section {
         }
         // console.log("bibb;esObj ", this.bubblesObj);
         
+    }
+    fadeOut(){
+        // console.log("this.alph ", this.alph);
+        this.alph-=0.025;
+        _App.context.save();
+        _App.context.globalAlpha=this.alph;
+        this.drawDeadBubbles();
+        _App.context.restore();
+        if(this.alph<=0){
+            this.endGame();
+            return;
+        }
+        this.timer = requestAnimationFrame(this.fadeOut.bind(this));
     }
     endGame(){
         sectionManager.proceed();
