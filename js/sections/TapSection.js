@@ -1,44 +1,30 @@
 import Section from './Section';
-import sectionManager from '../sectionManager';
 import eventTypeManager from '../eventTypeManager';
+import utils from '../utils';
 //
 class TapSection extends Section {
     constructor(){
-        // console.log("TapSection Constructor ");
-        
         super();
     }
     init(){
+        super.init();
         this.n = "tapper";
-        this.color = 'rgb(111,0,111)';
+        console.log("init", this.n);
+    }
+
+    showCanvas(){
         this.binder = this.finished.bind(this);
-        // console.log("TapSection Initted");
-        
-    }
-    start(){
-        
         eventTypeManager.addEvent(_App.context.canvas, this.binder); 
-        
-        sectionManager.setInstructions();
-        this.update();
-    }
-    
-    finished(e){
-        e.preventDefault();
-        console.log("finished");
-        
-        sectionManager.proceed();
-    }
-    kill(){
-        console.log("kill ", this.n);
-        
-        eventTypeManager.removeEvent(_App.context.canvas, this.binder);
-        
+        super.showCanvas();
+
     }
 
     update(){
-        return false;
+        // return false;
+        this.context.fillStyle = utils.getColors().brightGreen;
+        this.context.fillRect(Math.random()*_App.w, Math.random()*_App.h, 20, 20);
         console.log("updating!! ", this.n);
+        this.timer = requestAnimationFrame(this.update.bind(this));
     }
    
 }

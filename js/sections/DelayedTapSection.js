@@ -1,17 +1,18 @@
 import Section from './Section';
-import utils from '../utils';
-import sectionManager from '../sectionManager';
 import eventTypeManager from '../eventTypeManager';
+import utils from '../utils';
 //
 class DelayedTapSection extends Section {
     constructor(){
         super();
     }
     init(){
+        super.init()
         this.n = "delayedTap";
+        console.log("init", this.n);  
+
         this.interval = 1;
         this.startTime ="";
-        this.ctx = _App.context;
         //
         this.game = {
             isActive:false,
@@ -39,16 +40,16 @@ class DelayedTapSection extends Section {
             }
         }
         // this.msg = "tap "+this.game.targetTime/1000+" seconds apart to proceed";
-        this.msg = "tap 3 seconds apart to proceed";
+       
         
         
     }
     start(){
+        super.start();
+        super.addCanvasClick();
+
         this.timerbar.width = Math.min(_App.w*0.75, this.timerbar.maxWidth);
-        this.binder = this.clickHandler.bind(this);
-        eventTypeManager.addEvent(_App.context.canvas, this.binder);
-        sectionManager.setInstructions();
-        this.update();
+        // super.showCanvas();
     }
     
     update(){
@@ -57,14 +58,14 @@ class DelayedTapSection extends Section {
         this.timer = requestAnimationFrame(this.update.bind(this));
     }
     updateUI(){
-        let ctx = _App.context;
-        ctx.fillStyle = utils.getColors().light; 
-        ctx.beginPath();
+        
+        this.context.fillStyle = utils.getColors().light; 
+        this.context.beginPath();
         this.timerbar.x = (_App.w/2)-(this.timerbar.width/2);
         this.timerbar.y = (_App.h/2)-(this.timerbar.height);
-        ctx.rect(this.timerbar.x,
+        this.context.rect(this.timerbar.x,
         this.timerbar.y,this.timerbar.width,this.timerbar.height);
-        ctx.fill();
+        this.context.fill();
         
     }
     updateGame(){
@@ -80,18 +81,18 @@ class DelayedTapSection extends Section {
     }
 
     drawGame(){
-        let gradient = this.ctx.createLinearGradient(this.timerbar.x, this.timerbar.y, this.timerbar.x+this.timerbar.width, this.timerbar.y);
+        let gradient = this.context.createLinearGradient(this.timerbar.x, this.timerbar.y, this.timerbar.x+this.timerbar.width, this.timerbar.y);
             gradient.addColorStop("0", utils.getGrad().a);
             gradient.addColorStop("1", utils.getGrad().b);
-            this.ctx.fillStyle = gradient;
-            this.ctx.fillRect((_App.w/2)-(this.timerbar.pctBarWidth/2), this.timerbar.y, this.timerbar.width*this.game.pctComplete, this.timerbar.height)
+            this.context.fillStyle = gradient;
+            this.context.fillRect((_App.w/2)-(this.timerbar.pctBarWidth/2), this.timerbar.y, this.timerbar.width*this.game.pctComplete, this.timerbar.height)
         //
         this.drawTextLabels();
 
 
     }
     startGame(){
-        console.log("STATUS: startGame()");
+        console.log("STATUS: startGame()", this.game.isActive);
             if(!this.game.isActive){
                 this.timerbar.message.cur="";
                 this.game.curTime = 0;
@@ -112,7 +113,7 @@ class DelayedTapSection extends Section {
             if((this.game.targetTime/1000)-this.game.result < 0.5){
                 // console.log("close enough");
                 this.timerbar.message.cur = this.timerbar.message.win;
-                sectionManager.proceed();
+                this.finished();
             }else{
                 this.timerbar.message.cur = this.timerbar.message.tooearly;
             }
@@ -125,25 +126,10 @@ class DelayedTapSection extends Section {
     }
 
     clickHandler(e){
-        e.preventDefault();
-        // console.log("DelayedTap Section clickHandler called", e);
+        super.clickHandler(e);
         if(this.game.isActive){
-            console.log('second click registered, stop timer and check if complete');
             this.endGame(true);
         }else{
-            let tgt = "";
-            if (utils.getStatus().type=="mobile"){
-                // console.log('checking mobiel click', e.targetTouches[0]);
-                
-                tgt = e.targetTouches[0]
-            }else{
-                tgt = e;
-            }
-            let _mouse = {
-                x:tgt.clientX,
-                y:tgt.clientY
-            }
-            console.log("STATUS: clicked() ", _mouse.x, _mouse.y);     
             this.startGame();
         }
     }
@@ -153,8 +139,7 @@ class DelayedTapSection extends Section {
     }
 
     kill(){
-        cancelAnimationFrame(this.timer);    
-        eventTypeManager.removeEvent(_App.context.canvas, this.binder);
+        super.kill()
        console.log('removing delayedTapSection');
     }
 
@@ -164,40 +149,40 @@ class DelayedTapSection extends Section {
             this.timerbar.tap2DisplayValue=this.game.elapsedTime/1000+" sec";
         }
         //timer layers
-        this.ctx.fillStyle = utils.getColors().light;
-        this.ctx.font = "300 20px Roboto"; 
+        this.context.fillStyle = utils.getColors().light;
+        this.context.font = "300 20px Roboto"; 
         
-        this.ctx.save();
+        this.context.save();
         let str = "1st tap:";
-        this.ctx.textAlign="right";
-        this.ctx.fillText(str,_App.w/2-10, this.timerbar.y-40);
+        this.context.textAlign="right";
+        this.context.fillText(str,_App.w/2-10, this.timerbar.y-40);
 
         str = "2nd tap:";
-        this.ctx.fillText(str,_App.w/2-10, this.timerbar.y-20);
-        this.ctx.restore();
+        this.context.fillText(str,_App.w/2-10, this.timerbar.y-20);
+        this.context.restore();
         
-        this.ctx.save();
-        this.ctx.textAlign="left";
-        this.ctx.fillText(this.timerbar.tap1DisplayValue,_App.w/2+10, this.timerbar.y-40);
-        this.ctx.fillText(this.timerbar.tap2DisplayValue,_App.w/2+10, this.timerbar.y-20);
-        this.ctx.restore();
+        this.context.save();
+        this.context.textAlign="left";
+        this.context.fillText(this.timerbar.tap1DisplayValue,_App.w/2+10, this.timerbar.y-40);
+        this.context.fillText(this.timerbar.tap2DisplayValue,_App.w/2+10, this.timerbar.y-20);
+        this.context.restore();
 
 
 
-        this.ctx.fillStyle = utils.getColors().lessBright;
-        // this.ctx.fillStyle = utils.getColors().light;
-        this.ctx.font = "700 40px Roboto"; 
+        this.context.fillStyle = utils.getColors().lessBright;
+        // this.context.fillStyle = utils.getColors().light;
+        this.context.font = "700 40px Roboto"; 
         //  str = this.game.elapsedTime/1000+ " seconds elapsed";
-        // this.ctx.save();
-        this.ctx.textAlign = "center";
+        // this.context.save();
+        this.context.textAlign = "center";
          str = this.timerbar.tap2DisplayValue;
          str=str.substr(0,3);
-         this.ctx.fillText(str,_App.w/2, this.timerbar.y+60);
-        // this.ctx.restore();
+         this.context.fillText(str,_App.w/2, this.timerbar.y+60);
+        // this.context.restore();
 
-        this.ctx.font = "italic 200 14px Roboto"; 
+        this.context.font = "italic 200 14px Roboto"; 
         str = this.timerbar.message.cur;
-        this.ctx.fillText(str,_App.w/2, this.timerbar.y-80);
+        this.context.fillText(str,_App.w/2, this.timerbar.y-80);
         
 
         

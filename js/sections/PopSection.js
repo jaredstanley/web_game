@@ -1,8 +1,7 @@
 import Section from './Section';
-import Bubble from './Bubble';
-import utils from '../utils';
-import sectionManager from '../sectionManager';
 import eventTypeManager from '../eventTypeManager';
+import utils from '../utils';
+import Bubble from './Bubble';
 
 //
 class PopSection extends Section {
@@ -10,10 +9,12 @@ class PopSection extends Section {
         super();
     }
     init(){
-        this.canvas = _App.context.canvas;
-        this.bubblesObj = {};
-        this.bubbleCount = 8;
+        super.init();
         this.n = "popper";
+        console.log("init ", this.n);
+        
+        this.bubblesObj = {};
+        this.bubbleCount = 2;
         this.bubbleColorsArr = [
             {   hex:'#009474'
             },
@@ -28,16 +29,13 @@ class PopSection extends Section {
         
         this.initBubbles();
 
-        
-
     }
     start(){
+        super.start();
         console.log(this.n, ' started');
+        super.addCanvasClick();
+        // sectionManager.setInstructions();
         
-        this.binder = this.clickHandler.bind(this);
-        eventTypeManager.addEvent(_App.context.canvas, this.binder);
-        sectionManager.setInstructions();
-        this.update();
     }
     
     update(){
@@ -45,7 +43,7 @@ class PopSection extends Section {
             console.log("biubbs gone");
             
             
-            this.fadeOut();
+            this.finished();
             return;
         }
         // console.log('update() ', this.n);
@@ -62,8 +60,6 @@ class PopSection extends Section {
            ctx.arc(bubb.x, bubb.y, bubb.radius,0,Math.PI*2);
            ctx.fill();
            //
-           
-
         }
         
         if(count<=0){
@@ -93,24 +89,12 @@ class PopSection extends Section {
     }
     //
     clickHandler(e){
-        e.preventDefault();
-        console.log("clickHandler called from popSection");
-        let tgt = "";
-        if (utils.getStatus().type=="mobile"){
-            // console.log('checking mobiel click', e.targetTouches[0]);
-            tgt = e.targetTouches[0]
-        }else{
-            tgt = e;
-        }
-        let _mouse = {
-            x:tgt.clientX,
-            y:tgt.clientY
-        }
+        super.clickHandler(e);
         
         for (const key in this.bubblesObj) {   
                     
             let bubb = this.bubblesObj[key];
-            if (this.checkIfClicked(_mouse, bubb)){
+            if (this.checkIfClicked(this.mouse, bubb)){
                 // console.log('clicked', bubb.pos);
                 this.deadBubblesArr.push(Object.create(bubb));
                 delete this.bubblesObj[key];
@@ -136,19 +120,7 @@ class PopSection extends Section {
         // console.log("bibb;esObj ", this.bubblesObj);
         
     }
-    fadeOut(){
-        // console.log("this.alph ", this.alph);
-        this.alph-=0.025;
-        _App.context.save();
-        _App.context.globalAlpha=this.alph;
-        this.drawDeadBubbles();
-        _App.context.restore();
-        if(this.alph<=0){
-            this.endGame();
-            return;
-        }
-        this.timer = requestAnimationFrame(this.fadeOut.bind(this));
-    }
+   
     endGame(){
         sectionManager.proceed();
     }
@@ -156,14 +128,11 @@ class PopSection extends Section {
             return Math.sqrt((mouse.x-circle.x) ** 2 + (mouse.y - circle.y) ** 2) < circle.radius;
     }
     kill(){
+        super.kill();
         // console.log("kill kill kill")
-        cancelAnimationFrame(this.timer);
-        this.timer = null;
         delete this.bubblesObj;
         
-        eventTypeManager.removeEvent(_App.context.canvas, this.binder);
         // _App.context.canvas.removeEventListener('click', this.binder, true);
-       console.log('killing popSection');
         
     }
    

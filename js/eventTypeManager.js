@@ -4,7 +4,7 @@ let agent = "";
 
 
 exports.init=function(){
-    console.log("init from eventtypemgr");
+    // console.log("init from eventtypemgr");
     agent = window.clientInformation.userAgent.toString().search('Chrome');
     if (agent>0){
       utils.setStatus('desktop');

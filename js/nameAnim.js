@@ -46,7 +46,7 @@ function startAtStart(e){
     e.preventDefault();
   }
   
-  console.log("startAtStart called, ", isPlaying);
+  // console.log("startAtStart called, ", isPlaying);
   
   if(!isPlaying){
     anim.goToAndPlay(1,true);

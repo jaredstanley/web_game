@@ -1,25 +1,23 @@
 import Section from './Section';
+import eventTypeManager from '../eventTypeManager';
 import utils from '../utils';
 import sectionManager from '../sectionManager';
-import eventTypeManager from '../eventTypeManager';
+
 //
 class KeyboardSection extends Section {
     constructor(){
-        // console.log("KeyboardSection Constructor ");
-        
         super();
     }
     init(){
-        this.msg = "play 'Happy Birthday' to proceed";
-        this.ctx = _App.context;
+        super.init();
         this.n = "keyboard";
-        this.color = 'rgb(111,0,111)';
+        console.log('init', this.n);
+        
         this.game = {
             isActive:false,
             timer:{}
         }
         this.startTime ="";
-        // console.log("KeyboardSection Initted");
         this.piano = {
             maxWidth:350,
             maxHeight:325,
@@ -68,25 +66,18 @@ class KeyboardSection extends Section {
             curPos:0
         }
         this.piano.totalKeys = this.piano.ivories.length;
-        
-        
-        
+        // this.msg = "play 'Happy Birthday' to proceed";
     }
+
     start(){
+        super.start();
+        super.addCanvasClick();
         
-        // //
-        this.binder = this.clickHandler.bind(this);
-        
-       
-        eventTypeManager.addEvent(_App.context.canvas, this.binder);
-       //
         this.piano.width = Math.min(this.piano.maxWidth, _App.w*0.75);
         this.piano.height = Math.min(this.piano.maxHeight, _App.h*0.55);
-        
-        console.log(this.n, ' started', this.piano);
+      
         this.createKeys();  
-        sectionManager.setInstructions();
-        this.update();
+      
     }
     
     update(){
@@ -107,30 +98,30 @@ class KeyboardSection extends Section {
         
         let p = this.piano;
         
-        this.ctx.beginPath();
-        this.ctx.fillStyle = utils.getColors().light;
+        this.context.beginPath();
+        this.context.fillStyle = utils.getColors().light;
         //background
         p.x = (_App.w/2)-(p.width/2);
         p.y = (_App.h/2)-(p.height/2)-40;
-        this.ctx.rect(p.x,p.y,p.width,p.height);
-        this.ctx.fill();
+        this.context.rect(p.x,p.y,p.width,p.height);
+        this.context.fill();
         //piano keys
         p.ivories.forEach(itm => {
-            this.ctx.beginPath();
+            this.context.beginPath();
             let gradient = "";
-            gradient = this.ctx.createLinearGradient(p.x, p.y, p.x+p.width, p.y+p.height);
+            gradient = this.context.createLinearGradient(p.x, p.y, p.x+p.width, p.y+p.height);
             gradient.addColorStop("0", itm.gradient.a);
             gradient.addColorStop("1", itm.gradient.b);
-            this.ctx.fillStyle = gradient;
+            this.context.fillStyle = gradient;
             
-            this.ctx.fillRect(itm.x, itm.y, itm.width, itm.height);
+            this.context.fillRect(itm.x, itm.y, itm.width, itm.height);
             this.drawTextLabels(itm);
         })        
         //lyrics
-        this.ctx.save();
-        this.ctx.font = "700 20px Roboto"; 
-        this.ctx.textBaseline = "middle";
-        this.ctx.textAlign = "center";
+        this.context.save();
+        this.context.font = "700 20px Roboto"; 
+        this.context.textBaseline = "middle";
+        this.context.textAlign = "center";
                 
         
         let y = this.piano.y+this.piano.height+30;
@@ -140,14 +131,14 @@ class KeyboardSection extends Section {
             const str = this.song.lyrics[i];
             x+=(60*i);    
             if(i<this.song.curPos){
-               this.ctx.fillStyle = utils.getColors().white;
+               this.context.fillStyle = utils.getColors().white;
             }else{
-                this.ctx.fillStyle = utils.getColors().upcoming;
+                this.context.fillStyle = utils.getColors().upcoming;
             }
-            this.ctx.fillText(str,x, y);
+            this.context.fillText(str,x, y);
             
         }
-        this.ctx.restore();
+        this.context.restore();
             
 
         
@@ -175,21 +166,10 @@ class KeyboardSection extends Section {
     }
 
     clickHandler(e){
-        e.preventDefault();
-        // console.log("keyboardSection clickHandler called", e);
-        let tgt = "";
-        if (utils.getStatus().type=="mobile"){
-            // console.log('checking mobiel click', e.targetTouches[0]);
-            tgt = e.targetTouches[0];
-        }else{
-            tgt = e;
-        }
-        let _mouse = {
-            x:tgt.clientX,
-            y:tgt.clientY
-        }    
+        super.clickHandler(e);
+        
         this.piano.ivories.forEach(itm => {
-            if(this.checkIfClicked(_mouse, itm)){
+            if(this.checkIfClicked(this.mouse, itm)){
                 // console.log("STATUS: clicked on button", itm.i, itm.note);
                 this.checkIfCorrect(itm);
             }
@@ -230,26 +210,24 @@ class KeyboardSection extends Section {
     }
 
     kill(){
-        cancelAnimationFrame(this.timer);    
-        eventTypeManager.removeEvent(_App.context.canvas, this.binder);
-       console.log('removing KeyboardSection');
-        
+        super.kill();
+       console.log('removing KeyboardSection');       
     }
 
     drawTextLabels(itm){
         //piano key note labels
-        this.ctx.save();
-        this.ctx.fillStyle = utils.getColors().white;
-        this.ctx.font = "700 20px Roboto"; 
+        this.context.save();
+        this.context.fillStyle = utils.getColors().white;
+        this.context.font = "700 20px Roboto"; 
         let str = itm.note;
         let x = itm.x+itm.width/2;
         let y = itm.y+itm.height/2;
-        this.ctx.textBaseline = "middle";
-        this.ctx.textAlign = "center";
-        this.ctx.fillText(str,x, y);
+        this.context.textBaseline = "middle";
+        this.context.textAlign = "center";
+        this.context.fillText(str,x, y);
         //lyrics
         
-        this.ctx.restore();
+        this.context.restore();
         
     }
 
