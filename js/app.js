@@ -34,29 +34,12 @@ let _App = {
   //   _App.update();
     window.requestAnimationFrame(_App.loop);
   },
-  // blocker: function(e){
-  //   console.log("blocking");
-    
-  //   e.preventDefault();
-  // },
-  //
-  // update: function(){
-    
-  //   sectionManager.update();
-  //   lines.update();
-  //   progressBar.update();
-    
-    
-  // },
   //
   updateSize: function(){
     _App.context.canvas.width = document.documentElement.clientWidth;
     _App.context.canvas.height = document.documentElement.clientHeight;
     _App.w = _App.context.canvas.width;
     _App.h = _App.context.canvas.height;
-    // progressBar.init();
-    // lines.init();
-    // console.log("updateSize called");
     
   }
 }

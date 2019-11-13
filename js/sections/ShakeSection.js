@@ -12,7 +12,7 @@ class ShakeSection extends Section {
     init(){        
         super.init();
         this.n = "shaker"
-        console.log("tnit", this.n);
+        // console.log("tnit", this.n);
         // accel.init();
        
        

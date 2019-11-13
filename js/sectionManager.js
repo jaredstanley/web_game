@@ -10,6 +10,8 @@ import sectionDelayedTap from './sections/DelayedTapSection';
 import sectionKeyboard from './sections/KeyboardSection';
 import sectionShake from './sections/ShakeSection';
 //
+import canyonAnim from './canyonAnim';
+import tetonAnim from './tetonAnim';
 // import permissionsMgr from './PermissionsMgr';
 
 let popSection = new sectionPop();
@@ -17,6 +19,8 @@ let tapSection = new sectionTap();
 let delayedTapSection = new sectionDelayedTap();
 let keyboardSection = new sectionKeyboard();
 let shakeSection = new sectionShake();
+//
+
 
 
 
@@ -27,31 +31,36 @@ let sectionList = [
     {   pos:0,
         name:"tap",
         section:tapSection,
-        instructions:"tap to proceed"
+        instructions:"tap to proceed",
+        chapter:canyonAnim
     },
     {   pos:1,
         name:"pop",
         section:popSection,
-        instructions:"pop to proceed"
+        instructions:"pop to proceed",
+        chapter:tetonAnim
         
     }
    ,
     {   pos:2,
         name:"delayedTap",
         section:delayedTapSection,
-        instructions:"tap 3 seconds apart to proceed"
+        instructions:"tap 3 seconds apart to proceed",
+        chapter:null
     } 
     ,
     {   pos:3,
         name:"keyboard",
         section:keyboardSection,
-        instructions:"play the song to proceed"
+        instructions:"play the song to proceed",
+        chapter:null
         
     },
     {   pos:4,
         name:"shake",
         section:shakeSection,
-        instructions:"coming soon"
+        instructions:"coming soon",
+        chapter:null
     }
 ]
 
@@ -60,6 +69,10 @@ exports.init = function(){
     for (let i = 0; i < sectionList.length; i++) {
         let element = sectionList[i].section;
         element.init();
+        element = sectionList[i].chapter;
+        if(element!=null){
+            element.init();
+        }
       }
     _App.eventType = eventTypeManager.init();
     
@@ -107,19 +120,10 @@ function engageLoading(){
     curSection = sec.section;
     curSection.start(); 
     // console.log("sectionManager loading secrtion ", sectionList[curPos]);
-   
-    
     
 }
 exports.update=function(){
-    // console.log('sectionManager Update()');
-    // console.log(curSection);
-    // if(curSection.name=="none"){
-    //     return;
-    // }
-    // curSection.update();
-    
-    
+    // console.log('sectionManager Update()');    
 }
 
 

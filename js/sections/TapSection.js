@@ -9,7 +9,7 @@ class TapSection extends Section {
     init(){
         super.init();
         this.n = "tapper";
-        console.log("init", this.n);
+        // console.log("init", this.n);
     }
 
     showCanvas(){

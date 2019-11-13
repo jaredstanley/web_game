@@ -9,7 +9,7 @@ class DelayedTapSection extends Section {
     init(){
         super.init()
         this.n = "delayedTap";
-        console.log("init", this.n);  
+        // console.log("init", this.n);  
 
         this.interval = 1;
         this.startTime ="";

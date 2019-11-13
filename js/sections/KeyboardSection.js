@@ -11,7 +11,7 @@ class KeyboardSection extends Section {
     init(){
         super.init();
         this.n = "keyboard";
-        console.log('init', this.n);
+        // console.log('init', this.n);
         
         this.game = {
             isActive:false,

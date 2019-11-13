@@ -11,7 +11,7 @@ class PopSection extends Section {
     init(){
         super.init();
         this.n = "popper";
-        console.log("init ", this.n);
+        // console.log("init ", this.n);
         
         this.bubblesObj = {};
         this.bubbleCount = 2;
@@ -34,7 +34,7 @@ class PopSection extends Section {
         super.start();
         console.log(this.n, ' started');
         super.addCanvasClick();
-        // sectionManager.setInstructions();
+        super.sectionManager.setInstructions();
         
     }
     

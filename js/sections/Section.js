@@ -35,16 +35,16 @@ class Section {
         this.binder = this.clickHandler.bind(this);
         eventTypeManager.addEvent(_App.context.canvas, this.binder);
     }
+    
     showCanvas(e){
         this.chapterDiv.classList.remove('show');
         this.chapterDiv.classList.add('hide');
         this.instructionsDiv.classList.remove('hide');
         this.instructionsDiv.classList.add('show');
-        
-        
-        
+        //
         this.update();
     }
+
     clickHandler(e){
         e.preventDefault();
         let tgt = "";
