@@ -8,8 +8,8 @@ class PopSection extends Section {
     constructor(){
         super();
     }
-    init(){
-        super.init();
+    init(i){
+        super.init(i);
         this.n = "popper";
         // console.log("init ", this.n);
         

@@ -8,8 +8,8 @@ class KeyboardSection extends Section {
     constructor(){
         super();
     }
-    init(){
-        super.init();
+    init(i){
+        super.init(i);
         this.n = "keyboard";
         // console.log('init', this.n);
         

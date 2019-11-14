@@ -6,8 +6,8 @@ class DelayedTapSection extends Section {
     constructor(){
         super();
     }
-    init(){
-        super.init()
+    init(i){
+        super.init(i)
         this.n = "delayedTap";
         // console.log("init", this.n);  
 

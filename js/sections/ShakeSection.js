@@ -9,8 +9,8 @@ class ShakeSection extends Section {
     constructor(){
         super();
     }
-    init(){        
-        super.init();
+    init(i){        
+        super.init(i);
         this.n = "shaker"
         // console.log("tnit", this.n);
         // accel.init();

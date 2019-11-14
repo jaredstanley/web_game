@@ -6,8 +6,8 @@ class TapSection extends Section {
     constructor(){
         super();
     }
-    init(){
-        super.init();
+    init(i){
+        super.init(i);
         this.n = "tapper";
         // console.log("init", this.n);
     }

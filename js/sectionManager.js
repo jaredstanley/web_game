@@ -10,8 +10,11 @@ import sectionDelayedTap from './sections/DelayedTapSection';
 import sectionKeyboard from './sections/KeyboardSection';
 import sectionShake from './sections/ShakeSection';
 //
-import canyonAnim from './canyonAnim';
-import tetonAnim from './tetonAnim';
+import CanyonAnim from './animations/CanyonAnim';
+import TetonAnim from './animations/TetonAnim';
+import TouringAnim from './animations/TouringAnim';
+//
+
 // import permissionsMgr from './PermissionsMgr';
 
 let popSection = new sectionPop();
@@ -20,8 +23,10 @@ let delayedTapSection = new sectionDelayedTap();
 let keyboardSection = new sectionKeyboard();
 let shakeSection = new sectionShake();
 //
-
-
+let canyonAnim = new CanyonAnim();
+let tetonAnim = new TetonAnim();
+let touringAnim = new TouringAnim();
+//
 
 
 let curPos = 0;
@@ -46,21 +51,21 @@ let sectionList = [
         name:"delayedTap",
         section:delayedTapSection,
         instructions:"tap 3 seconds apart to proceed",
-        chapter:null
+        chapter:touringAnim
     } 
     ,
     {   pos:3,
         name:"keyboard",
         section:keyboardSection,
         instructions:"play the song to proceed",
-        chapter:null
+        chapter:tetonAnim
         
     },
     {   pos:4,
         name:"shake",
         section:shakeSection,
         instructions:"coming soon",
-        chapter:null
+        chapter:canyonAnim
     }
 ]
 
@@ -68,7 +73,7 @@ let sectionList = [
 exports.init = function(){
     for (let i = 0; i < sectionList.length; i++) {
         let element = sectionList[i].section;
-        element.init();
+        element.init(i);
         element = sectionList[i].chapter;
         if(element!=null){
             element.init();
@@ -81,6 +86,11 @@ exports.init = function(){
     // element.init();
 
 }
+
+exports.getSectionList=function(){
+    return sectionList;
+}
+
 exports.loadFirstSection = function(){  
     
     console.log("loading first section ");

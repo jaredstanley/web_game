@@ -6,13 +6,11 @@ import Chapter from '../Chapter';
 
 class Section {
     constructor(color){
-        // this.color = 'rgb('+Math.floor(Math.random()*255)+',111,11)';
-        this.timer = "";
-        this.n = ""
-        // console.log('Section Class constructor');
         
     }
-    init(){
+
+    init(i){
+        this.pos = i;
         this.chapter = new Chapter();
         // console.log("Section SuperClass Initted");
         this.context = _App.context;
@@ -25,7 +23,7 @@ class Section {
     }
     start(){
         // console.log("GHJHGFHJHG ",this.binder);
-        this.chapter.showChapterHeader();
+        this.chapter.show(this);
         this.showCanvasBinder = this.showCanvas.bind(this);
         eventTypeManager.addEvent(this.chapterDiv, this.showCanvasBinder); 
         sectionManager.setInstructions();
