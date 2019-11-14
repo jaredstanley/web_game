@@ -3,8 +3,8 @@ import utils from './utils';
 // import progressBar from './uiProgressBar';
 import animation from './nameAnim';
 import sectionManager from './sectionManager';
+import Chapter from './Chapter';
 // import eventTypeManager from './eventTypeManager';
-// import instructions from './instructions';
 
 
 let _App = {
@@ -15,12 +15,12 @@ let _App = {
      
     this.updateSize();
     //
-    animation.init();
+    // animation.init();
     sectionManager.init();
-    // instructions.init();
     // //
+    sectionManager.loadFirstSection();
     this.loop();
-    animation.begin();
+    // animation.begin();
   },
 
   loop: function(){

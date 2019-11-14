@@ -34,7 +34,6 @@ class PopSection extends Section {
         super.start();
         console.log(this.n, ' started');
         super.addCanvasClick();
-        super.sectionManager.setInstructions();
         
     }
     

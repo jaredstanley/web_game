@@ -1,31 +1,25 @@
 
-import eventTypeManager from '../eventTypeManager';
-import sectionManager from '../sectionManager';
-import utils from '../utils';
-import Chapter from '../Chapter';
+import eventTypeManager from './eventTypeManager';
+import sectionManager from './sectionManager';
+import utils from './utils';
 
-class Section {
+class Chapter {
     constructor(color){
-        // this.color = 'rgb('+Math.floor(Math.random()*255)+',111,11)';
+        
         this.timer = "";
         this.n = ""
-        // console.log('Section Class constructor');
-        
-    }
-    init(){
-        this.chapter = new Chapter();
-        // console.log("Section SuperClass Initted");
         this.context = _App.context;
         this.canvas = _App.context.canvas;
+        this.instructionsDiv = document.getElementById('instructions');
         this.chapterDiv=document.getElementById('chapterHeader');
         this.labelDiv = this.chapterDiv.getElementsByClassName('label')[0];
-        this.instructionsDiv=document.getElementById('instructions');
-        this.instructionTextDiv=this.instructionsDiv.getElementsByClassName('instructiontext')[0];
+        // console.log('Chapter Class constructor');
         
     }
+
     start(){
         // console.log("GHJHGFHJHG ",this.binder);
-        this.chapter.showChapterHeader();
+        this.showChapterHeader();
         this.showCanvasBinder = this.showCanvas.bind(this);
         eventTypeManager.addEvent(this.chapterDiv, this.showCanvasBinder); 
         sectionManager.setInstructions();
@@ -62,6 +56,18 @@ class Section {
             y:tgt.clientY
         }
     }
+    
+    showChapterHeader(){
+        this.labelDiv.innerHTML = this.n;
+        
+        this.chapterDiv.classList.remove('hide');
+        this.chapterDiv.classList.add('show');
+      
+        this.instructionsDiv.classList.remove('show');
+        this.instructionsDiv.classList.add('hide');
+        
+        
+    }
 
     finished(e){
         console.log("finished ", this.n);
@@ -78,4 +84,4 @@ class Section {
     }
 }
 
-export default Section
+export default Chapter

@@ -53,6 +53,8 @@ class DelayedTapSection extends Section {
     }
     
     update(){
+        console.log('upsRESD DELAYED TAP');
+        
         this.updateUI();
         this.drawGame();
         this.timer = requestAnimationFrame(this.update.bind(this));
@@ -139,7 +141,8 @@ class DelayedTapSection extends Section {
     }
 
     kill(){
-        super.kill()
+        super.kill();
+        clearInterval(this.game.timer);
        console.log('removing delayedTapSection');
     }
 

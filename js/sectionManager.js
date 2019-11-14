@@ -1,7 +1,7 @@
 import animation from './nameAnim';
 // import progressBar from './uiProgressBar';
 // import utils from './utils';
-// import instructions from './instructions';
+import Instructions from './Instructions';
 import eventTypeManager from './eventTypeManager';
 //
 import sectionTap from './sections/TapSection';
@@ -76,11 +76,13 @@ exports.init = function(){
       }
     _App.eventType = eventTypeManager.init();
     
+    this.instructions = new Instructions(); 
     // let element = sectionList[0].section;
     // element.init();
 
 }
-exports.loadFirstSection = function(){   
+exports.loadFirstSection = function(){  
+    
     console.log("loading first section ");
     // progressBar.nextSection();
     engageLoading();
@@ -93,7 +95,7 @@ exports.setInstructions=function(){
     // console.log(sec,"sdsds");
     
     
-    instructions.show(sec.instructions);
+    this.instructions.show(sec.instructions);
         
 }
 function nextSection(){

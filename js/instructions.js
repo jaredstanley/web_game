@@ -1,16 +1,28 @@
+
+import eventTypeManager from './eventTypeManager';
 import sectionManager from './sectionManager';
+import utils from './utils';
 
-let div = "";
+class Instructions {
+    constructor(){
+        
+        this.div = document.getElementById('instructions');
+        
+    }
 
-exports.init=function(){
-    this.div = document.getElementById('instructions');
+    show(str){
+        document.querySelector(".instructiontext").innerHTML=str;
+        this.div.classList.add('show');
+    }
+    hide(){
+     
+        this.div.classList.add('hide');
+    }
+    remove(){
+        this.div.classList.remove("cursor");
+        this.div.classList.add("ignored");
+    }
+
 }
 
-exports.show=function(str){
-    document.querySelector(".instructiontext").innerHTML=str;
-    this.div.classList.add('show');
-}
-exports.remove=function(){
-    this.div.classList.remove("cursor");
-    this.div.classList.add("ignored");
-}
+export default Instructions
