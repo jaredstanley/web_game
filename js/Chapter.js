@@ -1,7 +1,5 @@
 
-import eventTypeManager from './eventTypeManager';
 import sectionManager from './sectionManager';
-import utils from './utils';
 import lottie_web from 'lottie-web';
 
 class Chapter {
@@ -15,6 +13,7 @@ class Chapter {
         this.chapterDiv=document.getElementById('chapterHeader');
         this.chapterDiv=document.getElementById('chapterHeader');
         this.labelDiv = this.chapterDiv.getElementsByClassName('label')[0];
+        this.titleDiv = this.chapterDiv.getElementsByClassName('title')[0];
         this.animDiv = this.chapterDiv.getElementsByClassName('anim')[0];
         // console.log('Chapter Class constructor');
         
@@ -23,12 +22,13 @@ class Chapter {
         let list = sectionManager.getSectionList();
         list = list[itm.pos];
         let params = list.chapter.getParams();
-        console.log(itm.pos, params);
+        console.log(list);
         
         this.removeExisting();
          lottie_web.loadAnimation(params);
         
-        this.labelDiv.innerHTML = this.n;
+        this.titleDiv.innerHTML = list.title.toUpperCase();
+        this.labelDiv.innerHTML = list.verb;
         
         this.chapterDiv.classList.remove('hide');
         this.chapterDiv.classList.add('show');

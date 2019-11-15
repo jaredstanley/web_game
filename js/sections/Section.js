@@ -26,7 +26,7 @@ class Section {
         this.chapter.show(this);
         this.showCanvasBinder = this.showCanvas.bind(this);
         eventTypeManager.addEvent(this.chapterDiv, this.showCanvasBinder); 
-        sectionManager.setInstructions();
+        
         
        
         // sectionManager.setInstructions();
@@ -38,15 +38,21 @@ class Section {
     }
     
     showCanvas(e){
+        // console.log("chapterDiv Clicked, show it!!!, ",this.n);
+        
         this.chapterDiv.classList.remove('show');
         this.chapterDiv.classList.add('hide');
         this.instructionsDiv.classList.remove('hide');
         this.instructionsDiv.classList.add('show');
         //
+        eventTypeManager.removeEvent(this.chapterDiv, this.showCanvasBinder); 
+        sectionManager.setInstructions();
         this.update();
     }
 
     clickHandler(e){
+        console.log("canvas clicked CLICKCLICKCLICKCLICKCLICKCLICK",this.n);
+        
         e.preventDefault();
         let tgt = "";
         if (utils.getStatus().type=="mobile"){
@@ -62,15 +68,15 @@ class Section {
     }
 
     finished(e){
-        console.log("finished ", this.n);
+        // console.log("finished ", this.n);
         this.kill();   
         sectionManager.proceed();
     }
 
     kill(){
-        console.log("kill ", this.n);    
+        // console.log("kill ", this.n);    
         eventTypeManager.removeEvent(_App.context.canvas, this.binder);
-        eventTypeManager.removeEvent(this.chapterDiv, this.showCanvasBinder); 
+        
         cancelAnimationFrame(this.timer);
         this.timer = null;
     }

@@ -32,16 +32,14 @@ class PopSection extends Section {
     }
     start(){
         super.start();
-        console.log(this.n, ' started');
+        // console.log(this.n, ' started');
         super.addCanvasClick();
         
     }
     
     update(){
         if(this.bubblesAllGone){
-            console.log("biubbs gone");
-            
-            
+            // console.log("biubbs gone");
             this.finished();
             return;
         }
@@ -66,7 +64,7 @@ class PopSection extends Section {
             // this.endGame();
             // return;
         }
-        console.log("going");
+        // console.log("going");
         
 
         // console.log(count," << bubbles left");

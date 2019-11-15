@@ -18,20 +18,17 @@ let _App = {
     // animation.init();
     sectionManager.init();
     // //
-    sectionManager.loadFirstSection();
+    
     this.loop();
     // animation.begin();
   },
 
   loop: function(){
-    var ctx = _App.context;
-    // console.log('updateeeed');
     
-  //   // ctx.clearRect(0,0,_App.w, _App.h);
-    ctx.fillStyle = utils.getColors().darkGreen;
-    ctx.fillRect(0,0,_App.w, _App.h);
+    // ctx.clearRect(0,0,_App.w, _App.h);
+    _App.context.fillStyle = utils.getColors().darkGreen;
+    _App.context.fillRect(0,0,_App.w, _App.h);
 
-  //   _App.update();
     window.requestAnimationFrame(_App.loop);
   },
   //
