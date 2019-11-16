@@ -10,12 +10,12 @@ class TapSection extends Section {
         super.init(i);
         this.n = "tapper";
         
-        console.log("init", this.n);
+        // console.log("init", this.n);
     }
 
     showCanvas(){
         this.binder = this.clickHandler.bind(this);
-        console.log('***** adding click ahndleer', this.n);
+        // console.log('***** adding click ahndleer', this.n);
         
         eventTypeManager.addEvent(_App.context.canvas, this.binder); 
         super.showCanvas();
@@ -26,7 +26,7 @@ class TapSection extends Section {
     
         // super.clickHandler(e);
         
-        console.log("clickkkk from tapsection");
+        // console.log("clickkkk from tapsection");
         super.finished();   
        
         // console.log(this.deadBubblesArr);
@@ -36,7 +36,7 @@ class TapSection extends Section {
         // return false;
         this.context.fillStyle = utils.getColors().brightGreen;
         this.context.fillRect(Math.random()*_App.w, Math.random()*_App.h, 20, 20);
-        console.log("updating!! ", this.n);    
+        // console.log("updating!! ", this.n);    
         this.timer = requestAnimationFrame(this.update.bind(this));
     
     }

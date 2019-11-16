@@ -51,7 +51,7 @@ class Section {
     }
 
     clickHandler(e){
-        console.log("canvas clicked CLICKCLICKCLICKCLICKCLICKCLICK",this.n);
+        // console.log("canvas clicked CLICKCLICKCLICKCLICKCLICKCLICK",this.n);
         
         e.preventDefault();
         let tgt = "";
@@ -74,7 +74,13 @@ class Section {
     }
 
     kill(){
-        // console.log("kill ", this.n);    
+        // delete sectionManager.getCanyonAnim();
+        // delete sectionManager.getTetonAnim();
+        delete sectionManager.getSectionList()[this.pos].section;
+        console.log(sectionManager.getSectionList());
+        console.log(sectionManager);
+        
+        // console.log("kill ", sectionManager.getSectionList()[this.pos].section=null);    
         eventTypeManager.removeEvent(_App.context.canvas, this.binder);
         
         cancelAnimationFrame(this.timer);

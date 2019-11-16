@@ -29,6 +29,12 @@ let tetonAnim = new TetonAnim();
 let touringAnim = new TouringAnim();
 let nihonAnim = new NihonAnim();
 //
+exports.getCanyonAnim=function(){
+    return canyonAnim;
+}
+exports.getTetonAnim=function(){
+    return tetonAnim;
+}
 
 
 let curPos = 0;
@@ -51,8 +57,7 @@ let sectionList = [
         instructions:"pop to proceed",
         chapter:tetonAnim
         
-    }
-   ,
+    },
     {   pos:2,
         name:"delayedTap",
         title:"chapter three",
@@ -106,7 +111,7 @@ exports.getSectionList=function(){
 
 function loadFirstSection(){  
     
-    console.log("loading first section ");
+    // console.log("loading first section ");
     // progressBar.nextSection();
     engageLoading();
 }

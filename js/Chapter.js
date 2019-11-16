@@ -22,7 +22,7 @@ class Chapter {
         let list = sectionManager.getSectionList();
         list = list[itm.pos];
         let params = list.chapter.getParams();
-        console.log(list);
+        // console.log(list);
         
         this.removeExisting();
          lottie_web.loadAnimation(params);

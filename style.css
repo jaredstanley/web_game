@@ -83,7 +83,7 @@
     #instructions .instructiontext{
         padding-top: 1em;
         font-family: 'Roboto';
-        font-weight: 200;
+        font-weight: 300;
         font-style: italic;
         color: #bada55;
         text-align: center;
@@ -126,6 +126,10 @@
         align-items: center;
         color: #222;
         font-size: 1.5em;
+        font-family: 'Roboto';
+        font-weight: 300;
+        font-style: italic;
+        
         
         /* background: #666; */
         width: 100%;

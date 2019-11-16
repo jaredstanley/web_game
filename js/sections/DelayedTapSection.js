@@ -53,7 +53,7 @@ class DelayedTapSection extends Section {
     }
     
     update(){
-        console.log('upsRESD DELAYED TAP');
+        // console.log('upsRESD DELAYED TAP');
         
         this.updateUI();
         this.drawGame();
@@ -94,7 +94,7 @@ class DelayedTapSection extends Section {
 
     }
     startGame(){
-        console.log("STATUS: startGame()", this.game.isActive);
+        // console.log("STATUS: startGame()", this.game.isActive);
             if(!this.game.isActive){
                 this.timerbar.message.cur="";
                 this.game.curTime = 0;
@@ -143,7 +143,7 @@ class DelayedTapSection extends Section {
     kill(){
         super.kill();
         clearInterval(this.game.timer);
-       console.log('removing delayedTapSection');
+    //    console.log('removing delayedTapSection');
     }
 
     drawTextLabels(){

@@ -181,19 +181,19 @@ class KeyboardSection extends Section {
         // console.log(itm.note, this.song.curPos, this.song.notes[this.song.curPos]);
         
         if(itm.note===this.song.notes[this.song.curPos]){
-            console.log("correct note at position ", this.song.curPos);
+            // console.log("correct note at position ", this.song.curPos);
             this.song.curPos++;
             if(this.song.curPos>this.song.notes.length){
                 this.song.curPos = 0;
                 return;
             }
             if(this.song.curPos==this.song.notes.length){
-                console.log('you won!');
+                // console.log('you won!');
                 sectionManager.proceed();
                 
             }
         }else{
-            console.log("sry wrong note, start again");
+            // console.log("sry wrong note, start again");
             this.song.curPos = 0;
             
         }
@@ -211,7 +211,7 @@ class KeyboardSection extends Section {
 
     kill(){
         super.kill();
-       console.log('removing KeyboardSection');       
+    //    console.log('removing KeyboardSection');       
     }
 
     drawTextLabels(itm){
