@@ -1,9 +1,9 @@
 import utils from './utils';
 // import lines from './uiLines';
 // import progressBar from './uiProgressBar';
-import animation from './nameAnim';
+// import animation from './nameAnim';
 import sectionManager from './sectionManager';
-import Chapter from './Chapter';
+// import Chapter from './Chapter';
 // import eventTypeManager from './eventTypeManager';
 
 
@@ -19,17 +19,17 @@ let _App = {
     sectionManager.init();
     // //
     
-    this.loop();
+    // this.loop();
     // animation.begin();
+    sectionManager.update();
   },
 
   loop: function(){
     
-    // ctx.clearRect(0,0,_App.w, _App.h);
-    _App.context.fillStyle = utils.getColors().darkGreen;
-    _App.context.fillRect(0,0,_App.w, _App.h);
+    // utils.clearCanvas(_App, true);
+    
 
-    window.requestAnimationFrame(_App.loop);
+    // window.requestAnimationFrame(_App.loop);
   },
   //
   updateSize: function(){

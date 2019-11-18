@@ -14,13 +14,13 @@ class PopSection extends Section {
         // console.log("init ", this.n);
         
         this.bubblesObj = {};
-        this.bubbleCount = 2;
+        this.bubbleCount = 13;
         this.bubbleColorsArr = [
-            {   hex:'#009474'
+            {   hex:'#1d73d5'
             },
             {   hex:'#FFF'
             },
-            {   hex:'#acc800'
+            {   hex:'#99e3e9'
             }
         ];
         this.bubblesAllGone = false;

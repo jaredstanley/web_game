@@ -9,6 +9,7 @@ let status = {
 let _seed = 0;
 let count = 0;
 let colors = {
+  // darkGreen: "#31040E",
   darkGreen: "#1d210d",
   brightGreen: "#00ff18",
   lessBright: "#39b54a", 
@@ -16,21 +17,39 @@ let colors = {
   visited: "#0ba615",
   light: "#dedede",
   white:"#FFFFFF", 
-  dead: "rgba(0,0,0,0.2)"
+  dead: "rgba(0,0,0,0.2)",
+  darkRed:"#31040E",
+  darkBlue:"#00032b",
+  brightRed:"#C22A42",
+  midBlue:"#1d73d5",
+  lightBlue:"#99e3e9"
+
 };
 let grad1 = {
   b: "#009475", a:"#acc800"
 }
 let blendModeArr = ["source-over", "source-in", "source-out", "source-atop", "destination-over", "destination-in", "destination-out", "destination-atop", "lighter", "copy", "xor", "multiply", "screen", "overlay", "darken", "color-dodge", "color-burn", "hard-light", "soft-light", "difference", "exclusion", "hue", "saturation", "color", "luminosity"];
+exports.clearCanvas = function(_A, should, hex){
+  // ctx.clearRect(0,0,_App.w, _App.h);
+      if(should){
+        _A.context.fillStyle = hex;
+      _A.context.fillRect(0,0,_A.w, _A.h);
+      }
+    
+}
+
 exports.getColors = function(){
   return colors;
 }
+
 exports.getGrad = function(){
   return grad1;
 }
+
 exports.getStatus=function(){
   return status;
 }
+
 exports.setStatus=function(s){
   status.type = s;
 }
@@ -50,8 +69,10 @@ exports.debug= function(arr, clr, ctx){
 }
 
 exports.getRandom = function(){
-    return Math.random();
-    return (newOne() - 1) / 2147483646;
+    // return Math.random();
+    return Math.abs((Math.random() + Math.random() + Math.random() + Math.random() + Math.random() + Math.random()) - 6) / 6;
+  
+    // return (newOne() - 1) / 2147483646;
 }
 
 

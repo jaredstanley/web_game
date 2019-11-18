@@ -1,6 +1,6 @@
 // import animation from './nameAnim';
 // import progressBar from './uiProgressBar';
-// import utils from './utils';
+import utils from './utils';
 import Instructions from './Instructions';
 import eventTypeManager from './eventTypeManager';
 //
@@ -29,12 +29,12 @@ let tetonAnim = new TetonAnim();
 let touringAnim = new TouringAnim();
 let nihonAnim = new NihonAnim();
 //
-exports.getCanyonAnim=function(){
-    return canyonAnim;
-}
-exports.getTetonAnim=function(){
-    return tetonAnim;
-}
+// exports.getCanyonAnim=function(){
+//     return canyonAnim;
+// }
+// exports.getTetonAnim=function(){
+//     return tetonAnim;
+// }
 
 
 let curPos = 0;
@@ -97,10 +97,11 @@ exports.init = function(){
         }
       }
     _App.eventType = eventTypeManager.init();
-    
+    this.erase=true;
     this.instructions = new Instructions(); 
     // let element = sectionList[0].section;
-    // element.init();
+    // element.init();        
+
     loadFirstSection();
 
 }
@@ -127,7 +128,7 @@ exports.setInstructions=function(){
         
 }
 function nextSection(){
-    // console.log("next Section called, time to remove this pos: ", curPos);
+    console.log("next Section called, time to remove this pos: ", curPos);
     
     // if(animation.getIsPlaying()==true){
     //     console.log("mgr.nope");
@@ -153,7 +154,13 @@ function engageLoading(){
     
 }
 exports.update=function(){
-    // console.log('sectionManager Update()');    
+    // console.log(this.erase);
+    
+    if(this.erase){
+        utils.clearCanvas(_App, true, utils.getColors().darkBlue);
+    }
+    // console.log('sectionManager Update()');   
+    this.timer = requestAnimationFrame(this.update.bind(this)); 
 }
 
 

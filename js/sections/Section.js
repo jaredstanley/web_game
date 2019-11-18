@@ -72,13 +72,16 @@ class Section {
         this.kill();   
         sectionManager.proceed();
     }
+    erase(bool){
+        sectionManager.erase = bool;
+    }
 
     kill(){
         // delete sectionManager.getCanyonAnim();
         // delete sectionManager.getTetonAnim();
-        delete sectionManager.getSectionList()[this.pos].section;
-        console.log(sectionManager.getSectionList());
-        console.log(sectionManager);
+        // delete sectionManager.getSectionList()[this.pos].section;
+        // console.log(sectionManager.getSectionList());
+        // console.log(sectionManager);
         
         // console.log("kill ", sectionManager.getSectionList()[this.pos].section=null);    
         eventTypeManager.removeEvent(_App.context.canvas, this.binder);
