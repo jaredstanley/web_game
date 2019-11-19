@@ -2,6 +2,7 @@ import Section from './Section';
 import eventTypeManager from '../eventTypeManager';
 import utils from '../utils';
 import sectionManager from '../sectionManager';
+import audioManager from '../audioManager';
 
 //
 class KeyboardSection extends Section {
@@ -70,13 +71,14 @@ class KeyboardSection extends Section {
                 b:"#fb3a8b"
             }
         }
+        
         // this.msg = "play 'Happy Birthday' to proceed";
     }
 
     start(){
         super.start();
         super.addCanvasClick();
-       
+        audioManager.init();
         this.piano.width = Math.min(this.piano.maxWidth, _App.w*0.75);
         this.piano.width = Math.max(this.piano.minWidth, this.piano.width);
         this.piano.height = Math.min(this.piano.maxHeight, _App.h*0.55);
