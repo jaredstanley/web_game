@@ -8,7 +8,7 @@ import sectionTap from './sections/TapSection';
 import sectionPop from './sections/PopSection';
 import sectionDelayedTap from './sections/DelayedTapSection';
 import sectionKeyboard from './sections/KeyboardSection';
-import sectionShake from './sections/ShakeSection';
+import sectionRepeat from './sections/RepeatSection';
 //
 import CanyonAnim from './animations/CanyonAnim';
 import TetonAnim from './animations/TetonAnim';
@@ -23,7 +23,7 @@ let popSection = new sectionPop();
 let tapSection = new sectionTap();
 let delayedTapSection = new sectionDelayedTap();
 let keyboardSection = new sectionKeyboard();
-let shakeSection = new sectionShake();
+let repeatSection = new sectionRepeat();
 //
 let canyonAnim = new CanyonAnim();
 let tetonAnim = new TetonAnim();
@@ -50,15 +50,19 @@ let sectionList = [
         verb:"tap",
         section:tapSection,
         instructions:"tap to proceed",
+        txtColor:"#C22A42",
+        svgPatternID:"vertlines",
         chapter:canyonAnim
     },
     {   pos:1,
-        name:"popper",
-        title:"chapter two",
-        verb:"pop",
-        section:popSection,
-        instructions:"pop to proceed",
-        chapter:tetonAnim
+        name:"repeater",
+        title:"chapter five",
+        verb:"repeat",
+        section:repeatSection,
+        instructions:"coming soon",
+        txtColor:"#fb970c",
+        svgPatternID:"vertlines",
+        chapter:paraglidingAnim
         
     },
     {   pos:2,
@@ -67,6 +71,8 @@ let sectionList = [
         verb:"wait",
         section:delayedTapSection,
         instructions:"tap 3 seconds apart to proceed",
+        txtColor:"#ff0082",
+        svgPatternID:"vertlines",
         chapter:touringAnim
     } 
     ,
@@ -76,16 +82,21 @@ let sectionList = [
         verb:"play",
         section:keyboardSection,
         instructions:"play the song to proceed",
+        txtColor:"#ff0076",
+        svgPatternID:"vertlines",
         chapter:nihonAnim
         
     },
     {   pos:4,
-        name:"shake",
-        title:"chapter five",
-        verb:"shake",
-        section:shakeSection,
-        instructions:"coming soon",
-        chapter:paraglidingAnim
+        name:"popper",
+        title:"chapter two",
+        verb:"pop",
+        section:popSection,
+        instructions:"pop to proceed",
+        txtColor:"#1D73D3",
+        svgPatternID:"vertlines",
+        chapter:tetonAnim
+        
     }
 ]
 
@@ -128,7 +139,7 @@ exports.setInstructions=function(){
     // console.log(sec,"sdsds");
     
     
-    this.instructions.show(sec.instructions);
+    this.instructions.show(sec.instructions, sec.txtColor);
         
 }
 function nextSection(){

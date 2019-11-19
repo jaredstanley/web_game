@@ -14,7 +14,7 @@ class PopSection extends Section {
         // console.log("init ", this.n);
         
         this.bubblesObj = {};
-        this.bubbleCount = 4;
+        this.bubbleCount = 5;
         this.bubbleColorsArr = [
             {   hex:'#1D73D3'
             },
@@ -83,12 +83,13 @@ class PopSection extends Section {
     drawDeadBubbles(){
         let ctx = _App.context;
 
-        ctx.fillStyle = this.colors.med;
         this.deadBubblesArr.forEach((bubb, i) => {
+            ctx.strokeStyle = bubb.color;
+            ctx.lineWidth = 4;
             // console.log(bubb);
             ctx.beginPath();    
             ctx.arc(bubb.x, bubb.y, bubb.radius,0,Math.PI*2);
-            ctx.fill();
+            ctx.stroke();
         });
     }
     //

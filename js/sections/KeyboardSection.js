@@ -19,7 +19,8 @@ class KeyboardSection extends Section {
         }
         this.startTime ="";
         this.piano = {
-            maxWidth:350,
+            maxWidth:450,
+            minWidth:300,
             maxHeight:325,
             maxKeyHeight:40,
             width:0,
@@ -77,6 +78,7 @@ class KeyboardSection extends Section {
         super.addCanvasClick();
        
         this.piano.width = Math.min(this.piano.maxWidth, _App.w*0.75);
+        this.piano.width = Math.max(this.piano.minWidth, this.piano.width);
         this.piano.height = Math.min(this.piano.maxHeight, _App.h*0.55);
       
         this.createKeys();  
@@ -86,6 +88,8 @@ class KeyboardSection extends Section {
     update(){
         
         this.piano.width = Math.min(this.piano.maxWidth, _App.w*0.75);
+        this.piano.width = Math.max(this.piano.minWidth, this.piano.width);
+        
         this.piano.height = Math.min(this.piano.maxHeight, _App.h*0.55);
         this.piano.keyHeight = Math.min(this.piano.maxKeyHeight, this.piano.height*0.1);
         let keyHeightTotal = (this.piano.keyHeight*this.piano.totalKeys);
@@ -128,16 +132,29 @@ class KeyboardSection extends Section {
                 
         
         let y = this.piano.y+this.piano.height+30;
-            
+        let totalmsgw = 0;
+        let totalmsgspace = 0;
+        let mgn=0;
         for (let i = 0; i < this.song.lyrics.length; i++) {
-            let x = this.piano.x+this.piano.margin;
+            totalmsgw +=this.context.measureText(this.song.lyrics[i]).width; 
+        }    
+        totalmsgspace = this.piano.width-totalmsgw;
+        mgn=totalmsgspace/(this.song.lyrics.length+2);
+
+        // console.log(totalmsgw);
+        
+        for (let i = 0; i < this.song.lyrics.length; i++) {
+            let x = this.piano.x+this.piano.margin+mgn;
             const str = this.song.lyrics[i];
-            x+=(60*i);    
+            x+=((mgn+(totalmsgw/this.song.lyrics.length))*i);    
             if(i<this.song.curPos){
                this.context.fillStyle = this.colors.light;
             }else{
                 this.context.fillStyle = this.colors.bright;
             }
+            // console.log(this.context.measureText(str).width);
+            // console.log(this.piano.width);
+            
             this.context.fillText(str,x, y);
             
         }

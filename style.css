@@ -135,6 +135,21 @@
         width: 100%;
         height: 5%;
     }
+    #bg{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      
+    }
+    .st0{
+        fill:rgba(49,04,14,0.1);
+        background: #f7ebd5;
+        
+    }
+    .pattern-def{
+        position: absolute;
+        /* display: hidden; */
+    }
 
     p{
         text-align:center;

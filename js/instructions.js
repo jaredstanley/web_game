@@ -10,8 +10,10 @@ class Instructions {
         
     }
 
-    show(str){
-        document.querySelector(".instructiontext").innerHTML=str;
+    show(str, clr){
+        let txt = document.querySelector(".instructiontext");
+        txt.style.color = clr;
+        txt.innerHTML=str;
         this.div.classList.add('show');
     }
     hide(){
