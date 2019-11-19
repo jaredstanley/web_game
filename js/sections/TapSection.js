@@ -15,8 +15,19 @@ class TapSection extends Section {
         this.totalIterations=111;
         this.tgt=_App.w/2;
         this.curTgt=0;
+        this.colors = {
+            light: "#efefef",
+            bright:"#C22A42",
+            med:"#666",
+            dark:"#31040E"
+        }
         
         // console.log("init", this.n);
+    }
+
+    start(){
+        super.start();
+        // super.setBG();
     }
 
     showCanvas(){
@@ -41,7 +52,7 @@ class TapSection extends Section {
         console.log("updateee");
         
         if(!this.finished){
-            this.context.fillStyle = utils.getColors().brightRed;
+            this.context.fillStyle = this.colors.bright;
             this.context.fillRect(Math.random()*_App.w, Math.random()*_App.h, 20, 20);
             
             // console.log("updating!! ", this.n); 
@@ -66,7 +77,7 @@ class TapSection extends Section {
             
             this.curTgt = tweenFunctions.easeInSine(this.iteration, this.curTgt, this.tgt, this.totalIterations);
             this.curTgt = Math.round(this.curTgt*100)/100;
-            _App.context.strokeStyle=utils.getColors().brightRed;
+            _App.context.strokeStyle=this.colors.bright;
             _App.strokeWidth = Math.ceil(Math.random()*4);
             _App.context.beginPath();
             _App.context.arc(this.mouse.x,this.mouse.y, this.curTgt, 0, Math.PI*2);

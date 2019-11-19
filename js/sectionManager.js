@@ -14,6 +14,7 @@ import CanyonAnim from './animations/CanyonAnim';
 import TetonAnim from './animations/TetonAnim';
 import TouringAnim from './animations/TouringAnim';
 import NihonAnim from './animations/NihonAnim';
+import ParaglidingAnim from './animations/ParaglidingAnim';
 //
 
 // import permissionsMgr from './PermissionsMgr';
@@ -28,6 +29,7 @@ let canyonAnim = new CanyonAnim();
 let tetonAnim = new TetonAnim();
 let touringAnim = new TouringAnim();
 let nihonAnim = new NihonAnim();
+let paraglidingAnim = new ParaglidingAnim();
 //
 // exports.getCanyonAnim=function(){
 //     return canyonAnim;
@@ -39,6 +41,7 @@ let nihonAnim = new NihonAnim();
 
 let curPos = 0;
 let curSection = {name:"none"};
+let bgColor = "#456789"
 let sectionList = [
     
     {   pos:0,
@@ -82,7 +85,7 @@ let sectionList = [
         verb:"shake",
         section:shakeSection,
         instructions:"coming soon",
-        chapter:canyonAnim
+        chapter:paraglidingAnim
     }
 ]
 
@@ -98,6 +101,7 @@ exports.init = function(){
       }
     _App.eventType = eventTypeManager.init();
     this.erase=true;
+    this.bgColor =utils.geteColors().dark;
     this.instructions = new Instructions(); 
     // let element = sectionList[0].section;
     // element.init();        
@@ -157,7 +161,7 @@ exports.update=function(){
     // console.log(this.erase);
     
     if(this.erase){
-        utils.clearCanvas(_App, true, utils.getColors().darkBlue);
+        utils.clearCanvas(_App, true, this.bgColor);
     }
     // console.log('sectionManager Update()');   
     this.timer = requestAnimationFrame(this.update.bind(this)); 

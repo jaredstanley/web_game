@@ -39,6 +39,16 @@ class DelayedTapSection extends Section {
                 tooearly:"nope, too early",
             }
         }
+        this.colors = {
+            light: "#b55bfc",
+            bright:"#ff0082",
+            med:"#700089",
+            dark:"#181546",
+            grad:{
+                a:"#ff0082",
+                b:"#700089"
+            }
+        }
         // this.msg = "tap "+this.game.targetTime/1000+" seconds apart to proceed";
        
         
@@ -47,7 +57,7 @@ class DelayedTapSection extends Section {
     start(){
         super.start();
         super.addCanvasClick();
-
+        // super.setBG();
         this.timerbar.width = Math.min(_App.w*0.75, this.timerbar.maxWidth);
         // super.showCanvas();
     }
@@ -61,7 +71,7 @@ class DelayedTapSection extends Section {
     }
     updateUI(){
         
-        this.context.fillStyle = utils.getColors().light; 
+        this.context.fillStyle = this.colors.light; 
         this.context.beginPath();
         this.timerbar.x = (_App.w/2)-(this.timerbar.width/2);
         this.timerbar.y = (_App.h/2)-(this.timerbar.height);
@@ -84,8 +94,8 @@ class DelayedTapSection extends Section {
 
     drawGame(){
         let gradient = this.context.createLinearGradient(this.timerbar.x, this.timerbar.y, this.timerbar.x+this.timerbar.width, this.timerbar.y);
-            gradient.addColorStop("0", utils.getGrad().a);
-            gradient.addColorStop("1", utils.getGrad().b);
+            gradient.addColorStop("0", this.colors.grad.a);
+            gradient.addColorStop("1", this.colors.grad.b);
             this.context.fillStyle = gradient;
             this.context.fillRect((_App.w/2)-(this.timerbar.pctBarWidth/2), this.timerbar.y, this.timerbar.width*this.game.pctComplete, this.timerbar.height)
         //
@@ -152,7 +162,7 @@ class DelayedTapSection extends Section {
             this.timerbar.tap2DisplayValue=this.game.elapsedTime/1000+" sec";
         }
         //timer layers
-        this.context.fillStyle = utils.getColors().light;
+        this.context.fillStyle = this.colors.light;
         this.context.font = "300 20px Roboto"; 
         
         this.context.save();
@@ -172,7 +182,7 @@ class DelayedTapSection extends Section {
 
 
 
-        this.context.fillStyle = utils.getColors().lessBright;
+        this.context.fillStyle = this.colors.bright;
         // this.context.fillStyle = utils.getColors().light;
         this.context.font = "700 40px Roboto"; 
         //  str = this.game.elapsedTime/1000+ " seconds elapsed";

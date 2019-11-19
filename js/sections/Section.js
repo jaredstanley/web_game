@@ -19,10 +19,16 @@ class Section {
         this.labelDiv = this.chapterDiv.getElementsByClassName('label')[0];
         this.instructionsDiv=document.getElementById('instructions');
         this.instructionTextDiv=this.instructionsDiv.getElementsByClassName('instructiontext')[0];
+        this.colors = {
+            light: "#efefef",
+            med:"#666",
+            dark:"#333"
+        }
         
     }
     start(){
         // console.log("GHJHGFHJHG ",this.binder);
+        
         this.chapter.show(this);
         this.showCanvasBinder = this.showCanvas.bind(this);
         eventTypeManager.addEvent(this.chapterDiv, this.showCanvasBinder); 
@@ -32,6 +38,9 @@ class Section {
         // sectionManager.setInstructions();
        
     }
+    setBG(){
+        sectionManager.bgColor = this.colors.dark;
+    }
     addCanvasClick(){
         this.binder = this.clickHandler.bind(this);
         eventTypeManager.addEvent(_App.context.canvas, this.binder);
@@ -39,7 +48,7 @@ class Section {
     
     showCanvas(e){
         // console.log("chapterDiv Clicked, show it!!!, ",this.n);
-        
+        this.setBG();
         this.chapterDiv.classList.remove('show');
         this.chapterDiv.classList.add('hide');
         this.instructionsDiv.classList.remove('hide');

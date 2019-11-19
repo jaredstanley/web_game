@@ -9,25 +9,25 @@ let status = {
 let _seed = 0;
 let count = 0;
 let colors = {
-  // darkGreen: "#31040E",
-  darkGreen: "#1d210d",
-  brightGreen: "#00ff18",
-  lessBright: "#39b54a", 
-  upcoming: "#174d0f",
-  visited: "#0ba615",
-  light: "#dedede",
-  white:"#FFFFFF", 
-  dead: "rgba(0,0,0,0.2)",
-  darkRed:"#31040E",
-  darkBlue:"#00032b",
-  brightRed:"#C22A42",
-  midBlue:"#1d73d5",
-  lightBlue:"#99e3e9"
+//   // darkGreen: "#31040E",
+//   darkGreen: "#1d210d",
+//   brightGreen: "#00ff18",
+//   lessBright: "#39b54a", 
+//   upcoming: "#174d0f",
+//   visited: "#0ba615",
+//   light: "#dedede",
+//   white:"#FFFFFF", 
+//   dead: "rgba(0,0,0,0.2)",
+//   darkRed:"#31040E",
+//   darkBlue:"#00032b",
+//   brightRed:"#C22A42",
+//   midBlue:"#1d73d5",
+  dark:"#232323"
 
 };
-let grad1 = {
-  b: "#009475", a:"#acc800"
-}
+// let grad1 = {
+//   b: "#009475", a:"#acc800"
+// }
 let blendModeArr = ["source-over", "source-in", "source-out", "source-atop", "destination-over", "destination-in", "destination-out", "destination-atop", "lighter", "copy", "xor", "multiply", "screen", "overlay", "darken", "color-dodge", "color-burn", "hard-light", "soft-light", "difference", "exclusion", "hue", "saturation", "color", "luminosity"];
 exports.clearCanvas = function(_A, should, hex){
   // ctx.clearRect(0,0,_App.w, _App.h);
@@ -38,13 +38,13 @@ exports.clearCanvas = function(_A, should, hex){
     
 }
 
-exports.getColors = function(){
+exports.geteColors = function(){
   return colors;
 }
 
-exports.getGrad = function(){
-  return grad1;
-}
+// exports.getGrad = function(){
+//   return grad1;
+// }
 
 exports.getStatus=function(){
   return status;

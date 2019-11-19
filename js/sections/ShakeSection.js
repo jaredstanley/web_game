@@ -14,6 +14,16 @@ class ShakeSection extends Section {
         this.n = "shaker"
         // console.log("tnit", this.n);
         // accel.init();
+        this.colors = {
+            light: "#fecc45",
+            bright:"#fb970c",
+            med:"#6c6555",
+            dark:"#6c6555",
+            grad:{
+                a:"#f9debd",
+                b:"#c46c14"
+            }
+        }
        
        
         
@@ -36,8 +46,8 @@ class ShakeSection extends Section {
     update(){
         // console.log("updating!! ", this.n);
        let gradient = this.context.createLinearGradient(_App.w/2-100, _App.h/2-100, _App.w/2+100, _App.h/2+100);
-        gradient.addColorStop("0", utils.getGrad().a);
-        gradient.addColorStop("1", utils.getGrad().b);
+        gradient.addColorStop("0", this.colors.grad.a);
+        gradient.addColorStop("1", this.colors.grad.b);
        
         this.context.fillStyle=gradient;
         // this.context.fillRect(0,0,50,50);

@@ -30,32 +30,25 @@ class KeyboardSection extends Section {
             totalKeys:0,
             ivories:[
                 {
-                    note:"C",
-                    gradient: utils.getGrad()
+                    note:"C"
                 },
                 {
-                    note:"D",
-                    gradient: utils.getGrad()
+                    note:"D"
                 },
                 {
-                    note:"E",
-                    gradient: utils.getGrad()
+                    note:"E"
                 },
                 {
-                    note:"F",
-                    gradient: utils.getGrad()
+                    note:"F"
                 },
                 {
-                    note:"G",
-                    gradient: utils.getGrad()
+                    note:"G"
                 },
                 {
-                    note:"A",
-                    gradient: utils.getGrad()
+                    note:"A"
                 },
                 {
-                    note:"B",
-                    gradient: utils.getGrad()
+                    note:"B"
                 }
             ]
         };
@@ -66,13 +59,23 @@ class KeyboardSection extends Section {
             curPos:0
         }
         this.piano.totalKeys = this.piano.ivories.length;
+        this.colors = {
+            light: "#f5e5d5",
+            bright:"#ff0076",
+            med:"#f564b8",
+            dark:"#744957",
+            grad:{
+                a:"#fcd4cb",
+                b:"#fb3a8b"
+            }
+        }
         // this.msg = "play 'Happy Birthday' to proceed";
     }
 
     start(){
         super.start();
         super.addCanvasClick();
-        
+       
         this.piano.width = Math.min(this.piano.maxWidth, _App.w*0.75);
         this.piano.height = Math.min(this.piano.maxHeight, _App.h*0.55);
       
@@ -99,7 +102,7 @@ class KeyboardSection extends Section {
         let p = this.piano;
         
         this.context.beginPath();
-        this.context.fillStyle = utils.getColors().light;
+        this.context.fillStyle = this.colors.light;
         //background
         p.x = (_App.w/2)-(p.width/2);
         p.y = (_App.h/2)-(p.height/2)-40;
@@ -110,8 +113,8 @@ class KeyboardSection extends Section {
             this.context.beginPath();
             let gradient = "";
             gradient = this.context.createLinearGradient(p.x, p.y, p.x+p.width, p.y+p.height);
-            gradient.addColorStop("0", itm.gradient.a);
-            gradient.addColorStop("1", itm.gradient.b);
+            gradient.addColorStop("0", this.colors.grad.a);
+            gradient.addColorStop("1", this.colors.grad.b);
             this.context.fillStyle = gradient;
             
             this.context.fillRect(itm.x, itm.y, itm.width, itm.height);
@@ -131,9 +134,9 @@ class KeyboardSection extends Section {
             const str = this.song.lyrics[i];
             x+=(60*i);    
             if(i<this.song.curPos){
-               this.context.fillStyle = utils.getColors().white;
+               this.context.fillStyle = this.colors.light;
             }else{
-                this.context.fillStyle = utils.getColors().upcoming;
+                this.context.fillStyle = this.colors.bright;
             }
             this.context.fillText(str,x, y);
             
@@ -217,7 +220,7 @@ class KeyboardSection extends Section {
     drawTextLabels(itm){
         //piano key note labels
         this.context.save();
-        this.context.fillStyle = utils.getColors().white;
+        this.context.fillStyle = this.colors.light;
         this.context.font = "700 20px Roboto"; 
         let str = itm.note;
         let x = itm.x+itm.width/2;
