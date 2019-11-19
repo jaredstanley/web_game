@@ -2,7 +2,7 @@ import Section from './Section';
 import eventTypeManager from '../eventTypeManager';
 import utils from '../utils';
 import sectionManager from '../sectionManager';
-import audioManager from '../audioManager';
+import toneGenerator from '../toneGenerator';
 
 //
 class KeyboardSection extends Section {
@@ -78,7 +78,7 @@ class KeyboardSection extends Section {
     start(){
         super.start();
         super.addCanvasClick();
-        audioManager.init();
+        toneGenerator.init();
         this.piano.width = Math.min(this.piano.maxWidth, _App.w*0.75);
         this.piano.width = Math.max(this.piano.minWidth, this.piano.width);
         this.piano.height = Math.min(this.piano.maxHeight, _App.h*0.55);
@@ -192,11 +192,22 @@ class KeyboardSection extends Section {
         
         this.piano.ivories.forEach(itm => {
             if(this.checkIfClicked(this.mouse, itm)){
+                this.playNote(itm);
                 // console.log("STATUS: clicked on button", itm.i, itm.note);
                 this.checkIfCorrect(itm);
             }
             
         });  
+    }
+
+    playNote(itm){
+        // console.log(itm);
+        let osc = toneGenerator.getNote(itm.i);
+        // let audCtx = toneGenerator.getAudCtx();
+        console.log(toneGenerator, itm, osc);
+        toneGenerator.playSound(osc);
+        // setTimeout(postinsql.bind(null, topicId), 4000);
+        setTimeout(toneGenerator.stopSound.bind(null, osc), 100);
     }
 
     checkIfCorrect(itm){
