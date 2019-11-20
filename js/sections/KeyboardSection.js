@@ -201,13 +201,9 @@ class KeyboardSection extends Section {
     }
 
     playNote(itm){
-        // console.log(itm);
         let osc = toneGenerator.getNote(itm.i);
-        // let audCtx = toneGenerator.getAudCtx();
-        console.log(toneGenerator, itm, osc);
         toneGenerator.playSound(osc);
-        // setTimeout(postinsql.bind(null, topicId), 4000);
-        setTimeout(toneGenerator.stopSound.bind(null, osc), 100);
+        setTimeout(toneGenerator.stopSound.bind(null, osc), 222);
     }
 
     checkIfCorrect(itm){

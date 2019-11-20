@@ -55,14 +55,14 @@ let sectionList = [
         chapter:canyonAnim
     },
     {   pos:1,
-        name:"popper",
-        title:"chapter two",
-        verb:"pop",
-        section:popSection,
-        instructions:"pop to proceed",
-        txtColor:"#1D73D3",
+        name:"repeater",
+        title:"chapter five",
+        verb:"repeat",
+        section:repeatSection,
+        instructions:"repeat sequence to proceed",
+        txtColor:"#fb970c",
         svgPatternID:"vertlines",
-        chapter:tetonAnim
+        chapter:paraglidingAnim
         
     },
     {   pos:2,
@@ -88,14 +88,14 @@ let sectionList = [
         
     },
     {   pos:4,
-        name:"repeater",
-        title:"chapter five",
-        verb:"repeat",
-        section:repeatSection,
-        instructions:"coming soon",
-        txtColor:"#fb970c",
+        name:"popper",
+        title:"chapter two",
+        verb:"pop",
+        section:popSection,
+        instructions:"pop to proceed",
+        txtColor:"#1D73D3",
         svgPatternID:"vertlines",
-        chapter:paraglidingAnim
+        chapter:tetonAnim
         
         
     }
