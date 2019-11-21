@@ -9,11 +9,15 @@ let oscA = {};
 let oscB = {};
 let notesArr = [];
 let audCtx = {};
+let vol = {};
 
 
 exports.init = function () {
-    audCtx = new window.AudioContext();
-    const currentTime = audCtx.currentTime;
+    let AudioContext = window.AudioContext || window.webkitAudioContext;
+    audCtx = new AudioContext();
+    vol = audCtx.createGain();
+    const gainNode = audCtx.createGain();
+    console.log(`gainnode`, gainNode.gain.defaultValue);
     oscC = audCtx.createOscillator();
     oscD = audCtx.createOscillator();
     oscE = audCtx.createOscillator();
@@ -21,7 +25,9 @@ exports.init = function () {
     oscG = audCtx.createOscillator();
     oscA = audCtx.createOscillator();
     oscB = audCtx.createOscillator();
-
+    
+	gainNode.gain.value = 0.1;
+    
     oscC.frequency.value = 261.6;
     oscD.frequency.value = 293.7;
     oscE.frequency.value = 329.6;

@@ -70,7 +70,7 @@ exports.debug= function(arr, clr, ctx){
 
 exports.getRandom = function(){
     // return Math.random();
-    return Math.abs((Math.random() + Math.random() + Math.random() + Math.random() + Math.random() + Math.random()) - 6) / 6;
+    return Math.abs((Math.random() + Math.random() + Math.random()) - 3) / 3;
   
     // return (newOne() - 1) / 2147483646;
 }

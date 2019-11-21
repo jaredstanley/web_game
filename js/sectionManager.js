@@ -96,8 +96,6 @@ let sectionList = [
         txtColor:"#1D73D3",
         svgPatternID:"vertlines",
         chapter:tetonAnim
-        
-        
     }
 ]
 
