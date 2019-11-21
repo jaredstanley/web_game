@@ -9,6 +9,7 @@ import sectionPop from './sections/PopSection';
 import sectionDelayedTap from './sections/DelayedTapSection';
 import sectionKeyboard from './sections/KeyboardSection';
 import sectionRepeat from './sections/RepeatSection';
+import sectionUpdown from './sections/UpdownSection';
 //
 import CanyonAnim from './animations/CanyonAnim';
 import TetonAnim from './animations/TetonAnim';
@@ -24,6 +25,7 @@ let tapSection = new sectionTap();
 let delayedTapSection = new sectionDelayedTap();
 let keyboardSection = new sectionKeyboard();
 let repeatSection = new sectionRepeat();
+let upDownSection = new sectionUpdown();
 //
 let canyonAnim = new CanyonAnim();
 let tetonAnim = new TetonAnim();
@@ -41,7 +43,6 @@ let paraglidingAnim = new ParaglidingAnim();
 
 let curPos = 0;
 let curSection = {name:"none"};
-let bgColor = "#456789"
 let sectionList = [
     
     {   pos:0,
@@ -55,14 +56,15 @@ let sectionList = [
         chapter:canyonAnim
     },
     {   pos:1,
-        name:"repeater",
-        title:"chapter five",
-        verb:"repeat",
-        section:repeatSection,
-        instructions:"repeat sequence to proceed",
-        txtColor:"#fb970c",
+        name:"popper",
+        title:"chapter two",
+        verb:"pop",
+        section:popSection,
+        instructions:"pop to proceed",
+        txtColor:"#1D73D3",
         svgPatternID:"vertlines",
-        chapter:paraglidingAnim
+        chapter:tetonAnim
+        
         
     },
     {   pos:2,
@@ -88,12 +90,23 @@ let sectionList = [
         
     },
     {   pos:4,
-        name:"popper",
-        title:"chapter two",
-        verb:"pop",
-        section:popSection,
-        instructions:"pop to proceed",
-        txtColor:"#1D73D3",
+        name:"repeater",
+        title:"chapter five",
+        verb:"repeat",
+        section:repeatSection,
+        instructions:"repeat sequence to proceed",
+        txtColor:"#fb970c",
+        svgPatternID:"vertlines",
+        chapter:paraglidingAnim
+    },
+    {   pos:5,
+        name:"updown",
+        title:"chapter six",
+        verb:"point",
+        section:upDownSection,
+        instructions:"coming soon",
+        // instructions:"match direction to proceed",
+        txtColor:"#bada55",
         svgPatternID:"vertlines",
         chapter:tetonAnim
     }

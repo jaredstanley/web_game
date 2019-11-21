@@ -4,7 +4,7 @@ import utils from '../utils';
 import Bubble from './Bubble';
 
 //
-class PopSection extends Section {
+class UpdownSection extends Section {
     constructor(){
         super();
     }
@@ -14,20 +14,20 @@ class PopSection extends Section {
         // console.log("init ", this.n);
         
         this.bubblesObj = {};
-        this.bubbleCount = 6;
+        this.bubbleCount = 26;
         this.bubbleColorsArr = [
-            {   hex:'#1D73D3'
+            {   hex:'#667344'
             },
-            {   hex:'#c1f8d7'
+            {   hex:'#00f822'
             },
-            {   hex:'#99e3e9'
+            {   hex:'#00e300'
             }
         ];
         this.colors = {
-            light: "#99e3e9",
-            bright:"#1D73D3",
-            med:"#1153AD",
-            dark:"#00032b"
+            light: "#00e300",
+            bright:"#007300",
+            med:"#005300",
+            dark:"#003300"
         }
         this.bubblesAllGone = false;
         this.alph=1;
@@ -95,7 +95,7 @@ class PopSection extends Section {
     //
     clickHandler(e){
         super.clickHandler(e);
-        
+        return;
         for (const key in this.bubblesObj) {   
                     
             let bubb = this.bubblesObj[key];
@@ -142,4 +142,4 @@ class PopSection extends Section {
     }
    
 }
-export default PopSection
+export default UpdownSection

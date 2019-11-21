@@ -19,7 +19,7 @@ class RepeatSection extends Section {
             y: 0,
             noteDiam: 44,
             noteRad: 22,
-            noteMrgn: 22
+            noteMrgn: 11
         };
         this.colors = {
             white: "#FFFFFF",
