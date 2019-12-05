@@ -2,7 +2,7 @@ import Section from './Section';
 import eventTypeManager from '../eventTypeManager';
 import utils from '../utils';
 import sectionManager from '../sectionManager';
-import toneGenerator from '../toneGenerator';
+import toneGenerator from './sectionUtils/toneGenerator';
 
 //
 class KeyboardSection extends Section {
@@ -201,9 +201,11 @@ class KeyboardSection extends Section {
     }
 
     playNote(itm){
-        let osc = toneGenerator.getNote(itm.i);
-        toneGenerator.playSound(osc);
-        setTimeout(toneGenerator.stopSound.bind(null, osc), 222);
+        // let osc = toneGenerator.getNote(itm.i);
+        // console.log(itm,"<<<");
+        
+        toneGenerator.playSound(itm.i);
+        setTimeout(toneGenerator.stopSound.bind(null, itm.i), 222);
     }
 
     checkIfCorrect(itm){

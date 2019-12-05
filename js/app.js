@@ -10,7 +10,9 @@ import sectionManager from './sectionManager';
 let _App = {
   init: function(){
     
-    this.context = document.querySelector("#main").getContext("2d");
+    this.primaryCTX = document.querySelector("#primary").getContext("2d");
+    // this.secondaryCTX = document.querySelector("#secondary").getContext("experimental-webgl");
+    this.context = this.primaryCTX;
     
      
     this.updateSize();
@@ -21,6 +23,7 @@ let _App = {
     
     // this.loop();
     // animation.begin();
+    
     sectionManager.update();
   },
 
@@ -32,9 +35,18 @@ let _App = {
     // window.requestAnimationFrame(_App.loop);
   },
   //
-  updateSize: function(){
-    _App.context.canvas.width = document.documentElement.clientWidth;
-    _App.context.canvas.height = document.documentElement.clientHeight;
+  updateSize: function(e){
+    e = e || window.event;
+
+    _App.primaryCTX.canvas.width = document.documentElement.clientWidth;
+    _App.primaryCTX.canvas.height = document.documentElement.clientHeight;
+    
+    // _App.secondaryCTX.canvas.width = document.documentElement.clientWidth;
+    // _App.secondaryCTX.canvas.height = document.documentElement.clientHeight;
+
+
+    // _App.context.canvas.width = document.documentElement.clientWidth;
+    // _App.context.canvas.height = document.documentElement.clientHeight;
     _App.w = _App.context.canvas.width;
     _App.h = _App.context.canvas.height;
     
@@ -42,6 +54,10 @@ let _App = {
 }
 //
 window.onload=function(){
+  
+  // e = e || window.event;
+  // console.log(window);
+  
   window._App = _App;
   window.addEventListener("resize", _App.updateSize);
 

@@ -1,7 +1,7 @@
 import Section from './Section';
 import eventTypeManager from '../eventTypeManager';
 import utils from '../utils';
-import Bubble from './Bubble';
+import Bubble from './sectionUtils/Bubble';
 
 //
 class PopSection extends Section {
@@ -14,7 +14,7 @@ class PopSection extends Section {
         // console.log("init ", this.n);
         
         this.bubblesObj = {};
-        this.bubbleCount = 6;
+        this.bubbleCount = 1;
         this.bubbleColorsArr = [
             {   hex:'#1D73D3'
             },
@@ -48,7 +48,7 @@ class PopSection extends Section {
         if(this.bubblesAllGone){
             // console.log("biubbs gone");
             this.finished();
-            return;
+            return false;
         }
         // console.log('update() ', this.n);
         this.drawDeadBubbles();

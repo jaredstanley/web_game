@@ -92,6 +92,15 @@
        
     }
 
+    #primary{
+        background: firebrick;
+        position: absolute;
+    }  
+     #secondary{
+        background: deeppink;
+        position: absolute;
+    }
+
     #chapterHeader{
         position: absolute;
         width: 100%;
@@ -103,6 +112,7 @@
         /* align-content: center; */
         align-items: center;
         background: #efefef;
+        z-index: 10;
     }
 
     #chapterHeader .title{

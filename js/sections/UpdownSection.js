@@ -1,7 +1,8 @@
 import Section from './Section';
 import eventTypeManager from '../eventTypeManager';
 import utils from '../utils';
-import Bubble from './Bubble';
+import Bubble from './sectionUtils/Bubble';
+// import * as THREE from 'three';
 
 //
 class UpdownSection extends Section {
@@ -10,136 +11,34 @@ class UpdownSection extends Section {
     }
     init(i){
         super.init(i);
-        this.n = "popper";
+        this.n = "updaown";
         // console.log("init ", this.n);
-        
-        this.bubblesObj = {};
-        this.bubbleCount = 26;
-        this.bubbleColorsArr = [
-            {   hex:'#667344'
-            },
-            {   hex:'#00f822'
-            },
-            {   hex:'#00e300'
-            }
-        ];
-        this.colors = {
-            light: "#00e300",
-            bright:"#007300",
-            med:"#005300",
-            dark:"#003300"
-        }
-        this.bubblesAllGone = false;
-        this.alph=1;
-        this.deadBubblesArr = [];
-        
-        this.initBubbles();
+        // this.scene = new THREE.Scene();
+        // this.camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
+        // this.renderer = new THREE.WebGLRenderer({ canvas: _App.context.canvas });
+        // this.renderer.setSize( _App.w, _App.h );
+
+        // this.geometry = new THREE.BoxGeometry( 1, 1, 1 );
+        // this.material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+        // this.cube = new THREE.Mesh( this.geometry, this.material );
+        // this.scene.add( this.cube );
+
+        // this.camera.position.z = 5;
+        
     }
     start(){
         super.start();
-        // console.log(this.n, ' started');
-        // super.setBG();
         super.addCanvasClick();
-        
+        this.update();
     }
     
     update(){
-        if(this.bubblesAllGone){
-            // console.log("biubbs gone");
-            this.finished();
-            return;
-        }
-        // console.log('update() ', this.n);
-        this.drawDeadBubbles();
-        let count = 0;
-        let ctx = _App.context;
-        for (const key in this.bubblesObj) {   
-            count++;        
-            const bubb = this.bubblesObj[key];
-            bubb.updatePosition();
-            // console.log("a fmaily is this: ",barFamily);
-           ctx.fillStyle=bubb.color;
-           ctx.beginPath();
-           ctx.arc(bubb.x, bubb.y, bubb.radius,0,Math.PI*2);
-           ctx.fill();
-           //
-        }
-        
-        if(count<=0){
-            this.bubblesAllGone = true;
-            // this.endGame();
-            // return;
-        }
-        // console.log("going");
-        
-
-        // console.log(count," << bubbles left");
-        
+        // this.cube.rotation.x += 0.01;
+        // this.cube.rotation.y += 0.01;
+        // this.renderer.render( this.scene, this.camera );
         this.timer = requestAnimationFrame(this.update.bind(this));
-        // console.log(this.timer);        
     }
     //
-    drawDeadBubbles(){
-        let ctx = _App.context;
-
-        this.deadBubblesArr.forEach((bubb, i) => {
-            ctx.strokeStyle = bubb.color;
-            ctx.lineWidth = 4;
-            // console.log(bubb);
-            ctx.beginPath();    
-            ctx.arc(bubb.x, bubb.y, bubb.radius,0,Math.PI*2);
-            ctx.stroke();
-        });
-    }
-    //
-    clickHandler(e){
-        super.clickHandler(e);
-        return;
-        for (const key in this.bubblesObj) {   
-                    
-            let bubb = this.bubblesObj[key];
-            if (this.checkIfClicked(this.mouse, bubb)){
-                // console.log('clicked', bubb.pos);
-                this.deadBubblesArr.push(Object.create(bubb));
-                delete this.bubblesObj[key];
-                bubb = "";
-                break;
-            }
-        }
-        // console.log(this.deadBubblesArr);
-        
-    }
-    //
-
-    initBubbles(){
-        let count = this.bubbleColorsArr.length;
-        for (let i = 0; i < this.bubbleCount; i++) {
-            let x = Math.random()*_App.w;
-            let y = Math.random()*_App.h;
-            let color = this.bubbleColorsArr[i%count].hex;
-            const element = new Bubble(i, x, y, color);
-            this.bubblesObj[i] = element;
-            
-        }
-        // console.log("bibb;esObj ", this.bubblesObj);
-        
-    }
-   
-    endGame(){
-        sectionManager.proceed();
-    }
-    checkIfClicked(mouse, circle){
-            return Math.sqrt((mouse.x-circle.x) ** 2 + (mouse.y - circle.y) ** 2) < circle.radius;
-    }
-    kill(){
-        super.kill();
-        // console.log("kill kill kill")
-        delete this.bubblesObj;
-        
-        // _App.context.canvas.removeEventListener('click', this.binder, true);
-        
-    }
-   
 }
 export default UpdownSection
