@@ -14,7 +14,7 @@ class PopSection extends Section {
         // console.log("init ", this.n);
         
         this.bubblesObj = {};
-        this.bubbleCount = 1;
+        this.bubbleCount = 8;
         this.bubbleColorsArr = [
             {   hex:'#1D73D3'
             },
