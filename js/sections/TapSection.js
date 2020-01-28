@@ -12,7 +12,7 @@ class TapSection extends Section {
         this.n = "tapper";
         this.finished=false;
         this.iteration=0;
-        this.totalIterations=415;
+        this.totalIterations=115;
         this.tgt=_App.w/2;
         this.curTgt=0;
         this.colors = {
