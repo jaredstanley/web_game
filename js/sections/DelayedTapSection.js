@@ -17,6 +17,7 @@ class DelayedTapSection extends Section {
         this.game = {
             isActive:false,
             targetTime:3000,
+            tolerance:0.2,
             curTime:0,
             elapsedTime:0,
             pctComplete:0,
@@ -122,7 +123,7 @@ class DelayedTapSection extends Section {
         clearInterval(this.game.timer)
         if(clicked){
             this.game.result = this.game.elapsedTime/1000;
-            if((this.game.targetTime/1000)-this.game.result < 0.5){
+            if((this.game.targetTime/1000)-this.game.result < this.game.tolerance){
                 // console.log("close enough");
                 this.timerbar.message.cur = this.timerbar.message.win;
                 this.finished();

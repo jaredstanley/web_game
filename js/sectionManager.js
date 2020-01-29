@@ -50,7 +50,7 @@ let sectionList = [
         title:"chapter one",
         verb:"tap",
         section:tapSection,
-        instructions:"tap to proceed",
+        instructions:"tap the screen",
         txtColor:"#C22A42",
         svgPatternID:"vertlines",
         chapter:canyonAnim
@@ -60,7 +60,7 @@ let sectionList = [
         title:"chapter two",
         verb:"pop",
         section:popSection,
-        instructions:"pop to proceed",
+        instructions:"pop the bubbles",
         txtColor:"#1D73D3",
         svgPatternID:"vertlines",
         chapter:tetonAnim
@@ -72,7 +72,7 @@ let sectionList = [
         title:"chapter three",
         verb:"wait",
         section:delayedTapSection,
-        instructions:"tap 3 seconds apart to proceed",
+        instructions:"tap 3 seconds apart",
         txtColor:"#ff0082",
         svgPatternID:"vertlines",
         chapter:touringAnim
@@ -81,9 +81,9 @@ let sectionList = [
     {   pos:3,
         name:"keyboard",
         title:"chapter four",
-        verb:"play",
+        verb:"keyboard",
         section:keyboardSection,
-        instructions:"play the song to proceed",
+        instructions:"play the song",
         txtColor:"#ff0076",
         svgPatternID:"vertlines",
         chapter:nihonAnim
@@ -94,7 +94,7 @@ let sectionList = [
         title:"chapter five",
         verb:"repeat",
         section:repeatSection,
-        instructions:"repeat sequence to proceed",
+        instructions:"repeat the sequence",
         txtColor:"#fb970c",
         svgPatternID:"vertlines",
         chapter:paraglidingAnim
@@ -102,11 +102,11 @@ let sectionList = [
     {   pos:5,
         name:"updown",
         title:"chapter six",
-        verb:"point",
+        verb:"rotate",
         section:upDownSection,
-        instructions:"coming soon",
-        // instructions:"match direction to proceed",
-        txtColor:"#bada55",
+        instructions:"rotate on all 3 axes to proceed",
+        
+        txtColor:"#bada41",
         svgPatternID:"vertlines",
         chapter:tetonAnim
     }
