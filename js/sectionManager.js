@@ -16,6 +16,7 @@ import TetonAnim from './animations/TetonAnim';
 import TouringAnim from './animations/TouringAnim';
 import NihonAnim from './animations/NihonAnim';
 import ParaglidingAnim from './animations/ParaglidingAnim';
+import LostcoastAnim from './animations/LostcoastAnim';
 //
 
 // import permissionsMgr from './PermissionsMgr';
@@ -32,6 +33,7 @@ let tetonAnim = new TetonAnim();
 let touringAnim = new TouringAnim();
 let nihonAnim = new NihonAnim();
 let paraglidingAnim = new ParaglidingAnim();
+let lostcoastAnim = new LostcoastAnim();
 //
 // exports.getCanyonAnim=function(){
 //     return canyonAnim;
@@ -64,8 +66,6 @@ let sectionList = [
         txtColor:"#1D73D3",
         svgPatternID:"vertlines",
         chapter:tetonAnim
-        
-        
     },
     {   pos:2,
         name:"delayedTap",
@@ -108,7 +108,7 @@ let sectionList = [
         
         txtColor:"#bada41",
         svgPatternID:"vertlines",
-        chapter:tetonAnim
+        chapter:lostcoastAnim
     }
 ]
 
