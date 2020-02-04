@@ -20,11 +20,12 @@
     "bable-loader": "0.0.1-security",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",
-    "webpack-dev-server": "^3.1.4"
+    "webpack-dev-server": "^3.1.4",
+    "three": "^0.110.0"
   },
   "dependencies": {
     "lottie-web": "^5.5.9",
-    "spdy-transport": "^3.0.0",
-    "three": "^0.110.0"
+    "spdy-transport": "^3.0.0"
+   
   }
 }
