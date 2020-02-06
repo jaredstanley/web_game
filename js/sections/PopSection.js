@@ -9,7 +9,7 @@ class PopSection extends Section {
         super.init(i);
         this.n = "popper";
         this.bubblesObj = {};
-        this.bubbleCount = 2;
+        this.bubbleCount = 8;
         this.bubbleColorsArr = [
             {   hex:'#1D73D3'
             },
@@ -32,11 +32,13 @@ class PopSection extends Section {
         this.initBubbles();
     }
     start(){
+        
         super.start();
         super.addCanvasClick();
     }
     //
     update(){
+        super.erase(true);
         if(this.bubblesAllGone){
             this.finished();
             return false;

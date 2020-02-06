@@ -136,12 +136,12 @@ class RepeatSection extends Section {
 
         let x = _App.w / 2;
         let y = _App.h / 2;
-        this.context.save();
-        this.context.textBaseline = "middle";
-        this.context.textAlign = "center";
-        this.context.font = "700 20px Roboto";
-        this.context.fillText(this.n.toUpperCase() + " section", x, y + 80);
-        this.context.restore();
+        // this.context.save();
+        // this.context.textBaseline = "middle";
+        // this.context.textAlign = "center";
+        // this.context.font = "700 20px Roboto";
+        // this.context.fillText(this.n.toUpperCase() + " section", x, y + 80);
+        // this.context.restore();
 
 
 

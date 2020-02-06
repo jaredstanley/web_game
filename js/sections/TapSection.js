@@ -11,6 +11,7 @@ class TapSection extends Section {
     init(i){
         super.init(i);
         this.n = "tapper";
+        this.numPoints=200;
         this.finished=false;
         this.iteration=0;
         this.totalIterations=65;
@@ -24,7 +25,6 @@ class TapSection extends Section {
         }
         this.lastSectionSwitch=true;
         this.points=[];
-        this.numPoints=100;
         this.velocity=0.1;
         this.z=0;
 
@@ -64,6 +64,7 @@ class TapSection extends Section {
             }
             // super.finished();
             this.makePainting();
+           
         }   
         this.timer = requestAnimationFrame(this.update.bind(this)); 
     }
@@ -105,7 +106,7 @@ class TapSection extends Section {
     }
     //
     makePainting(){
-        super.erase(false);
+        // super.erase(false);
         this.iteration++;  
         if (this.iteration < this.totalIterations) {
             this.curTgt = tweenFunctions.easeInSine(this.iteration, this.curTgt, this.tgt, this.totalIterations);
@@ -116,6 +117,7 @@ class TapSection extends Section {
             _App.context.arc(this.mouse.x,this.mouse.y, this.curTgt, 0, Math.PI*2);
             _App.context.stroke();
         }else{
+            
             super.erase(true);
             this.finished=!this.finished;
             cancelAnimationFrame(this.timer);
@@ -136,7 +138,8 @@ class TapSection extends Section {
         this.points.push(
             {
                 x: Math.random()*_App.w,
-                y:_App.h/2,
+                y:0,
+                // y:_App.h/2,
                 vx: Math.random()-Math.random()-Math.random(),
                 vy: Math.random()-Math.random()-Math.random(),
                 clr:clr,

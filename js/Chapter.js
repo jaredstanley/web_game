@@ -4,7 +4,7 @@ import lottie_web from 'lottie-web';
 
 class Chapter {
     constructor(color){
-        
+        this.anim = "";
         this.timer = "";
         this.n = ""
         this.context = _App.context;
@@ -25,7 +25,7 @@ class Chapter {
         // console.log(list);
         
         this.removeExisting();
-         lottie_web.loadAnimation(params);
+         this.anim = lottie_web.loadAnimation(params);
         
         this.titleDiv.innerHTML = list.title.toUpperCase();
         this.labelDiv.innerHTML = list.verb;
@@ -38,7 +38,11 @@ class Chapter {
         
         
     }
-
+    pauseMe(){
+        // console.log(lottie_web);
+        lottie_web.pause();
+        // this.anim.gotoAndStop(this.anim.currentFrame, true);
+    }
     removeExisting(){
         let element = this.animDiv.querySelector('svg');
         

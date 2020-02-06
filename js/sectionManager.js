@@ -102,9 +102,9 @@ let sectionList = [
     {   pos:5,
         name:"updown",
         title:"chapter six",
-        verb:"rotate",
+        verb:"coming soon",
         section:updownSection,
-        instructions:"rotate on all 3 axes to proceed",
+        instructions:"coming soon",
         txtColor:"#bada41",
         svgPatternID:"vertlines",
         chapter:lostcoastAnim
@@ -147,22 +147,19 @@ exports.proceed = function(){
 }
 exports.setInstructions=function(){
     let sec = sectionList.find(itm => itm.pos == curPos);
-    // console.log(sec,"sdsds");
+    // sec.section.chapter.anim.stop();
+    // console.log(sec.section.chapter.anim.currentFrame);
+    
+    
+    // sec.section.chapter.pauseMe();
+    
     
     
     this.instructions.show(sec.instructions, sec.txtColor);
         
 }
 function nextSection(){
-    // console.log("next Section called, time to remove this pos: ", curPos);
     
-    // if(animation.getIsPlaying()==true){
-    //     console.log("mgr.nope");
-    //     return;
-    // }
-    // if(curPos==0){
-    //     animation.shrinkLogo();  
-    // }
     curSection.kill();
     curPos++;
     // progressBar.nextSection();
@@ -180,7 +177,7 @@ function engageLoading(){
     
 }
 exports.update=function(){
-    // console.log(this.erase);
+    // console.log(this.erase," &*&*");
     
     if(this.erase){
         utils.clearCanvas(_App, true, this.bgColor);

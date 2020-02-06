@@ -89,6 +89,7 @@
         text-align: center;
         width: 300px;
         letter-spacing: 0.15em;
+        z-index:10;
        
     }
 
@@ -116,7 +117,7 @@
     }
 
     #chapterHeader .title{
-        font-size: 3em;
+        font-size: 2em;
         color: #222;
         /* width: 90%;
         max-width: 600px;

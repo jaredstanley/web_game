@@ -31,6 +31,7 @@ class Section {
         // console.log("GHJHGFHJHG ",this.binder);
 
         this.chapter.show(this);
+        
         this.showCanvasBinder = this.showCanvas.bind(this);
         eventTypeManager.addEvent(this.chapterDiv, this.showCanvasBinder);
 
@@ -39,6 +40,7 @@ class Section {
         // sectionManager.setInstructions();
 
     }
+   
     setBG() {        
         sectionManager.bgColor = this.colors.dark;
     }
@@ -57,7 +59,9 @@ class Section {
         //
         eventTypeManager.removeEvent(this.chapterDiv, this.showCanvasBinder);
         sectionManager.setInstructions();
+        this.chapter.pauseMe();
         this.update();
+
     }
 
     clickHandler(e) {
@@ -77,22 +81,17 @@ class Section {
         }
     }
 
+
     finished(e) {
         // console.log("finished ", this.n);
         this.kill();
         sectionManager.proceed();
     }
-    erase(bool) {
-        sectionManager.erase = bool;
+    erase(n) {
+        sectionManager.erase = n;
     }
 
     kill() {
-        // delete sectionManager.getCanyonAnim();
-        // delete sectionManager.getTetonAnim();
-        // delete sectionManager.getSectionList()[this.pos].section;
-        // console.log(sectionManager.getSectionList());
-        // console.log(sectionManager);
-
         // console.log("kill ", sectionManager.getSectionList()[this.pos].section=null);    
         eventTypeManager.removeEvent(_App.context.canvas, this.binder);
 

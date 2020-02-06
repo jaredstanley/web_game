@@ -1,10 +1,4 @@
-import utils from './utils';
-// import lines from './uiLines';
-// import progressBar from './uiProgressBar';
-// import animation from './nameAnim';
 import sectionManager from './sectionManager';
-// import Chapter from './Chapter';
-// import eventTypeManager from './eventTypeManager';
 
 
 let _App = {
@@ -41,13 +35,7 @@ let _App = {
     _App.primaryCTX.canvas.width = document.documentElement.clientWidth;
     _App.primaryCTX.canvas.height = document.documentElement.clientHeight;
     
-    // _App.secondaryCTX.canvas.width = document.documentElement.clientWidth;
-    // _App.secondaryCTX.canvas.height = document.documentElement.clientHeight;
-
-
-    // _App.context.canvas.width = document.documentElement.clientWidth;
-    // _App.context.canvas.height = document.documentElement.clientHeight;
-    _App.w = _App.context.canvas.width;
+     _App.w = _App.context.canvas.width;
     _App.h = _App.context.canvas.height;
     
   }

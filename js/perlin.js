@@ -235,6 +235,6 @@ function perlin3(x, y, z) {
   
 exports.getValue = function(x, y) {
     let scale = 0.01;
-    //return noise.perlin3(x * scale, y * scale,z) * Math.PI * 2;
-    return perlin2(x * scale, y * scale) * Math.PI * 2;
+    // return perlin2(x * scale, y * scale) * Math.PI * 2;
+    return simplex2(x * scale, y * scale) * Math.PI * 2;
   }
