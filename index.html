@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="minimal-ui, width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!-- <meta name="viewport" content="minimal-ui, width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"> -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Jared Stanley">
     <link rel="apple-touch-icon" href="img/iphone.png">
@@ -12,6 +13,8 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300i,300,700&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="#">
+    <script src="node_modules/eruda/eruda.js"></script>
+    <script>eruda.init();</script>
     <title>Jared Game</title>
 </head>
 
@@ -159,9 +162,10 @@
                   </pattern>
     </svg> -->
     <canvas id="primary"></canvas>
-    <canvas id="secondary" class="hide"></canvas>
+    <!-- <canvas id="secondary" class="hide"></canvas> -->
     
-    <script src="dist/bundle.js"></script>
+    <script src="bundle.js"></script>
+    <!-- <script src="dist/bundle.js"></script> -->
 </body>
 
 </html>

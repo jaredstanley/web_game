@@ -23,7 +23,8 @@ exports.init=function(){
 	console.log("accelerometer is ready");
 	
 	// if (window.DeviceMotionEvent != undefined) {
-		window.addEventListener("devicemotion", handleMotion, true); 
+		window.addEventListener("deviceorientation", handleOrientation, true); 
+		// window.addEventListener("devicemotion", handleMotion, true); 
            
 
 		// }
@@ -36,13 +37,23 @@ exports.init=function(){
 
 }
 function handleMotion(e){
-    console.log("hjkgfkhgf");
+    console.log("handling motion");
     
     moveData.x = e.accelerationIncludingGravity.x;
     moveData.y = e.accelerationIncludingGravity.y;
     moveData.z = e.accelerationIncludingGravity.z;
     
     console.log("miotn", moveData);
+
+}
+function handleOrientation(e){
+    console.log("handling orientation");
+    
+    moveData.alpha = e.alpha; //z
+    moveData.beta = e.beta; //x
+    moveData.gamma = e.gamma; //y
+    
+    console.log("oritnetion", moveData);
 
 }
 

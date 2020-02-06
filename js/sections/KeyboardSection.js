@@ -1,6 +1,4 @@
 import Section from './Section';
-import eventTypeManager from '../eventTypeManager';
-import utils from '../utils';
 import sectionManager from '../sectionManager';
 import toneGenerator from './sectionUtils/toneGenerator';
 

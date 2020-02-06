@@ -1,8 +1,8 @@
 import Section from './Section';
 import eventTypeManager from '../eventTypeManager';
-import utils from '../utils';
-import Bubble from './sectionUtils/Bubble';
-// import * as THREE from 'three';
+import tweenFunctions from '../tweenFunctions';
+import PermissionsMgr from '../PermissionsMgr';
+import accelerometer from '../accelerometer';
 
 //
 class UpdownSection extends Section {
@@ -11,34 +11,80 @@ class UpdownSection extends Section {
     }
     init(i){
         super.init(i);
+        PermissionsMgr.init();
         this.n = "updaown";
-        // console.log("init ", this.n);
-        // this.scene = new THREE.Scene();
-        // this.camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
-
-        // this.renderer = new THREE.WebGLRenderer({ canvas: _App.context.canvas });
-        // this.renderer.setSize( _App.w, _App.h );
-
-        // this.geometry = new THREE.BoxGeometry( 1, 1, 1 );
-        // this.material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-        // this.cube = new THREE.Mesh( this.geometry, this.material );
-        // this.scene.add( this.cube );
-
-        // this.camera.position.z = 5;
+        this.finished=false;
+        this.iteration=0;
+        this.totalIterations=115;
+        this.tgt=_App.w/2;
+        this.curTgt=0;
+        this.colors = {
+            light: "#bada55",
+            bright:"#C22A42",
+            med:"#666",
+            dark:"#31040E"
+        }
         
+        // console.log("init", this.n);
     }
+
     start(){
         super.start();
-        super.addCanvasClick();
-        this.update();
+        // super.setBG();
+    }
+
+    showCanvas(){
+        this.binder = this.clickHandler.bind(this);
+        // console.log('***** adding click ahndleer', this.n);
+        
+        eventTypeManager.addEvent(_App.context.canvas, this.binder); 
+        super.showCanvas();
+        
+    }
+
+    clickHandler(e){
+    //    console.log(_App);
+       
+        super.clickHandler(e);
+        if(PermissionsMgr.checkOrientation()){
+            //ios13
+            this.colors.bright = '#116600';
+            if(PermissionsMgr.askOrientation()){
+                this.colors.bright = '#00ff00';
+                accelerometer.init();
+            }else{
+                this.colors.bright = '#222222';
+            };
+
+            
+        }else{
+            this.colors.bright = '#ff0000';
+
+        }
+        // console.log("clickkkk from tapsection");
+        
     }
     
     update(){
-        // this.cube.rotation.x += 0.01;
-        // this.cube.rotation.y += 0.01;
-        // this.renderer.render( this.scene, this.camera );
-        this.timer = requestAnimationFrame(this.update.bind(this));
+        // console.log("updateee");
+        accelerometer.getData();
+        if(!this.finished){
+            this.context.fillStyle = this.colors.bright;
+            this.context.fillRect(0, 0, _App.w/2, _App.h/2);
+            
+            if(this.iteration>=this.totalIterations){
+                return;
+            }   
+            
+        }
+        this.timer = requestAnimationFrame(this.update.bind(this)); 
     }
     //
+    
+    kill(){
+        super.kill();
+        eventTypeManager.removeEvent(_App.context.canvas, this.binder);
+        this.binder=null;
+    }
 }
 export default UpdownSection

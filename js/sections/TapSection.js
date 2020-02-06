@@ -1,6 +1,5 @@
 import Section from './Section';
 import eventTypeManager from '../eventTypeManager';
-import utils from '../utils';
 import tweenFunctions from '../tweenFunctions';
 //
 class TapSection extends Section {
@@ -12,7 +11,7 @@ class TapSection extends Section {
         this.n = "tapper";
         this.finished=false;
         this.iteration=0;
-        this.totalIterations=115;
+        this.totalIterations=65;
         this.tgt=_App.w/2;
         this.curTgt=0;
         this.colors = {

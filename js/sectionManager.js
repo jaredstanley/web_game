@@ -61,7 +61,8 @@ let sectionList = [
         name:"popper",
         title:"chapter two",
         verb:"pop",
-        section:popSection,
+        // section:popSection,
+        section:upDownSection,
         instructions:"pop the bubbles",
         txtColor:"#1D73D3",
         svgPatternID:"vertlines",
@@ -105,7 +106,6 @@ let sectionList = [
         verb:"rotate",
         section:upDownSection,
         instructions:"rotate on all 3 axes to proceed",
-        
         txtColor:"#bada41",
         svgPatternID:"vertlines",
         chapter:lostcoastAnim
