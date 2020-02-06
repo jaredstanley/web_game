@@ -1,8 +1,5 @@
 import Section from './Section';
-import eventTypeManager from '../eventTypeManager';
-import tweenFunctions from '../tweenFunctions';
-import PermissionsMgr from '../PermissionsMgr';
-import accelerometer from '../accelerometer';
+import Bubble from './sectionUtils/Bubble';
 
 //
 class UpdownSection extends Section {
@@ -11,80 +8,135 @@ class UpdownSection extends Section {
     }
     init(i){
         super.init(i);
-        PermissionsMgr.init();
-        this.n = "updaown";
-        this.finished=false;
-        this.iteration=0;
-        this.totalIterations=115;
-        this.tgt=_App.w/2;
-        this.curTgt=0;
-        this.colors = {
-            light: "#bada55",
-            bright:"#C22A42",
-            med:"#666",
-            dark:"#31040E"
-        }
+        this.n = "popper";
+        // console.log("init ", this.n);
         
-        // console.log("init", this.n);
-    }
+        this.bubblesObj = {};
+        this.bubbleCount = 88;
+        this.bubbleColorsArr = [
+            {   hex:'#65a644'
+            },
+            {   hex:'#f4844c'
+            },
+            {   hex:'#bbe5f4'
+            },
+            {   hex:'#345725'
+            },
+            {   hex:'#3d7337'
+            },
+            {   hex:'#b8c733'
+            },
+            {   hex:'#3d7337'
+            }
+        ];
+        this.bubblesAllGone = false;
+        this.alph=1;
+        this.deadBubblesArr = [];
+        
+        this.initBubbles();
 
+    }
     start(){
         super.start();
-        // super.setBG();
-    }
-
-    showCanvas(){
-        this.binder = this.clickHandler.bind(this);
-        // console.log('***** adding click ahndleer', this.n);
-        
-        eventTypeManager.addEvent(_App.context.canvas, this.binder); 
-        super.showCanvas();
-        
-    }
-
-    clickHandler(e){
-    //    console.log(_App);
-       
-        super.clickHandler(e);
-        if(PermissionsMgr.checkOrientation()){
-            //ios13
-            this.colors.bright = '#116600';
-            if(PermissionsMgr.askOrientation()){
-                this.colors.bright = '#00ff00';
-                accelerometer.init();
-            }else{
-                this.colors.bright = '#222222';
-            };
-
-            
-        }else{
-            this.colors.bright = '#ff0000';
-
-        }
-        // console.log("clickkkk from tapsection");
+        super.addCanvasClick();
         
     }
     
     update(){
-        // console.log("updateee");
-        accelerometer.getData();
-        if(!this.finished){
-            this.context.fillStyle = this.colors.bright;
-            this.context.fillRect(0, 0, _App.w/2, _App.h/2);
-            
-            if(this.iteration>=this.totalIterations){
-                return;
-            }   
-            
+        if(this.bubblesAllGone){
+            this.finished();
+            return false;
         }
-        this.timer = requestAnimationFrame(this.update.bind(this)); 
+        // console.log('update() ', this.n);
+        this.drawDeadBubbles();
+        let count = 0;
+        let ctx = _App.context;
+        for (const key in this.bubblesObj) {   
+            count++;        
+            const bubb = this.bubblesObj[key];
+            bubb.updatePosition();
+            // console.log("a fmaily is this: ",barFamily);
+           ctx.fillStyle=bubb.color;
+           ctx.beginPath();
+           ctx.arc(bubb.x, bubb.y, bubb.radius,0,Math.PI*2);
+           ctx.fill();
+           //
+        }
+        
+        if(count<=0){
+            this.bubblesAllGone = true;
+            // this.endGame();
+            // return;
+        }
+        // console.log("going");
+        
+
+        // console.log(count," << bubbles left");
+        
+        this.timer = requestAnimationFrame(this.update.bind(this));
+        // console.log(this.timer);        
     }
     //
-    
+    drawDeadBubbles(){
+        let ctx = _App.context;
+
+        this.deadBubblesArr.forEach((bubb, i) => {
+            ctx.strokeStyle = bubb.color;
+            ctx.lineWidth = 4;
+            // console.log(bubb);
+            ctx.beginPath();    
+            ctx.arc(bubb.x, bubb.y, bubb.radius,0,Math.PI*2);
+            ctx.stroke();
+        });
+    }
+    //
+    clickHandler(e){
+        super.clickHandler(e);
+        
+        for (const key in this.bubblesObj) {   
+                    
+            let bubb = this.bubblesObj[key];
+            if (this.checkIfClicked(this.mouse, bubb)){
+                // console.log('clicked', bubb.pos);
+                this.deadBubblesArr.push(Object.create(bubb));
+                delete this.bubblesObj[key];
+                bubb = "";
+                break;
+            }
+        }
+        // console.log(this.deadBubblesArr);
+        
+    }
+    //
+
+    initBubbles(){
+        let count = this.bubbleColorsArr.length;
+        for (let i = 0; i < this.bubbleCount; i++) {
+            let x = Math.random()*_App.w;
+            let y = Math.random()*_App.h;
+            let color = this.bubbleColorsArr[i%count].hex;
+            const element = new Bubble(i, x, y, color);
+            this.bubblesObj[i] = element;
+            
+        }
+        // console.log("bibb;esObj ", this.bubblesObj);
+        
+    }
+   
+    endGame(){
+        sectionManager.proceed();
+    }
+    checkIfClicked(mouse, circle){
+            return Math.sqrt((mouse.x-circle.x) ** 2 + (mouse.y - circle.y) ** 2) < circle.radius;
+    }
     kill(){
         super.kill();
-        eventTypeManager.removeEvent(_App.context.canvas, this.binder);
-        this.binder=null;
+        // console.log("kill kill kill")
+        delete this.bubblesObj;
+        
+        // _App.context.canvas.removeEventListener('click', this.binder, true);
+        
     }
+   
 }
 export default UpdownSection

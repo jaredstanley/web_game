@@ -26,7 +26,7 @@ let tapSection = new sectionTap();
 let delayedTapSection = new sectionDelayedTap();
 let keyboardSection = new sectionKeyboard();
 let repeatSection = new sectionRepeat();
-let upDownSection = new sectionUpdown();
+let updownSection = new sectionUpdown();
 //
 let canyonAnim = new CanyonAnim();
 let tetonAnim = new TetonAnim();
@@ -61,8 +61,7 @@ let sectionList = [
         name:"popper",
         title:"chapter two",
         verb:"pop",
-        // section:popSection,
-        section:upDownSection,
+        section:popSection,
         instructions:"pop the bubbles",
         txtColor:"#1D73D3",
         svgPatternID:"vertlines",
@@ -104,7 +103,7 @@ let sectionList = [
         name:"updown",
         title:"chapter six",
         verb:"rotate",
-        section:upDownSection,
+        section:updownSection,
         instructions:"rotate on all 3 axes to proceed",
         txtColor:"#bada41",
         svgPatternID:"vertlines",
