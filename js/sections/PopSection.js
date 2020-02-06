@@ -18,6 +18,14 @@ class PopSection extends Section {
             {   hex:'#99e3e9'
             }
         ];
+        this.colors = {
+            white: "#FFFFFF",
+            light: "#c1f8d7",
+            bright: "#1D73D3",
+            med: "#99e3e9",
+            dark: "#00032b",
+            
+        };
         this.bubblesAllGone = false;
         this.alph=1;
         this.deadBubblesArr = [];

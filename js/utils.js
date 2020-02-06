@@ -22,7 +22,7 @@ let colors = {
 //   darkBlue:"#00032b",
 //   brightRed:"#C22A42",
 //   midBlue:"#1d73d5",
-  dark:"#232323"
+  dark:"#31040E"
 
 };
 // let grad1 = {
@@ -38,7 +38,7 @@ exports.clearCanvas = function(_A, should, hex){
     
 }
 
-exports.geteColors = function(){
+exports.getColors = function(){
   return colors;
 }
 

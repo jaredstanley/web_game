@@ -123,7 +123,7 @@ exports.init = function(){
       }
     _App.eventType = eventTypeManager.init();
     this.erase=true;
-    this.bgColor =utils.geteColors().dark;
+    this.bgColor =utils.getColors().dark;
     this.instructions = new Instructions(); 
     // let element = sectionList[0].section;
     // element.init();        
@@ -154,7 +154,7 @@ exports.setInstructions=function(){
         
 }
 function nextSection(){
-    console.log("next Section called, time to remove this pos: ", curPos);
+    // console.log("next Section called, time to remove this pos: ", curPos);
     
     // if(animation.getIsPlaying()==true){
     //     console.log("mgr.nope");
@@ -184,6 +184,8 @@ exports.update=function(){
     
     if(this.erase){
         utils.clearCanvas(_App, true, this.bgColor);
+        // console.log(this.bgColor,"  <<<");
+        
     }
     // console.log('sectionManager Update()');   
     this.timer = requestAnimationFrame(this.update.bind(this)); 

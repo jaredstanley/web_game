@@ -22,8 +22,9 @@ class Section {
         this.colors = {
             light: "#efefef",
             med: "#666",
-            dark: "#333"
+            dark: "#31040E"
         }
+        this.setBG();
 
     }
     start() {
@@ -38,7 +39,7 @@ class Section {
         // sectionManager.setInstructions();
 
     }
-    setBG() {
+    setBG() {        
         sectionManager.bgColor = this.colors.dark;
     }
     addCanvasClick() {
