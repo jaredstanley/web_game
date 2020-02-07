@@ -9,20 +9,22 @@ class TapSection extends Section {
         super();
     }
     init(i){
-        super.init(i);
-        this.n = "tapper";
-        this.numPoints=200;
-        this.finished=false;
-        this.iteration=0;
-        this.totalIterations=65;
-        this.tgt=_App.w/2;
-        this.curTgt=0;
         this.colors = {
             bright:"#C22A42",
             light: "#F7BB7F",
             med:"#971438",
             dark:"#31040E"
         }
+        super.init(i, this.colors);
+        this.i=i;
+        this.n = "tapper";
+        this.numPoints=200;
+        this.finished=false;
+        this.iteration=0;
+        this.totalIterations=85;
+        this.tgt=_App.w/2;
+        this.curTgt=0;
+        
         this.lastSectionSwitch=true;
         this.points=[];
         this.velocity=0.1;
@@ -33,6 +35,7 @@ class TapSection extends Section {
     }
     //
     start(){
+        super.init(this.i, this.colors);
         super.start();
         
     }

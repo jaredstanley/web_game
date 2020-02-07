@@ -9,7 +9,7 @@ class Section {
 
     }
 
-    init(i) {
+    init(i, clrs) {
         this.pos = i;
         this.chapter = new Chapter();
         // console.log("Section SuperClass Initted");
@@ -19,11 +19,10 @@ class Section {
         this.labelDiv = this.chapterDiv.getElementsByClassName('label')[0];
         this.instructionsDiv = document.getElementById('instructions');
         this.instructionTextDiv = this.instructionsDiv.getElementsByClassName('instructiontext')[0];
-        this.colors = {
-            light: "#efefef",
-            med: "#666",
-            dark: "#31040E"
+        if(clrs!=null){
+            this.colors = clrs;
         }
+        
         this.setBG();
 
     }

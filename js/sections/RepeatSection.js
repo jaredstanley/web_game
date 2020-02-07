@@ -1,47 +1,49 @@
 import Section from './Section';
-import eventTypeManager from '../eventTypeManager';
-import utils from '../utils';
-import sectionManager from '../sectionManager';
+import tweenFunctions from '../tweenFunctions';
+
 //
 class RepeatSection extends Section {
     constructor() {
         super();
+        this.colors = {
+            white: "#FFFFFF",
+            light: "#f9debd",
+            yellow:"#fecc45",
+            bright: "#fb970c",
+            med: "#c46c14",
+            ltbrown:"#c69c6d",
+            gray:"#a89d83",
+            dark: "#6c6555"
+        };
     }
     init(i) {
         super.init(i);
         this.n = "repeater";
         this.piano = {
-            maxWidth: 450,
+            maxWidth: 550,
             minWidth: 300,
             width: 0,
             height: 0,
             x: 0,
             y: 0,
-            noteDiam: 44,
-            noteRad: 22,
+            noteDiam: 66,
+            noteRad: 33,
             noteMrgn: 11
         };
-        this.colors = {
-            white: "#FFFFFF",
-            light: "#f9debd",
-            bright: "#fb970c",
-            med: "#6c6555",
-            dark: "#6c6555",
-            grad: {
-                a: "#f9debd",
-                b: "#c46c14"
-            },
-            notes: {
-                a: "#f9debd",
-                b: "#fecc45",
-                c: "#fb970c",
-                d: "#c46c14",
-                e: "#c69c6d",
-                f: "#a89d83"
-            }
+        this.colors.grad = {
+                a: this.colors.light,
+                b: this.colors.med
+            };
+        this.colors.notes = {
+                a: this.colors.gray,
+                b: this.colors.ltbrown,
+                c: this.colors.med,
+                d: this.colors.bright,
+                e: this.colors.yellow,
+                f: this.colors.light
         };
         this.game = {
-            totalMoves: 4,
+            totalMoves: 6,
             answersArr: [],
             curGuessPos:0,
             correctGuesses:0,
@@ -64,11 +66,14 @@ class RepeatSection extends Section {
             if (this.colors.notes.hasOwnProperty(key)) {
                 const itm = {};
                 itm.color = this.colors.notes[key];
-                // console.log(itm);
+                //   console.log(itm);
 
                 itm.i = i;
                 itm.rad = this.piano.noteRad;
+                itm.origRad = this.piano.noteRad;
                 itm.diam = this.piano.noteDiam;
+                itm.iteration=0;
+                itm.totalIterations=24;
                 itm.hitArea = {
                     width: this.piano.noteDiam,
                     height: this.piano.noteDiam,
@@ -102,7 +107,9 @@ class RepeatSection extends Section {
         super.clickHandler(e);
         this.keyboardKeysArr.forEach(itm => {
             if (this.checkIfClicked(this.mouse, itm.hitArea)) {
-                // console.log("STATUS: clicked on button", itm.i, itm);
+                itm.rad = itm.origRad/1.5;
+                // this.scaleBtn(itm);
+                console.log("STATUS: clicked on button", itm.i, itm);
                 if(this.game.autoPB.playingBack == false){
                     this.checkClickGuess(itm);
                 }
@@ -126,11 +133,11 @@ class RepeatSection extends Section {
         // console.log("updating!! ", this.n);
 
         this.updateUI();
-        let gradient = this.context.createLinearGradient(_App.w / 2 - 100, _App.h / 2 - 100, _App.w / 2 + 100, _App.h / 2 + 100);
-        gradient.addColorStop("0", this.colors.grad.a);
-        gradient.addColorStop("1", this.colors.grad.b);
+        // let gradient = this.context.createLinearGradient(_App.w / 2 - 100, _App.h / 2 - 100, _App.w / 2 + 100, _App.h / 2 + 100);
+        // gradient.addColorStop("0", this.colors.grad.a);
+        // gradient.addColorStop("1", this.colors.grad.b);
 
-        this.context.fillStyle = gradient;
+        // this.context.fillStyle = gradient;
         // this.context.fillRect(0,0,50,50);
         // this.context.fill();
 
@@ -151,12 +158,15 @@ class RepeatSection extends Section {
 
     updateUI() {
         this.keyboardKeysArr.forEach(itm => {
+            this.scaleBtn(itm);
             let woff = _App.w / 2 - (this.piano.width);
             itm.x = (this.piano.noteMrgn / 2 + (this.piano.noteDiam + this.piano.noteMrgn) * itm.i) + (this.piano.noteRad) + _App.w / 2 - (this.piano.width / 2);
             itm.y = _App.h / 2;
             itm.hitArea.y = itm.y - this.piano.noteRad;
             itm.hitArea.x = itm.x - this.piano.noteRad;
             this.context.fillStyle = itm.color;
+            // console.log("itm.color", itm.color);
+            
             this.context.beginPath();
             this.context.arc(itm.x, itm.y, itm.rad, 0, Math.PI * 2);
             this.context.fill();
@@ -177,7 +187,8 @@ class RepeatSection extends Section {
             this.game.answersArr.push(num);
         }
         console.log("game initted, here are the steps:", this.game.answersArr);
-        this.playBack();
+        // this.playBack();
+        setTimeout(this.playBack.bind(this), 222);
         // this.addGameStep();
 
     }
@@ -188,6 +199,7 @@ class RepeatSection extends Section {
 
         
         this.playNextStep();
+        // setTimeout(this.playNextStep.bind(this), 111);
 
     }
     playNextStep() {
@@ -197,10 +209,10 @@ class RepeatSection extends Section {
         console.log("playing next", this.game.autoPB.curPBPos, this.game.correctGuesses);
         if (this.game.autoPB.curPBPos <= this.game.correctGuesses) {
             
-            setTimeout(this.playNextStep.bind(this), 333);
+            setTimeout(this.playNextStep.bind(this), 444);
             this.game.autoPB.curPBPos++;
         } else {
-            console.log("fini");
+            console.log("autoplayback complete");
             this.game.autoPB.curPBPos = 0;
             this.game.autoPB.playingBack = false;
         }
@@ -222,7 +234,8 @@ class RepeatSection extends Section {
                     console.log("you won!");
                     this.finished();
                 }else{
-                    this.playBack();
+                    // this.playBack();
+                    setTimeout(this.playBack.bind(this), 222);
                 }
             }
 
@@ -250,6 +263,23 @@ class RepeatSection extends Section {
         this.context.lineWidth = 5;
         this.context.stroke();
 
+    }
+
+    scaleBtn(itm){  
+        if(itm.rad<itm.origRad){
+            itm.iteration++;  
+            if (itm.iteration < itm.totalIterations) {
+                // console.log(iteration, curH);
+                itm.rad = tweenFunctions.easeInSine(itm.iteration, itm.rad, itm.origRad, itm.totalIterations);
+                
+                // console.log(curH,"<<");
+                
+            }else{
+                itm.iteration=0;
+                itm.rad = itm.origRad;
+            } 
+        }
+           
     }
 
 }

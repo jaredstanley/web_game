@@ -5,6 +5,16 @@ import utils from '../utils';
 class DelayedTapSection extends Section {
     constructor(){
         super();
+        this.colors = {
+            light: "#b55bfc",
+            bright:"#ff0082",
+            med:"#700089",
+            dark:"#181546",
+            grad:{
+                a:"#ff0082",
+                b:"#700089"
+            }
+        }
     }
     init(i){
         super.init(i)
@@ -40,16 +50,7 @@ class DelayedTapSection extends Section {
                 tooearly:"nope, too early",
             }
         }
-        this.colors = {
-            light: "#b55bfc",
-            bright:"#ff0082",
-            med:"#700089",
-            dark:"#181546",
-            grad:{
-                a:"#ff0082",
-                b:"#700089"
-            }
-        }
+        
         // this.msg = "tap "+this.game.targetTime/1000+" seconds apart to proceed";
        
         

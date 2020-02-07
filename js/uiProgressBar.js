@@ -64,7 +64,7 @@ function buildNav(){
 }
 //
 exports.update = function(){
-    console.log(itmHeight);
+    // console.log(itmHeight);
     
     xpos = Math.min(_App.w*0.1, 30);
     if(_App.w<480){

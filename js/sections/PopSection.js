@@ -4,20 +4,6 @@ import Bubble from './sectionUtils/Bubble';
 class PopSection extends Section {
     constructor(){
         super();
-    }
-    init(i){
-        super.init(i);
-        this.n = "popper";
-        this.bubblesObj = {};
-        this.bubbleCount = 1;
-        this.bubbleColorsArr = [
-            {   hex:'#1D73D3'
-            },
-            {   hex:'#c1f8d7'
-            },
-            {   hex:'#99e3e9'
-            }
-        ];
         this.colors = {
             white: "#FFFFFF",
             light: "#c1f8d7",
@@ -26,6 +12,22 @@ class PopSection extends Section {
             dark: "#00032b",
             
         };
+    }
+    init(i){
+        super.init(i);
+        this.n = "popper";
+        this.bubblesObj = {};
+        this.bubbleCount = 1;
+        // this.bubbleCount = 8;
+        this.bubbleColorsArr = [
+            {   hex:'#1D73D3'
+            },
+            {   hex:'#c1f8d7'
+            },
+            {   hex:'#99e3e9'
+            }
+        ];
+        
         this.bubblesAllGone = false;
         this.alph=1;
         this.deadBubblesArr = [];

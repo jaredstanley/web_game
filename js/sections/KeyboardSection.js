@@ -6,6 +6,16 @@ import toneGenerator from './sectionUtils/toneGenerator';
 class KeyboardSection extends Section {
     constructor(){
         super();
+        this.colors = {
+            light: "#f5e5d5",
+            bright:"#ff0076",
+            med:"#f564b8",
+            dark:"#744957",
+            grad:{
+                a:"#fcd4cb",
+                b:"#fb3a8b"
+            }
+        }
     }
     init(i){
         super.init(i);
@@ -59,16 +69,7 @@ class KeyboardSection extends Section {
             curPos:0
         }
         this.piano.totalKeys = this.piano.ivories.length;
-        this.colors = {
-            light: "#f5e5d5",
-            bright:"#ff0076",
-            med:"#f564b8",
-            dark:"#744957",
-            grad:{
-                a:"#fcd4cb",
-                b:"#fb3a8b"
-            }
-        }
+        
         
         // this.msg = "play 'Happy Birthday' to proceed";
     }

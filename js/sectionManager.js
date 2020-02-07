@@ -178,7 +178,7 @@ function engageLoading(){
     
 }
 exports.update=function(){
-    console.log(this.erase," &*&*");
+    // console.log(this.erase," &*&*");
     
     if(this.erase){
         utils.clearCanvas(_App, true, this.bgColor);

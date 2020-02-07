@@ -5,6 +5,12 @@ import Bubble from './sectionUtils/Bubble';
 class UpdownSection extends Section {
     constructor(){
         super();
+        this.colors = {
+            bright:"#f4844c",
+            light: "#bbe5f4",
+            med:"#65a644",
+            dark:"#345725"
+        }
     }
     init(i){
         super.init(i);
@@ -29,12 +35,7 @@ class UpdownSection extends Section {
             {   hex:'#3d7337'
             }
         ];
-        this.colors = {
-            bright:"#f4844c",
-            light: "#bbe5f4",
-            med:"#65a644",
-            dark:"#345725"
-        }
+        
         this.bubblesAllGone = false;
         this.alph=1;
         this.deadBubblesArr = [];

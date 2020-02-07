@@ -14,21 +14,18 @@ let _App = {
     //
     // animation.init();
     sectionManager.init();
+    progressBar.init();
     // //
+    sectionManager.update();
+    progressBar.update();
     
     // this.loop();
     // animation.begin();
-    progressBar.init();
     
-    sectionManager.update();
-    progressBar.update();
   },
 
   loop: function(){
-    
     // utils.clearCanvas(_App, true);
-    
-
     // window.requestAnimationFrame(_App.loop);
   },
   //
@@ -46,10 +43,7 @@ let _App = {
 }
 //
 window.onload=function(){
-  
-  // e = e || window.event;
-  // console.log(window);
-  
+
   window._App = _App;
   window.addEventListener("resize", _App.updateSize);
 
