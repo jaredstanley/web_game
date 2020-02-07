@@ -17,8 +17,8 @@ class PopSection extends Section {
         super.init(i);
         this.n = "popper";
         this.bubblesObj = {};
-        this.bubbleCount = 1;
-        // this.bubbleCount = 8;
+        // this.bubbleCount = 1;
+        this.bubbleCount = 8;
         this.bubbleColorsArr = [
             {   hex:'#1D73D3'
             },

@@ -14,25 +14,19 @@ let buffSrc = {};
 let masterGainNode={};
 let isConnected=false;
 let vol = {};
-let noteValsArr = [
-    { note: "C", freq: "261.6" },
-    { note: "D", freq: "293.7" },
-    { note: "E", freq: "329.6" },
-    { note: "F", freq: "349.2" },
-    { note: "G", freq: "392" },
-    { note: "A", freq: "440" },
-    { note: "B", freq: "493.9" }];
+
 
 exports.init = function () {
-    noteValsArr.reverse();
+    // noteValsArr.reverse();
     let AudioContext = window.AudioContext || window.webkitAudioContext;
     audCtx = new AudioContext();
     
     //
     masterGainNode = audCtx.createGain();
 }
-exports.playSound = function (i) {
-    let val = noteValsArr[i].freq;
+exports.playSound = function (i, freq) {
+    let val = freq;
+    // let val = noteValsArr[i].freq;
     if(isConnected){
         mainOsc.disconnect();
         mainOsc.stop();

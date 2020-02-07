@@ -18,7 +18,7 @@ class UpdownSection extends Section {
         // console.log("init ", this.n);
         
         this.bubblesObj = {};
-        this.bubbleCount = 148;
+        this.bubbleCount = 222;
         this.bubbleColorsArr = [
             {   hex:'#65a644'
             },

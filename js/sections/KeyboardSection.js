@@ -40,25 +40,32 @@ class KeyboardSection extends Section {
             totalKeys:0,
             ivories:[
                 {
-                    note:"C"
+                    note:"C",
+                    freq:"261.6"
                 },
                 {
-                    note:"D"
+                    note:"D",
+                    freq:"293.7"
                 },
                 {
-                    note:"E"
+                    note:"E",
+                    freq:"329.6"
                 },
                 {
-                    note:"F"
+                    note:"F",
+                    freq:"349.2"
                 },
                 {
-                    note:"G"
+                    note:"G",
+                    freq:"392"
                 },
                 {
-                    note:"A"
+                    note:"A",
+                    freq:"440"
                 },
                 {
-                    note:"B"
+                    note:"B",
+                    freq:"493.9"
                 }
             ]
         };
@@ -179,6 +186,8 @@ class KeyboardSection extends Section {
         let p = this.piano;
         p.ivories.reverse().forEach(itm => {
             itm.i=i;
+            
+            
             itm.gradObj="";
 
 
@@ -203,7 +212,7 @@ class KeyboardSection extends Section {
         // let osc = toneGenerator.getNote(itm.i);
         // console.log(itm,"<<<");
         
-        toneGenerator.playSound(itm.i);
+        toneGenerator.playSound(itm.i, itm.freq);
         setTimeout(toneGenerator.stopSound.bind(null, itm.i), 222);
     }
 

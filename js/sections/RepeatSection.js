@@ -1,5 +1,6 @@
 import Section from './Section';
 import tweenFunctions from '../tweenFunctions';
+import toneGenerator from './sectionUtils/toneGenerator';
 
 //
 class RepeatSection extends Section {
@@ -42,6 +43,32 @@ class RepeatSection extends Section {
                 e: this.colors.yellow,
                 f: this.colors.light
         };
+        this.frequencies=[
+            {
+                note:"C",
+                freq:"261.63"
+            },
+            {
+                note:"E",
+                freq:"329.63"
+            },
+            {
+                note:"G",
+                freq:"392.00"
+            },
+            {
+                note:"C",
+                freq:"523.25"
+            },
+            {
+                note:"E",
+                freq:"659.25"
+            },
+            {
+                note:"G",
+                freq:"783.99"
+            }
+        ]
         this.game = {
             totalMoves: 6,
             answersArr: [],
@@ -69,6 +96,7 @@ class RepeatSection extends Section {
                 //   console.log(itm);
 
                 itm.i = i;
+                itm.freq = this.frequencies[i].freq;
                 itm.rad = this.piano.noteRad;
                 itm.origRad = this.piano.noteRad;
                 itm.diam = this.piano.noteDiam;
@@ -90,6 +118,7 @@ class RepeatSection extends Section {
     start() {
         super.start();
         super.addCanvasClick();
+        toneGenerator.init();
         
         // this.piano.width = Math.min(this.piano.maxWidth, _App.w*0.75);
         // this.piano.width = Math.max(this.piano.minWidth, this.piano.width);
@@ -108,6 +137,7 @@ class RepeatSection extends Section {
         this.keyboardKeysArr.forEach(itm => {
             if (this.checkIfClicked(this.mouse, itm.hitArea)) {
                 itm.rad = itm.origRad/1.5;
+                this.playNote(itm);
                 // this.scaleBtn(itm);
                 console.log("STATUS: clicked on button", itm.i, itm);
                 if(this.game.autoPB.playingBack == false){
@@ -188,7 +218,7 @@ class RepeatSection extends Section {
         }
         console.log("game initted, here are the steps:", this.game.answersArr);
         // this.playBack();
-        setTimeout(this.playBack.bind(this), 222);
+        setTimeout(this.playBack.bind(this), 333);
         // this.addGameStep();
 
     }
@@ -205,11 +235,14 @@ class RepeatSection extends Section {
     playNextStep() {
         // console.log("playnextStep", this.game.autoPB.curPBPos, this.game.answersArr[this.game.autoPB.curPBPos]);
         let _i = this.game.answersArr[this.game.autoPB.curPBPos];
-        this.game.autoPB.curPBItem = this.keyboardKeysArr[_i];
+        let itm = this.keyboardKeysArr[_i];
+        this.game.autoPB.curPBItem = itm;
+        
         console.log("playing next", this.game.autoPB.curPBPos, this.game.correctGuesses);
         if (this.game.autoPB.curPBPos <= this.game.correctGuesses) {
-            
+            this.playNote(itm);
             setTimeout(this.playNextStep.bind(this), 444);
+
             this.game.autoPB.curPBPos++;
         } else {
             console.log("autoplayback complete");
@@ -235,7 +268,7 @@ class RepeatSection extends Section {
                     this.finished();
                 }else{
                     // this.playBack();
-                    setTimeout(this.playBack.bind(this), 222);
+                    setTimeout(this.playBack.bind(this), 888);
                 }
             }
 
@@ -257,6 +290,7 @@ class RepeatSection extends Section {
     drawActive() {
         this.context.beginPath();
         let tgt = this.game.autoPB.curPBItem;
+        
         // console.log("drawing active", tgt);
         this.context.arc(tgt.x, tgt.y, tgt.rad + 10, 0, Math.PI * 2);
         this.context.strokeStyle = this.colors.white;
@@ -280,6 +314,13 @@ class RepeatSection extends Section {
             } 
         }
            
+    }
+
+    playNote(itm){
+        
+        
+        toneGenerator.playSound(itm.i, itm.freq);
+        setTimeout(toneGenerator.stopSound.bind(null, itm.i), 222);
     }
 
 }
