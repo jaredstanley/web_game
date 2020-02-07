@@ -21,14 +21,14 @@ class RepeatSection extends Section {
         super.init(i);
         this.n = "repeater";
         this.piano = {
-            maxWidth: 550,
+            maxWidth: 450,
             minWidth: 300,
             width: 0,
             height: 0,
             x: 0,
             y: 0,
-            noteDiam: 66,
-            noteRad: 33,
+            noteDiam: 56,
+            noteRad: 28,
             noteMrgn: 11
         };
         this.colors.grad = {
