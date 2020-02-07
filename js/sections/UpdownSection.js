@@ -12,7 +12,7 @@ class UpdownSection extends Section {
         // console.log("init ", this.n);
         
         this.bubblesObj = {};
-        this.bubbleCount = 88;
+        this.bubbleCount = 148;
         this.bubbleColorsArr = [
             {   hex:'#65a644'
             },
@@ -20,7 +20,7 @@ class UpdownSection extends Section {
             },
             {   hex:'#bbe5f4'
             },
-            {   hex:'#345725'
+            {   hex:'#3d7337'
             },
             {   hex:'#3d7337'
             },
@@ -29,6 +29,12 @@ class UpdownSection extends Section {
             {   hex:'#3d7337'
             }
         ];
+        this.colors = {
+            bright:"#f4844c",
+            light: "#bbe5f4",
+            med:"#65a644",
+            dark:"#345725"
+        }
         this.bubblesAllGone = false;
         this.alph=1;
         this.deadBubblesArr = [];

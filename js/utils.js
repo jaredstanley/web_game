@@ -11,7 +11,7 @@ let count = 0;
 let colors = {
 //   // darkGreen: "#31040E",
 //   darkGreen: "#1d210d",
-//   brightGreen: "#00ff18",
+  brightGreen: "#00ff18",
 //   lessBright: "#39b54a", 
 //   upcoming: "#174d0f",
 //   visited: "#0ba615",
@@ -40,6 +40,10 @@ exports.clearCanvas = function(_A, should, hex){
 
 exports.getColors = function(){
   return colors;
+}
+
+exports.setColors = function(clrObj){
+  colors=clrObj;
 }
 
 // exports.getGrad = function(){

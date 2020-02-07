@@ -18,9 +18,9 @@ class TapSection extends Section {
         this.tgt=_App.w/2;
         this.curTgt=0;
         this.colors = {
-            light: "#bada55",
             bright:"#C22A42",
-            med:"#666",
+            light: "#F7BB7F",
+            med:"#971438",
             dark:"#31040E"
         }
         this.lastSectionSwitch=true;

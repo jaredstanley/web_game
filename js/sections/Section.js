@@ -42,7 +42,8 @@ class Section {
     }
    
     setBG() {        
-        sectionManager.bgColor = this.colors.dark;
+        utils.setColors(this.colors);
+        sectionManager.bgColor = utils.getColors().dark;
     }
     addCanvasClick() {
         this.binder = this.clickHandler.bind(this);

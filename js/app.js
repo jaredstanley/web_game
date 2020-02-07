@@ -1,4 +1,5 @@
 import sectionManager from './sectionManager';
+import progressBar from './uiProgressBar';
 
 
 let _App = {
@@ -17,8 +18,10 @@ let _App = {
     
     // this.loop();
     // animation.begin();
+    progressBar.init();
     
     sectionManager.update();
+    progressBar.update();
   },
 
   loop: function(){
@@ -37,6 +40,7 @@ let _App = {
     
      _App.w = _App.context.canvas.width;
     _App.h = _App.context.canvas.height;
+    progressBar.init();
     
   }
 }

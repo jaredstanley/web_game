@@ -1,5 +1,6 @@
 import utils from './utils';
 import highlightBar from './uiHighlightBar';
+import sectionManager from './sectionManager';
 let x=0;
 let y=0;
 let heightPercentage = 75; //0-100
@@ -7,7 +8,7 @@ let margin = 6;
 let navItemWidth = 10;
 let fontSizeOrig = 12;
 let fontSizeSm = 8;
-let sections = 7; 
+let sections = 6; 
 let context = "";
 let itmHeight = 0;
 let itmMaxHeight = 20;
@@ -18,6 +19,8 @@ let currentSection = 0;
 
 //
 exports.init = function(){
+    // console.log("init progbar");
+    
     context = _App.context;
     buildNav();
 }
@@ -41,13 +44,13 @@ function buildNav(){
     for (let i = 0; i < sections; i++) {
         let sec = sections-currentSection;
         
-        if(i<sec){defaultColor=c.upcoming;}
-        else if(i>sec){defaultColor=c.visited}
-        else {defaultColor=c.upcoming;
+        if(i<sec){defaultColor=c.light;}
+        else if(i>sec){defaultColor=c.med}
+        else {defaultColor=c.dark;
         }
         
         let itm = {
-            color: defaultColor,
+            color: "#FFFFFF",
             i: i+1,
             y: (itmHeight+margin)*i+topMargin, 
             height: itmHeight-margin
@@ -61,14 +64,14 @@ function buildNav(){
 }
 //
 exports.update = function(){
-    // console.log(itmHeight);
+    console.log(itmHeight);
     
     xpos = Math.min(_App.w*0.1, 30);
     if(_App.w<480){
         xpos=5;
     }
    itemsArr.forEach(itm =>{
-        context.fillStyle = itm.color;
+        context.fillStyle = utils.getColors().light;
         context.fillRect(xpos, itm.y, navItemWidth, itm.height); 
     })
 
@@ -85,7 +88,7 @@ exports.update = function(){
 }
 
 function addTextLabels(s){
-    context.fillStyle = utils.getColors().brightGreen;
+    context.fillStyle = utils.getColors().bright;
     context.font = "300 "+s+"px Roboto";
     context.textAlign = "left";
     for (let i = 1; i <= itemsArr.length; i++) {

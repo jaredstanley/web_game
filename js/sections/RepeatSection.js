@@ -23,7 +23,7 @@ class RepeatSection extends Section {
         };
         this.colors = {
             white: "#FFFFFF",
-            light: "#fecc45",
+            light: "#f9debd",
             bright: "#fb970c",
             med: "#6c6555",
             dark: "#6c6555",

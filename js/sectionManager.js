@@ -1,5 +1,5 @@
 // import animation from './nameAnim';
-// import progressBar from './uiProgressBar';
+import progressBar from './uiProgressBar';
 import utils from './utils';
 import Instructions from './Instructions';
 import eventTypeManager from './eventTypeManager';
@@ -42,7 +42,7 @@ let lostcoastAnim = new LostcoastAnim();
 //     return tetonAnim;
 // }
 
-
+let curColorSet = {};
 let curPos = 0;
 let curSection = {name:"none"};
 let sectionList = [
@@ -127,9 +127,8 @@ exports.init = function(){
     this.instructions = new Instructions(); 
     // let element = sectionList[0].section;
     // element.init();        
-
+   
     loadFirstSection();
-
 }
 
 exports.getSectionList=function(){
@@ -139,7 +138,7 @@ exports.getSectionList=function(){
 function loadFirstSection(){  
     
     // console.log("loading first section ");
-    // progressBar.nextSection();
+    progressBar.nextSection();
     engageLoading();
 }
 exports.proceed = function(){
@@ -162,7 +161,7 @@ function nextSection(){
     
     curSection.kill();
     curPos++;
-    // progressBar.nextSection();
+    progressBar.nextSection();
     engageLoading();    
 }
 
@@ -172,18 +171,21 @@ function engageLoading(){
 
     // console.log('section to load is: ',sec.name);
     curSection = sec.section;
+    curColorSet= sec.section.colors;
     curSection.start(); 
+
     // console.log("sectionManager loading secrtion ", sectionList[curPos]);
     
 }
 exports.update=function(){
-    // console.log(this.erase," &*&*");
+    console.log(this.erase," &*&*");
     
     if(this.erase){
         utils.clearCanvas(_App, true, this.bgColor);
         // console.log(this.bgColor,"  <<<");
         
     }
+    progressBar.update();
     // console.log('sectionManager Update()');   
     this.timer = requestAnimationFrame(this.update.bind(this)); 
 }

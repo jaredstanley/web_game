@@ -1,9 +1,10 @@
 import utils from './utils';
 import tweenFunctions from './tweenFunctions';
+import sectionManager from './sectionManager';
 
 let needsUpdate=false;
 let iteration=0;
-let totalIterations=50;
+let totalIterations=20;
 let margin=0;
 let xpos=0;
 let x=0;
@@ -11,15 +12,13 @@ let y=0;
 let w=0;
 let h=0;
 let curH=0;
-let c = utils.getColors().brightGreen; 
+let c = sectionManager.bgColor; 
 let dir="grow"; //"shrink"
 
 exports.reset=function(){
     // console.log("needs updatedddd");
     
     needsUpdate=true;
-    // h=0;
-    // curH=0;
 
 }
 
@@ -35,8 +34,6 @@ function growTheBar(itm){
         iteration=0;
         needsUpdate=false;
         dir="shrink";
-        
-        
     }    
 }
 
