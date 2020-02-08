@@ -10,6 +10,7 @@ import sectionDelayedTap from './sections/DelayedTapSection';
 import sectionKeyboard from './sections/KeyboardSection';
 import sectionRepeat from './sections/RepeatSection';
 import sectionUpdown from './sections/UpdownSection';
+import sectionComingsoon from './sections/ComingsoonSection';
 //
 import CanyonAnim from './animations/CanyonAnim';
 import TetonAnim from './animations/TetonAnim';
@@ -17,6 +18,7 @@ import TouringAnim from './animations/TouringAnim';
 import NihonAnim from './animations/NihonAnim';
 import ParaglidingAnim from './animations/ParaglidingAnim';
 import LostcoastAnim from './animations/LostcoastAnim';
+import ComingsoonAnim from './animations/ComingsoonAnim';
 //
 
 // import permissionsMgr from './PermissionsMgr';
@@ -27,6 +29,7 @@ let delayedTapSection = new sectionDelayedTap();
 let keyboardSection = new sectionKeyboard();
 let repeatSection = new sectionRepeat();
 let updownSection = new sectionUpdown();
+let comingsoonSection = new sectionComingsoon();
 //
 let canyonAnim = new CanyonAnim();
 let tetonAnim = new TetonAnim();
@@ -34,6 +37,7 @@ let touringAnim = new TouringAnim();
 let nihonAnim = new NihonAnim();
 let paraglidingAnim = new ParaglidingAnim();
 let lostcoastAnim = new LostcoastAnim();
+let comingsoonAnim = new ComingsoonAnim();
 //
 // exports.getCanyonAnim=function(){
 //     return canyonAnim;
@@ -102,12 +106,22 @@ let sectionList = [
     {   pos:5,
         name:"updown",
         title:"chapter six",
-        verb:"coming soon",
+        verb:"point",
         section:updownSection,
-        instructions:"coming soon",
-        txtColor:"#bada41",
+        instructions:"don't get caught",
+        txtColor:"#65a644",
         svgPatternID:"vertlines",
         chapter:lostcoastAnim
+    },
+    {   pos:6,
+        name:"comingsoon",
+        title:"chapter seven",
+        verb:"coming soon",
+        section:comingsoonSection,
+        instructions:"coming soon",
+        txtColor:"#dedede",
+        svgPatternID:"vertlines",
+        chapter:comingsoonAnim
     }
 ]
 

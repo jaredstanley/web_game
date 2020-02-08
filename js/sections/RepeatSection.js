@@ -1,6 +1,7 @@
 import Section from './Section';
 import tweenFunctions from '../tweenFunctions';
 import toneGenerator from './sectionUtils/toneGenerator';
+import utils from '../utils';
 
 //
 class RepeatSection extends Section {
@@ -70,7 +71,7 @@ class RepeatSection extends Section {
             }
         ]
         this.game = {
-            totalMoves: 6,
+            totalMoves: utils.getDevConfig().totalMoves,
             answersArr: [],
             curGuessPos:0,
             correctGuesses:0,

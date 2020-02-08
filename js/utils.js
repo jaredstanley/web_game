@@ -13,6 +13,22 @@ let colors = {
   dark:"#31040E"
 
 };
+// let devConfig = {
+//   bubbleCount:1,
+//   targetTime:1000,
+//   skipKeyboard:true,
+//   totalMoves:2,
+//   totalSections:7
+// }
+let devConfig = {
+  bubbleCount:8,
+  targetTime:3000,
+  skipKeyboard:false,
+   totalMoves:6,
+   totalSections:7
+}
+
+
 
 let blendModeArr = ["source-over", "source-in", "source-out", "source-atop", "destination-over", "destination-in", "destination-out", "destination-atop", "lighter", "copy", "xor", "multiply", "screen", "overlay", "darken", "color-dodge", "color-burn", "hard-light", "soft-light", "difference", "exclusion", "hue", "saturation", "color", "luminosity"];
 exports.clearCanvas = function(_A, should, hex){
@@ -22,6 +38,10 @@ exports.clearCanvas = function(_A, should, hex){
       _A.context.fillRect(0,0,_A.w, _A.h);
       }
     
+}
+
+exports.getDevConfig = function(){
+  return devConfig;
 }
 
 exports.getColors = function(){

@@ -1,6 +1,7 @@
 import Section from './Section';
 import sectionManager from '../sectionManager';
 import toneGenerator from './sectionUtils/toneGenerator';
+import utils from '../utils';
 
 //
 class KeyboardSection extends Section {
@@ -197,7 +198,10 @@ class KeyboardSection extends Section {
 
     clickHandler(e){
         super.clickHandler(e);
-        
+        if(utils.getDevConfig().skipKeyboard){
+            sectionManager.proceed();
+            return;
+        }
         this.piano.ivories.forEach(itm => {
             if(this.checkIfClicked(this.mouse, itm)){
                 this.playNote(itm);

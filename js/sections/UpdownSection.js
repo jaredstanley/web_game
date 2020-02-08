@@ -14,11 +14,11 @@ class UpdownSection extends Section {
     }
     init(i){
         super.init(i);
-        this.n = "popper";
+        this.n = "updown";
         // console.log("init ", this.n);
         
         this.bubblesObj = {};
-        this.bubbleCount = 222;
+        this.bubbleCount = 11;
         this.bubbleColorsArr = [
             {   hex:'#65a644'
             },
@@ -123,6 +123,7 @@ class UpdownSection extends Section {
             let y = Math.random()*_App.h;
             let color = this.bubbleColorsArr[i%count].hex;
             const element = new Bubble(i, x, y, color);
+            element.radius=22;
             this.bubblesObj[i] = element;
             
         }
