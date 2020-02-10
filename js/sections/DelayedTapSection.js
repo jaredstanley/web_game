@@ -27,7 +27,7 @@ class DelayedTapSection extends Section {
         this.game = {
             isActive:false,
             targetTime:utils.getDevConfig().targetTime,
-            tolerance:0.2,
+            tolerance:utils.getDevConfig().tolerance,
             curTime:0,
             elapsedTime:0,
             pctComplete:0,

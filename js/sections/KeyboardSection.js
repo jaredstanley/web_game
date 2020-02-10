@@ -30,7 +30,7 @@ class KeyboardSection extends Section {
         this.startTime ="";
         this.piano = {
             maxWidth:450,
-            minWidth:300,
+            minWidth:200,
             maxHeight:325,
             maxKeyHeight:40,
             width:0,

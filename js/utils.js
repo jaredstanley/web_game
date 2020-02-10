@@ -9,24 +9,25 @@ let status = {
 let _seed = 0;
 let count = 0;
 let colors = {
-  brightGreen: "#00ff18",
   dark:"#31040E"
 
 };
-// let devConfig = {
-//   bubbleCount:1,
-//   targetTime:1000,
-//   skipKeyboard:true,
-//   totalMoves:2,
-//   totalSections:7
-// }
 let devConfig = {
-  bubbleCount:8,
-  targetTime:3000,
-  skipKeyboard:false,
-   totalMoves:6,
-   totalSections:7
+  bubbleCount:1,
+  targetTime:1000,
+  tolerance:1,
+  skipKeyboard:true,
+  totalMoves:1,
+  totalSections:7
 }
+// let devConfig = {
+//   bubbleCount:8,
+//   targetTime:3000,
+//  tolerance:0.1,
+//   skipKeyboard:false,
+//    totalMoves:6,
+//    totalSections:7
+// }
 
 
 

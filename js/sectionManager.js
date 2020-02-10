@@ -57,7 +57,6 @@ let sectionList = [
         verb:"tap",
         section:tapSection,
         instructions:"tap the screen",
-        txtColor:"#C22A42",
         svgPatternID:"vertlines",
         chapter:canyonAnim
     },
@@ -67,17 +66,15 @@ let sectionList = [
         verb:"pop",
         section:popSection,
         instructions:"pop the bubbles",
-        txtColor:"#1D73D3",
         svgPatternID:"vertlines",
         chapter:tetonAnim
     },
     {   pos:2,
         name:"delayedTap",
         title:"chapter three",
-        verb:"wait",
+        verb:"delay",
         section:delayedTapSection,
         instructions:"tap 3 seconds apart",
-        txtColor:"#ff0082",
         svgPatternID:"vertlines",
         chapter:touringAnim
     } 
@@ -85,10 +82,9 @@ let sectionList = [
     {   pos:3,
         name:"keyboard",
         title:"chapter four",
-        verb:"keyboard",
+        verb:"melody",
         section:keyboardSection,
         instructions:"play the song",
-        txtColor:"#ff0076",
         svgPatternID:"vertlines",
         chapter:nihonAnim
         
@@ -99,7 +95,6 @@ let sectionList = [
         verb:"repeat",
         section:repeatSection,
         instructions:"repeat the sequence",
-        txtColor:"#fb970c",
         svgPatternID:"vertlines",
         chapter:paraglidingAnim
     },
@@ -109,7 +104,6 @@ let sectionList = [
         verb:"point",
         section:updownSection,
         instructions:"don't get caught",
-        txtColor:"#65a644",
         svgPatternID:"vertlines",
         chapter:lostcoastAnim
     },
@@ -119,7 +113,6 @@ let sectionList = [
         verb:"coming soon",
         section:comingsoonSection,
         instructions:"coming soon",
-        txtColor:"#dedede",
         svgPatternID:"vertlines",
         chapter:comingsoonAnim
     }
@@ -167,8 +160,9 @@ exports.setInstructions=function(){
     // sec.section.chapter.pauseMe();
     
     
+    // console.log("sec", sec);
     
-    this.instructions.show(sec.instructions, sec.txtColor);
+    this.instructions.show(sec.instructions, sec.section.colors.bright);
         
 }
 function nextSection(){
