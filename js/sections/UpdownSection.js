@@ -1,7 +1,6 @@
-
 import Section from './Section';
+import sectionManager from '../sectionManager';
 import tweenFunctions from '../tweenFunctions';
-import toneGenerator from './sectionUtils/toneGenerator';
 import utils from '../utils';
 
 //
@@ -26,9 +25,9 @@ class UpdownSection extends Section {
             isActive:false,
             startTime:0,
             elapsedTime:0,
-            targetTime:600,
+            targetTime:1100,
             totalMoves: 3,
-            keysArr: [],
+            btnsArr: [],
             curGuessPos:0,
             correctGuesses:0,
             maxWidth: 400,
@@ -38,7 +37,9 @@ class UpdownSection extends Section {
             x: 0,
             y: 0,
             totalHeight:0,
-            numKeys:4,
+            numBtns:4,
+            userChoice:null,
+            computerChoice:null,
             buttons: {
                 margin:10,
                 w:200,
@@ -59,21 +60,16 @@ class UpdownSection extends Section {
             pctComplete:0,
             elapsedTime:0,
             targetTime:0,
-            message:{
-                cur:"",
-                win:"you did it!",
-                toolate:"you took too long",
-                tooearly:"nope, too early",
-            }
+
         }
         
-        this.initButtons();
+        
 
     }
 
     initButtons() {
         
-        for (let i = 0; i < this.game.numKeys; i++) {
+        for (let i = 0; i < this.game.numBtns; i++) {
             const itm = {
                 i:i,
                 iteration:0,
@@ -86,7 +82,7 @@ class UpdownSection extends Section {
                 }
                 
             };
-            this.game.keysArr.push(itm);
+            this.game.btnsArr.push(itm);
         }
     }
             
@@ -94,12 +90,12 @@ class UpdownSection extends Section {
     start() {
         super.start();
         super.addCanvasClick();
-
+        this.initButtons();
     }
 
     showCanvas(){
         super.showCanvas();
-        this.initGame();
+        // this.initGame();
     }
 
     clickHandler(e) {
@@ -109,11 +105,10 @@ class UpdownSection extends Section {
             return;
         }
         super.clickHandler(e);
-        this.game.keysArr.forEach(itm => {
+        this.game.btnsArr.forEach(itm => {
             if (this.checkIfClicked(this.mouse, itm.hitArea)) {
-
+                this.game.userChoice=itm.i+1;
                 console.log("STATUS: clicked on button", itm.i, itm);
-
             }
 
         });
@@ -122,7 +117,6 @@ class UpdownSection extends Section {
     checkIfClicked(mouse, square) {
         if (mouse.x > square.x && mouse.x < square.x + square.width) {
             if (mouse.y > square.y && mouse.y < square.y + square.height) {
-
                 return true;
             }
         }
@@ -134,54 +128,98 @@ class UpdownSection extends Section {
         if(this.game.isActive){
             this.updateGame();
         }
-        this.updateUI();
-       
         let x = _App.w / 2;
-        let y = _App.h / 2;
-       
+        let y = _App.h / 2; 
 
+        this.updateUI();
         this.timer = requestAnimationFrame(this.update.bind(this));
-
     }
 
     updateUI() {
-        _App.context.strokeWidth = this.game.buttons.strokeWidth;
-        for (let i = 0; i < this.game.keysArr.length; i++) {
-            let itm = this.game.keysArr[i];
+        let ctx = _App.context;
+        
+        ctx.strokeWidth = this.game.buttons.strokeWidth;
+        for (let i = 0; i < this.game.btnsArr.length; i++) {
+            let itm = this.game.btnsArr[i];
             itm.hitArea.x = _App.w/2-this.game.buttons.w/2;
-            itm.hitArea.y = (this.game.buttons.h+this.game.buttons.margin)*itm.i;
+            itm.hitArea.y = 20+(this.game.buttons.h+this.game.buttons.margin)*itm.i;
             itm.hitArea.width = this.game.buttons.w;
             itm.hitArea.height = this.game.buttons.h;
-            _App.context.beginPath();
-            _App.context.rect(itm.hitArea.x, itm.hitArea.y, itm.hitArea.width,itm.hitArea.height);
-            _App.context.strokeStyle=this.game.buttons.colorList[i];
-            _App.context.stroke();
+            ctx.beginPath();
+            ctx.rect(itm.hitArea.x, itm.hitArea.y, itm.hitArea.width,itm.hitArea.height);
+            ctx.strokeStyle=this.game.buttons.colorList[i];
+            ctx.stroke();
+            if(this.game.userChoice==(1+itm.i)){
+                // console.log("chosen ",itm.i);
+                ctx.beginPath();
+                ctx.rect(itm.hitArea.x, itm.hitArea.y, itm.hitArea.width,itm.hitArea.height);
+                ctx.save();
+                ctx.globalAlpha=0.3;
+                ctx.fillStyle=this.game.buttons.colorList[i];
+                
+                ctx.fill();
+                ctx.restore();
+                
+            }
+
             
         }
+        // if(this.game.isActive){
+        //     let tmp = Math.floor(Math.random()*this.game.btnsArr.length);
+        //     let t = this.game.btnsArr[tmp]; 
+        //     ctx.strokeStyle=this.colors.white;
+        //     ctx.beginPath();
+        //     ctx.rect(t.hitArea.x, t.hitArea.y, t.hitArea.width,t.hitArea.height);
+        //     ctx.stroke();
+            
+        //  }
+        
+
+        if(this.game.computerChoice!=null){
+            let tgt = this.game.btnsArr[this.game.computerChoice-1];
+            ctx.fillStyle = this.colors.white;
+            ctx.beginPath();
+            ctx.rect(tgt.hitArea.x+10,tgt.hitArea.y+10,tgt.hitArea.width-20,tgt.hitArea.height-20);
+            ctx.fill();
+            let msg = 'Computer: '+ this.game.computerChoice+" || You: "+this.game.userChoice;
+            if(this.game.userChoice==null){
+                msg = "Please make a selection before timer runs out."
+            }
+            this.showMessage(msg);
+
+            if(this.game.computerChoice==this.game.userChoice){
+                this.finished();
+                return false;
+            }
+        }
         this.updateTimerBar();
+
     }
 
     updateTimerBar(){
-        _App.context.fillStyle = this.colors.light; 
-        _App.context.beginPath();
+        let ctx = _App.context;
+        ctx.fillStyle = this.colors.light; 
+        ctx.beginPath();
         this.timerbar.x = (_App.w/2)-(this.timerbar.width/2);
         this.timerbar.y = (_App.h)-(this.timerbar.height)-100;
-        _App.context.rect(this.timerbar.x,
+        ctx.rect(this.timerbar.x,
         this.timerbar.y,this.timerbar.width,this.timerbar.height);
-        _App.context.fill();
-
-        _App.context.fillStyle = this.colors.bright; 
-        _App.context.beginPath();
-        _App.context.rect(this.timerbar.x,this.timerbar.y,this.timerbar.width-this.timerbar.pctBarWidth,this.timerbar.height);
-        _App.context.fill();
+        ctx.fill();
+        if(this.game.isActive){
+            ctx.fillStyle = this.colors.bright; 
+            ctx.beginPath();
+            ctx.rect(this.timerbar.x,this.timerbar.y,this.timerbar.width-this.timerbar.pctBarWidth,this.timerbar.height);
+            ctx.fill();
+        }
     }
     startGame(){
         console.log("STATUS: startGame()", this.game.isActive);
-                this.timerbar.message.cur="";
-                this.game.isActive=true;
-                this.game.startTime = new Date();
-                this.gameBinder = this.updateGame.bind(this);
-                this.game.timer = setInterval(this.gameBinder, this.interval)
+        this.game.computerChoice=null;
+        this.game.userChoice=null;
+        this.game.isActive=true;
+        this.game.startTime = new Date();
+        this.gameBinder = this.updateGame.bind(this);
+        this.game.timer = setInterval(this.gameBinder, this.interval)
     }
 
     updateGame(){
@@ -190,31 +228,36 @@ class UpdownSection extends Section {
         this.game.elapsedTime = d-this.game.startTime;
         this.game.pctComplete = (this.game.elapsedTime/this.game.targetTime);
         this.timerbar.pctBarWidth = this.timerbar.width*this.game.pctComplete;
-        console.log(this.game.pctComplete);
-        
-       
-
-
+        // console.log(this.game.pctComplete);
         //
         if(this.game.pctComplete>=1){
-           this.endGame(false);
+           this.endRound(false);
         }
     }
 
-    endGame(clicked){
+    endRound(clicked){
         this.game.isActive=false;
         clearInterval(this.game.timer);
-        console.log('i choose ', Math.ceil(Math.random()*this.game.keysArr.length));
+        this.game.computerChoice = Math.ceil(Math.random()*this.game.btnsArr.length);
+        // console.log('i choose ', this.game.computerChoice);
+       
     }
 
-    initGame() {
-        // console.log('initGame', this.keyboardKeysArr);
-        
+    // initGame() {
+    //     // console.log('initGame', this.keyboardKeysArr);  
+    // }
+    showMessage(msg){
+            
+            //timer layers
+            _App.context.fillStyle = this.colors.light;
+            _App.context.font = "300 14px Roboto"; 
+            
+            _App.context.save();
+            _App.context.textAlign="center";
+            _App.context.fillText(msg,_App.w/2, this.timerbar.y+30);
+            _App.context.restore();        
     }
     
-   
-
-
 }
 export default UpdownSection
 //

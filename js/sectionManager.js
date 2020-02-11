@@ -101,9 +101,9 @@ let sectionList = [
     {   pos:5,
         name:"updown",
         title:"chapter six",
-        verb:"point",
+        verb:"match",
         section:updownSection,
-        instructions:"don't get caught",
+        instructions:"guess the spot",
         svgPatternID:"vertlines",
         chapter:lostcoastAnim
     },
@@ -177,7 +177,7 @@ function engageLoading(){
     
     let sec = sectionList.find(itm => itm.pos == curPos);
 
-    // console.log('section to load is: ',sec.name);
+    console.log('section to load is: ', sec.section, sec);
     curSection = sec.section;
     curColorSet= sec.section.colors;
     curSection.start(); 
