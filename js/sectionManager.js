@@ -49,7 +49,7 @@ let comingsoonAnim = new ComingsoonAnim();
 let curColorSet = {};
 let curPos = 0;
 let curSection = {name:"none"};
-let sectionList = [
+let gamesList = [
     
     {   pos:0,
         name:"tapper",
@@ -120,10 +120,10 @@ let sectionList = [
 
 //
 exports.init = function(){
-    for (let i = 0; i < sectionList.length; i++) {
-        let element = sectionList[i].section;
+    for (let i = 0; i < gamesList.length; i++) {
+        let element = gamesList[i].section;
         element.init(i);
-        element = sectionList[i].chapter;
+        element = gamesList[i].chapter;
         if(element!=null){
             element.init();
         }
@@ -132,14 +132,14 @@ exports.init = function(){
     this.erase=true;
     this.bgColor =utils.getColors().dark;
     this.instructions = new Instructions(); 
-    // let element = sectionList[0].section;
+    // let element = gamesList[0].section;
     // element.init();        
    
     loadFirstSection();
 }
 
 exports.getSectionList=function(){
-    return sectionList;
+    return gamesList;
 }
 
 function loadFirstSection(){  
@@ -152,7 +152,7 @@ exports.proceed = function(){
     nextSection();
 }
 exports.setInstructions=function(){
-    let sec = sectionList.find(itm => itm.pos == curPos);
+    let sec = gamesList.find(itm => itm.pos == curPos);
     // sec.section.chapter.anim.stop();
     // console.log(sec.section.chapter.anim.currentFrame);
     
@@ -175,14 +175,14 @@ function nextSection(){
 
 function engageLoading(){
     
-    let sec = sectionList.find(itm => itm.pos == curPos);
+    let _game = gamesList.find(itm => itm.pos == curPos);
 
-    console.log('section to load is: ', sec.section, sec);
-    curSection = sec.section;
-    curColorSet= sec.section.colors;
+    console.log('section to load is: ', _game, curPos);
+    curSection = _game.section;
+    curColorSet= _game.section.colors;
     curSection.start(); 
 
-    // console.log("sectionManager loading secrtion ", sectionList[curPos]);
+    // console.log("sectionManager loading secrtion ", gamesList[curPos]);
     
 }
 exports.update=function(){

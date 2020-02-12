@@ -23,6 +23,7 @@ class UpdownSection extends Section {
         
         this.game = {
             isActive:false,
+            over:false,
             startTime:0,
             elapsedTime:0,
             targetTime:1100,
@@ -130,9 +131,12 @@ class UpdownSection extends Section {
         }
         let x = _App.w / 2;
         let y = _App.h / 2; 
-
-        this.updateUI();
-        this.timer = requestAnimationFrame(this.update.bind(this));
+        
+        
+        if(!this.game.over){
+            this.updateUI();
+            this.timer = requestAnimationFrame(this.update.bind(this));
+        }
     }
 
     updateUI() {
@@ -188,8 +192,13 @@ class UpdownSection extends Section {
             this.showMessage(msg);
 
             if(this.game.computerChoice==this.game.userChoice){
-                this.finished();
+                console.log("you wonnn", this.game.isActive);
+                if(this.game.over==false){
+                    this.game.over=true;
+                    this.finished();
+                }
                 return false;
+                
             }
         }
         this.updateTimerBar();
@@ -246,6 +255,15 @@ class UpdownSection extends Section {
     // initGame() {
     //     // console.log('initGame', this.keyboardKeysArr);  
     // }
+
+    kill(){
+        console.log("kill instance");
+        
+        super.kill();
+        cancelAnimationFrame(this.timer)
+        this.timer = null;
+
+    }
     showMessage(msg){
             
             //timer layers

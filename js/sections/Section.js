@@ -93,6 +93,7 @@ class Section {
 
     kill() {
         // console.log("kill ", sectionManager.getSectionList()[this.pos].section=null);    
+        // console.log("kill from Section class");    
         eventTypeManager.removeEvent(_App.context.canvas, this.binder);
 
         cancelAnimationFrame(this.timer);
