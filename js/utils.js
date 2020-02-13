@@ -17,8 +17,8 @@ let colors = {
 //   targetTime:1000,
 //   tolerance:1,
 //   skipKeyboard:true,
-//   totalMoves:1,
-//   totalSections:7
+//   totalMoves:1
+  
 // }
 let devConfig = {
   bubbleCount:8,

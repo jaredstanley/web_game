@@ -10,10 +10,12 @@ class TapSection extends Section {
     }
     init(i){
         this.colors = {
+            white:"#F7EBD5",
             bright:"#C22A42",
             light: "#F7BB7F",
-            med:"#971438",
-            dark:"#31040E"
+            med:"#981638",
+            meddark:"#5F041E",
+            dark:"#32040E"
         }
         super.init(i, this.colors);
         this.i=i;
@@ -131,12 +133,20 @@ class TapSection extends Section {
         
     }
     createPoints(){
+        // console.log(Object.keys(this.colors).length);
+        let colorTotal=Object.keys(this.colors).length-1;
         for(let p = 0; p < this.numPoints; p ++) {
+            // let n = Object.values(this.colors)[p%colorTotal];
+            // console.log(n);
+            
+            // console.log(Object.values(this.colors)[n]);
+            
             let r = Math.round(Math.random()*255)+50;
             let g = Math.round(Math.random()*1);
-            let b = Math.round(Math.random()*133);
+            let b = Math.round(Math.random()*99);
             let a = Math.random()+0.01;
             let clr="rgba("+r+","+g+","+b+","+a+")";
+
             let lw = Math.random()*1;
             
         this.points.push(
@@ -146,6 +156,7 @@ class TapSection extends Section {
                 // y:_App.h/2,
                 vx: Math.random()-Math.random()-Math.random(),
                 vy: Math.random()-Math.random()-Math.random(),
+                // clr:n,
                 clr:clr,
                 lw:lw
             }

@@ -31,8 +31,8 @@ class UpdownSection extends Section {
             btnsArr: [],
             curGuessPos:0,
             correctGuesses:0,
-            maxWidth: 400,
-            minWidth: 200,
+            maxWidth: 300,
+            minWidth: 110,
             width: 0,
             height: 0,
             x: 0,
@@ -257,7 +257,7 @@ class UpdownSection extends Section {
     // }
 
     kill(){
-        console.log("kill instance");
+        // console.log("kill instance");
         
         super.kill();
         cancelAnimationFrame(this.timer)

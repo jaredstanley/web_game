@@ -6,9 +6,11 @@ class ComingsoonSection extends Section {
     constructor(){
         super();
         this.colors = {
+            white:"#ffffff",
             bright:"#878787",
-            light: "#ffffff",
+            light: "#dedede",
             med:"#666666",
+            meddark:'#333333',
             dark:"#242424"
         }
     }
@@ -112,12 +114,16 @@ class ComingsoonSection extends Section {
     //
 
     initBubbles(){
+        let colorTotal=Object.keys(this.colors).length-1;
+        
+        
         this.bubblesObj={};
-        let count = this.bubbleColorsArr.length;
+        let count = this.bubbleColorsArr.length-1;
         for (let i = 0; i < this.bubbleCount; i++) {
             let x = Math.random()*_App.w;
             let y = Math.random()*_App.h;
-            let color = this.bubbleColorsArr[i%count].hex;
+            let color = Object.values(this.colors)[i%colorTotal];
+            // let color = this.bubbleColorsArr[i%count].hex;
             const element = new Bubble(i, x, y, color);
             element.radius=22;
             this.bubblesObj[i] = element;

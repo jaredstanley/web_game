@@ -77,8 +77,7 @@ let gamesList = [
         instructions:"tap 3 seconds apart",
         svgPatternID:"vertlines",
         chapter:touringAnim
-    } 
-    ,
+    },
     {   pos:3,
         name:"keyboard",
         title:"chapter four",
@@ -177,8 +176,9 @@ function engageLoading(){
     
     let _game = gamesList.find(itm => itm.pos == curPos);
 
-    console.log('section to load is: ', _game, curPos);
+    // console.log('section to load is: ', _game, curPos);
     curSection = _game.section;
+    // console.log('&&&&& section to load is: ', curSection, curPos);
     curColorSet= _game.section.colors;
     curSection.start(); 
 

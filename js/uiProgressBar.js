@@ -8,7 +8,7 @@ let margin = 6;
 let navItemWidth = 10;
 let fontSizeOrig = 12;
 let fontSizeSm = 8;
-let sections = utils.getDevConfig().totalSections; 
+let sections =null;
 let context = "";
 let itmHeight = 0;
 let itmMaxHeight = 20;
@@ -32,8 +32,8 @@ exports.nextSection = function(){
     // console.log('current section is now ', currentSection);
 }
 //
-function buildNav(){
-    
+function buildNav(){ 
+    sections =sectionManager.getSectionList().length;
     itemsArr = [];
     let defaultColor = "";
     itmHeight = ((_App.h*(heightPercentage*0.01))/sections)-margin;
