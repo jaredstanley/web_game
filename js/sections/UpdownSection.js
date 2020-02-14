@@ -2,6 +2,7 @@ import Section from './Section';
 import sectionManager from '../sectionManager';
 import tweenFunctions from '../tweenFunctions';
 import utils from '../utils';
+import Hourglass from '../Hourglass';
 
 //
 class UpdownSection extends Section {
@@ -51,19 +52,17 @@ class UpdownSection extends Section {
 
         };
         
-        this.timerbar = {
+        this.tb = {
             width:_App.w*0.5,
             maxWidth:375,
             height:10,
             x:0,
-            y:0,
-            pctBarWidth:0,
-            pctComplete:0,
-            elapsedTime:0,
-            targetTime:0,
+            y:0
+            
 
         }
         
+        this.hourglass = new Hourglass("right");
         
 
     }
@@ -89,6 +88,9 @@ class UpdownSection extends Section {
             
 
     start() {
+        this.hourglass.init(this.tb.x, this.tb.y, 
+            this.tb.width, this.tb.height, 
+            this.colors.light, this.colors.bright);
         super.start();
         super.addCanvasClick();
         this.initButtons();
@@ -206,20 +208,22 @@ class UpdownSection extends Section {
     }
 
     updateTimerBar(){
-        let ctx = _App.context;
-        ctx.fillStyle = this.colors.light; 
-        ctx.beginPath();
-        this.timerbar.x = (_App.w/2)-(this.timerbar.width/2);
-        this.timerbar.y = (_App.h)-(this.timerbar.height)-100;
-        ctx.rect(this.timerbar.x,
-        this.timerbar.y,this.timerbar.width,this.timerbar.height);
-        ctx.fill();
-        if(this.game.isActive){
-            ctx.fillStyle = this.colors.bright; 
-            ctx.beginPath();
-            ctx.rect(this.timerbar.x,this.timerbar.y,this.timerbar.width-this.timerbar.pctBarWidth,this.timerbar.height);
-            ctx.fill();
-        }
+        // let ctx = _App.context;
+        // ctx.fillStyle = this.colors.light; 
+        // ctx.beginPath();
+        // this.tb.x = (_App.w/2)-(this.tb.width/2);
+        // this.tb.y = (_App.h)-(this.tb.height)-100;
+        // ctx.rect(this.tb.x,
+        // this.tb.y,this.tb.width,this.tb.height);
+        // ctx.fill();
+        // if(this.game.isActive){
+         // this.tb.width-this.tb.
+            this.hourglass.update(this.game.pctComplete)
+            // ctx.fillStyle = this.colors.bright; 
+            // ctx.beginPath();
+         // ctx.rect(this.tb.x,this.tb.y,this.tb.width-this.tb.
+            // ctx.fill();
+        // }
     }
     startGame(){
         console.log("STATUS: startGame()", this.game.isActive);
@@ -235,8 +239,8 @@ class UpdownSection extends Section {
         // console.log("STATUS: updateGame()", this);
         let d = new Date();
         this.game.elapsedTime = d-this.game.startTime;
-        this.game.pctComplete = (this.game.elapsedTime/this.game.targetTime);
-        this.timerbar.pctBarWidth = this.timerbar.width*this.game.pctComplete;
+        this.game.ptComplete = (this.game.elapsedTime/this.game.targetTime);
+        this.tb.
         // console.log(this.game.pctComplete);
         //
         if(this.game.pctComplete>=1){
@@ -272,7 +276,7 @@ class UpdownSection extends Section {
             
             _App.context.save();
             _App.context.textAlign="center";
-            _App.context.fillText(msg,_App.w/2, this.timerbar.y+30);
+            _App.context.fillText(msg,_App.w/2, this.tb.y+30);
             _App.context.restore();        
     }
     

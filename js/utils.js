@@ -12,22 +12,22 @@ let colors = {
   dark:"#31040E"
 
 };
-// let devConfig = {
-//   bubbleCount:1,
-//   targetTime:1000,
-//   tolerance:1,
-//   skipKeyboard:true,
-//   totalMoves:1
-  
-// }
 let devConfig = {
-  bubbleCount:8,
-  targetTime:3000,
- tolerance:0.1,
-  skipKeyboard:false,
-   totalMoves:6,
-   totalSections:7
+  bubbleCount:1,
+  targetTime:1000,
+  tolerance:1,
+  skipKeyboard:true,
+  totalMoves:1
+  
 }
+// let devConfig = {
+//   bubbleCount:8,
+//   targetTime:3000,
+//  tolerance:0.1,
+//   skipKeyboard:false,
+//    totalMoves:6,
+//    totalSections:7
+// }
 
 
 
