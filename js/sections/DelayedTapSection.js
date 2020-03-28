@@ -58,7 +58,7 @@ class DelayedTapSection extends Section {
         
     }
     start(){
-        this.hourglass.init(this.tb.x, this.tb.y, 
+        this.hourglass.init(this.tb.x, _App.h/2, 
             this.tb.width, this.tb.height, 
             this.colors.light, this.gradient);
         super.start();

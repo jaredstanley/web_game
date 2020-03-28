@@ -109,6 +109,7 @@ class RepeatSection extends Section {
                 }
                 this.keyboardKeysArr.push(itm);
                 this.piano.width += (this.piano.noteDiam + this.piano.noteMrgn);
+                this.piano.height += (this.piano.noteDiam + this.piano.noteMrgn);
                 // console.log("idth ", this.piano.width);
 
             }
@@ -191,8 +192,10 @@ class RepeatSection extends Section {
         this.keyboardKeysArr.forEach(itm => {
             this.scaleBtn(itm);
             let woff = _App.w / 2 - (this.piano.width);
-            itm.x = (this.piano.noteMrgn / 2 + (this.piano.noteDiam + this.piano.noteMrgn) * itm.i) + (this.piano.noteRad) + _App.w / 2 - (this.piano.width / 2);
-            itm.y = _App.h / 2;
+            // itm.x = (this.piano.noteMrgn / 2 + (this.piano.noteDiam + this.piano.noteMrgn) * itm.i) + (this.piano.noteRad) + _App.w / 2 - (this.piano.width / 2);
+            // itm.y = _App.h / 2;
+            itm.x = _App.w / 2;
+            itm.y = (this.piano.noteMrgn / 2 + (this.piano.noteDiam + this.piano.noteMrgn) * itm.i) + (this.piano.noteRad) + _App.h / 2 - (this.piano.height / 2);
             itm.hitArea.y = itm.y - this.piano.noteRad;
             itm.hitArea.x = itm.x - this.piano.noteRad;
             this.context.fillStyle = itm.color;

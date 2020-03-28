@@ -4,7 +4,7 @@ import sectionManager from './sectionManager';
 let x=0;
 let y=0;
 let heightPercentage = 75; //0-100
-let margin = 6; 
+let margin = 3; 
 let navItemWidth = 10;
 let fontSizeOrig = 12;
 let fontSizeSm = 8;
@@ -68,7 +68,7 @@ exports.update = function(){
     
     xpos = Math.min(_App.w*0.1, 30);
     if(_App.w<480){
-        xpos=5;
+        xpos=0;
     }
    itemsArr.forEach(itm =>{
         context.fillStyle = utils.getColors().light;

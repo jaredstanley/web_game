@@ -23,6 +23,9 @@ class Hourglass {
             h:h,
             color:progColor
         }
+        console.log(this.baseParams);
+        
+
     }
     getParams(){
         return this.baseParams;
@@ -36,7 +39,7 @@ class Hourglass {
     updateBase(){
         this.baseParams.w = Math.min(_App.w*0.75, this.maxW);
         this.baseParams.x = _App.w/2-this.baseParams.w/2;
-        this.baseParams.y = (_App.h/2)-this.baseParams.h/2;
+        this.baseParams.y = this.baseParams.y;
     }
     //
     updateProgBar(pct){
@@ -55,19 +58,15 @@ class Hourglass {
     }
     //
     draw(){
-        // console.log(this.baseParams, this.progParams);
-        
+       
         let ctx = _App.context;
-        // ctx.beginFill();
+       
         ctx.fillStyle = this.baseParams.color;
         ctx.fillRect(this.baseParams.x, this.baseParams.y, this.baseParams.w, this.baseParams.h);
 
         ctx.fillStyle = this.progParams.color;
-        // console.log(this.progParams);
-        
         ctx.fillRect(this.progParams.x, this.progParams.y, this.progParams.w, this.progParams.h);
-        //
-
+        
     }
 }
 

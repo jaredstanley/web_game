@@ -115,10 +115,11 @@ class TapSection extends Section {
         this.iteration++;  
         if (this.iteration < this.totalIterations) {
             this.curTgt = tweenFunctions.easeInSine(this.iteration, this.curTgt, this.tgt, this.totalIterations);
-            this.curTgt = Math.round(this.curTgt*100)/100;
+            // this.curTgt = Math.round(this.curTgt*100)/100;
             _App.context.strokeStyle=this.colors.bright;
+            console.log(_App.context.globalAlpha,_App.context.strokeStyle, _App.context.lineWidth);
             
-            _App.strokeWidth = 1;
+            _App.context.lineWidth = 1;
             _App.context.beginPath();
             _App.context.arc(this.mouse.x,this.mouse.y, this.curTgt, 0, Math.PI*2);
             _App.context.stroke();

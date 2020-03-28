@@ -54,17 +54,13 @@ class UpdownSection extends Section {
         
         this.tb = {
             width:_App.w*0.5,
-            maxWidth:375,
+            maxWidth:350,
             height:10,
             x:0,
-            y:0
-            
-
+            y:0 
         }
         
         this.hourglass = new Hourglass("right");
-        
-
     }
 
     initButtons() {
@@ -88,7 +84,9 @@ class UpdownSection extends Section {
             
 
     start() {
-        this.hourglass.init(this.tb.x, this.tb.y, 
+        
+        
+        this.hourglass.init(this.tb.x, _App.h*0.85, 
             this.tb.width, this.tb.height, 
             this.colors.light, this.colors.bright);
         super.start();
@@ -102,7 +100,7 @@ class UpdownSection extends Section {
     }
 
     clickHandler(e) {
-        // console.log("clicked");
+        console.log("clicked");
         if(!this.game.isActive){
             this.startGame();
             return;
@@ -148,13 +146,13 @@ class UpdownSection extends Section {
         for (let i = 0; i < this.game.btnsArr.length; i++) {
             let itm = this.game.btnsArr[i];
             itm.hitArea.x = _App.w/2-this.game.buttons.w/2;
-            itm.hitArea.y = 20+(this.game.buttons.h+this.game.buttons.margin)*itm.i;
+            itm.hitArea.y = 30+(this.game.buttons.h+this.game.buttons.margin)*itm.i;
             itm.hitArea.width = this.game.buttons.w;
             itm.hitArea.height = this.game.buttons.h;
-            ctx.beginPath();
-            ctx.rect(itm.hitArea.x, itm.hitArea.y, itm.hitArea.width,itm.hitArea.height);
+            
             ctx.strokeStyle=this.game.buttons.colorList[i];
-            ctx.stroke();
+            ctx.strokeRect(itm.hitArea.x, itm.hitArea.y, itm.hitArea.width,itm.hitArea.height);
+            
             if(this.game.userChoice==(1+itm.i)){
                 // console.log("chosen ",itm.i);
                 ctx.beginPath();
@@ -170,23 +168,13 @@ class UpdownSection extends Section {
 
             
         }
-        // if(this.game.isActive){
-        //     let tmp = Math.floor(Math.random()*this.game.btnsArr.length);
-        //     let t = this.game.btnsArr[tmp]; 
-        //     ctx.strokeStyle=this.colors.white;
-        //     ctx.beginPath();
-        //     ctx.rect(t.hitArea.x, t.hitArea.y, t.hitArea.width,t.hitArea.height);
-        //     ctx.stroke();
-            
-        //  }
+       
         
 
         if(this.game.computerChoice!=null){
             let tgt = this.game.btnsArr[this.game.computerChoice-1];
             ctx.fillStyle = this.colors.white;
-            ctx.beginPath();
-            ctx.rect(tgt.hitArea.x+10,tgt.hitArea.y+10,tgt.hitArea.width-20,tgt.hitArea.height-20);
-            ctx.fill();
+            ctx.fillRect(tgt.hitArea.x+10,tgt.hitArea.y+10,tgt.hitArea.width-20,tgt.hitArea.height-20);
             let msg = 'Computer: '+ this.game.computerChoice+" || You: "+this.game.userChoice;
             if(this.game.userChoice==null){
                 msg = "Please make a selection before timer runs out."
@@ -203,28 +191,11 @@ class UpdownSection extends Section {
                 
             }
         }
-        this.updateTimerBar();
+        this.hourglass.update(this.game.pctComplete)
 
     }
 
-    updateTimerBar(){
-        // let ctx = _App.context;
-        // ctx.fillStyle = this.colors.light; 
-        // ctx.beginPath();
-        // this.tb.x = (_App.w/2)-(this.tb.width/2);
-        // this.tb.y = (_App.h)-(this.tb.height)-100;
-        // ctx.rect(this.tb.x,
-        // this.tb.y,this.tb.width,this.tb.height);
-        // ctx.fill();
-        // if(this.game.isActive){
-         // this.tb.width-this.tb.
-            this.hourglass.update(this.game.pctComplete)
-            // ctx.fillStyle = this.colors.bright; 
-            // ctx.beginPath();
-         // ctx.rect(this.tb.x,this.tb.y,this.tb.width-this.tb.
-            // ctx.fill();
-        // }
-    }
+   
     startGame(){
         console.log("STATUS: startGame()", this.game.isActive);
         this.game.computerChoice=null;
@@ -239,8 +210,7 @@ class UpdownSection extends Section {
         // console.log("STATUS: updateGame()", this);
         let d = new Date();
         this.game.elapsedTime = d-this.game.startTime;
-        this.game.ptComplete = (this.game.elapsedTime/this.game.targetTime);
-        this.tb.
+        this.game.pctComplete = (this.game.elapsedTime/this.game.targetTime);
         // console.log(this.game.pctComplete);
         //
         if(this.game.pctComplete>=1){
@@ -255,10 +225,6 @@ class UpdownSection extends Section {
         // console.log('i choose ', this.game.computerChoice);
        
     }
-
-    // initGame() {
-    //     // console.log('initGame', this.keyboardKeysArr);  
-    // }
 
     kill(){
         // console.log("kill instance");
@@ -276,7 +242,7 @@ class UpdownSection extends Section {
             
             _App.context.save();
             _App.context.textAlign="center";
-            _App.context.fillText(msg,_App.w/2, this.tb.y+30);
+            _App.context.fillText(msg,_App.w/2, this.tb.y+20);
             _App.context.restore();        
     }
     
