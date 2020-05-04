@@ -45,7 +45,7 @@ class UpdownSection extends Section {
             buttons: {
                 margin:10,
                 w:200,
-                h:100,
+                h:75,
                 strokeWidth:40,
                 colorList: [this.colors.light, this.colors.bright, this.colors.med, this.colors.meddark]
             }

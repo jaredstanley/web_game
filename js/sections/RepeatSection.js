@@ -37,29 +37,17 @@ class RepeatSection extends Section {
                 b: this.colors.med
             };
         this.colors.notes = {
-                a: this.colors.gray,
-                b: this.colors.ltbrown,
-                c: this.colors.med,
-                d: this.colors.bright,
+                f: this.colors.light,
                 e: this.colors.yellow,
-                f: this.colors.light
+                d: this.colors.bright,
+                c: this.colors.med,
+                b: this.colors.ltbrown,
+                a: this.colors.gray
         };
         this.frequencies=[
             {
                 note:"C",
-                freq:"261.63"
-            },
-            {
-                note:"E",
-                freq:"329.63"
-            },
-            {
-                note:"G",
-                freq:"392.00"
-            },
-            {
-                note:"C",
-                freq:"523.25"
+                freq:"783.99"
             },
             {
                 note:"E",
@@ -67,7 +55,19 @@ class RepeatSection extends Section {
             },
             {
                 note:"G",
-                freq:"783.99"
+                freq:"523.25"
+            },
+            {
+                note:"C",
+                freq:"392.00"
+            },
+            {
+                note:"E",
+                freq:"329.63"
+            },
+            {
+                note:"G",
+                freq:"261.63"
             }
         ]
         this.game = {
