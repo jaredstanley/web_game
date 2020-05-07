@@ -4,7 +4,6 @@ https://lab.martiansf.com/jrs/
 
 
 An article summarizing the app here: 
-https://medium.com/@jaredstanley/creating-a-web-app-with-no-libraries-or-frameworks-tl-dr-impossible-92f9500d84f2?sk=2f46fa14e331b844d4cc1c37b6f366e3
-
+https://medium.com/@jaredstanley/creating-a-web-app-game-series-a-breakdown-write-up-of-the-project-source-code-824989db7736
 
 Source files included, including the .aep file for the animations. 
