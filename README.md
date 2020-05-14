@@ -1,4 +1,8 @@
 # web_game
+
+![Image of animations]
+(https://miro.medium.com/max/4800/0*HlyglaFQtdXAReRC.jpeg)
+
 A series of simple web games. Playable here:
 https://lab.martiansf.com/jrs/
 
