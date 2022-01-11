@@ -5,7 +5,7 @@
 
 A series of simple web games. 
 # Live Playable URL here:
-https://lab.martiansf.com/jrs/
+https://lab.jaredstanley.com/jrs/
 
 
 # An article summarizing the build process etc here: 
